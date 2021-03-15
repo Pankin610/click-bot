@@ -8,8 +8,5 @@ import program.Program;
  */
 
 public class Console extends AbstractEnvironment {
-    @Override
-    public void runProgram(Program prog) {
-        prog.exec(this);
-    }
+
 }

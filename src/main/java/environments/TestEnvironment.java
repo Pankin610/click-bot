@@ -7,8 +7,4 @@ import program.Program;
  */
 
 public class TestEnvironment extends AbstractEnvironment {
-    @Override
-    public void runProgram(Program prog) {
-
-    }
 }

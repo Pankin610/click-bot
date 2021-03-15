@@ -1,5 +1,6 @@
 package environments;
 
+import program.Program;
 import util.Pair;
 
 /**
@@ -8,7 +9,9 @@ import util.Pair;
  */
 
 public abstract class AbstractEnvironment implements Environment {
-    public void runProgram(){}
+    public void runProgram(Program prog){
+        prog.exec(this);
+    }
     public void pushKey(char z){}
     public void moveMouse(Pair cords){}
     public void wait(int tim){}
