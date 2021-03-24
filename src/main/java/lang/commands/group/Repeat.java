@@ -1,25 +1,29 @@
 package lang.commands.group;
 
 import environments.Environment;
-import lang.commands.BlockCommand;
+import exceptions.ExecException;
 import lang.commands.Command;
-import lang.commands.single.Nothing;
+import util.builders.BlockBuilder;
 
-public class Repeat extends BlockCommand {
+public final class Repeat extends BlockCommand {
+    private static final String id = "REPEAT";
     private final int num;
-    public Repeat(Command[] m_coms, int m_num){
-        if(m_coms == null) {
-            num = m_num;
-            coms = new Command[1];
-            coms[0] = new Nothing();
-            return;
-        }
+    public Repeat(Command[] m_commands, int m_num){
+        super(m_commands);
         num = m_num;
-        coms = new Command[m_coms.length];
-        System.arraycopy(m_coms, 0, coms, 0, m_coms.length);
+    }
+    public Repeat(BlockBuilder m_commands, int m_num){
+        this(m_commands.toArray(),m_num);
     }
     @Override
-    public void exec(Environment envi) {
-        for(Command com : coms) com.exec(envi);
+    public void execute(Environment envi) throws ExecException {
+        for (int i = 0; i < num; i++) {
+            for (Command com : commands) com.execute(envi);
+        }
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 }

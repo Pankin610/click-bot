@@ -1,0 +1,33 @@
+package lang.conditions.binaryrelations;
+
+import environments.Environment;
+import exceptions.EvaluationException;
+import exceptions.IncomparableVariablesException;
+import exceptions.NoVariableWithThisNameException;
+import lang.variables.Variable;
+
+public final class GreaterOrEqual extends BinaryRelation {
+    private static final String id = "GREATER_EQ";
+    public GreaterOrEqual(String m_variable1, String m_variable2) {
+        super(m_variable1, m_variable2);
+    }
+    @Override
+    public boolean eval(Environment envi) throws EvaluationException {
+        try{
+            Variable var1 = envi.getVarByName(variable1);
+            Variable var2 = envi.getVarByName(variable2);
+            return var2.isLessThan(var1) || var1.getValue().equals(var2.getValue());
+        }
+        catch (NoVariableWithThisNameException e){
+            throw new EvaluationException("No variable with name: " + e.getName() + " (LessOrEqual)");
+        }
+        catch (IncomparableVariablesException ex){
+            throw new EvaluationException("Incomparable variables (LessOrEqual)");
+        }
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+}

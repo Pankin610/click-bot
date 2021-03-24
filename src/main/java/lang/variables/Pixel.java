@@ -1,11 +1,36 @@
 package lang.variables;
 
-import util.Pair;
+import environments.Environment;
+import util.Coordinate;
 
-public class Pixel implements Variable {
-    Pixel(int m_x, int m_y){
-        cords = new Pair(m_x,m_y);
+public final class Pixel extends AbstractVariable {
+    private static final String id = "PIXEL";
+    public Pixel(String m_name, int m_x, int m_y){
+        super(m_name);
+        cords = new Coordinate(m_x,m_y);
     }
-    public final Pair cords;
-    public Object getColor(){return new Object();}
+    private final Coordinate cords;
+
+    /**
+     * Getter for cords.
+     * @return cords of Pixel.
+     */
+    @Override
+    public Coordinate getValue() {
+        return cords;
+    }
+    /**
+     * Method shoving some sort of 'color' of given Pixel. Exact class responsible for handling colors will be implemented later.
+     * Probably it will be variation of normal Integers.
+     * @param envi environment in which command should be called.
+     * @return returns color of given Pixel.
+     */
+    public Integer getColor(Environment envi){
+        return envi.getPixel(cords);
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
 }

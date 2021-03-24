@@ -1,19 +1,20 @@
 At the moment, project consists of several main files, such as: environments, lang, program... etc.
 More or less, each of them is responsible for an integral part of program.
 
-Environment class describes how commands should behave in different situations (for testing purposes, as desktop or console application, etc).
-Abstract environment contains default (console) implementation.
+Environment class describes how commands should behave in different situations
+(for testing purposes, as desktop or console application, etc).
+Abstract environment contains most of default (console) implementation.
 
-'files' folder is responsible for handling communication with files.
+'Files' folder is responsible for handling communication with files.
 
 Folder 'gui' contains graphic part of program.
 
 Language folder contains scheme of pseudocode in which result programs can be created.
 
-Program class contains description of resulting program and methods for reading and saving to a file.
+Program class contains description of resulting program and methods handling reading and saving to a file.
 
 Testing folder exists for testing purposes.
 
 Utility folder contains some handy classes, which may be used in implementation of methods in whole project.
 
-#################################################################
+Commands should be implemented in general way, preferably should contain only calls to methods from Environment interface.
