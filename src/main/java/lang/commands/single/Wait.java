@@ -1,15 +1,14 @@
 package lang.commands.single;
 
 import environments.Environment;
-import lang.commands.SingleCommand;
 
-public class Wait extends SingleCommand {
-    private final int tim;
-    public Wait(int m_tim){
-        tim = m_tim;
+public final class Wait extends SingleCommand {
+    private final int wait_time;
+    public Wait(int wait_time_milliseconds){
+        wait_time = wait_time_milliseconds;
     }
     @Override
-    public void exec(Environment envi) {
-        envi.wait(tim);
+    public void execute(Environment envi) {
+        envi.wait(wait_time);
     }
 }

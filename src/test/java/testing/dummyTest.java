@@ -1,12 +1,13 @@
 package testing;
 
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
 
-class dummyTest {
+import static org.junit.Assert.assertEquals;
+
+public class dummyTest {
     @Test
-    public void testDummy(){
+    public void simpleTest(){
         assertEquals("String",dummy.fun());
     }
 }

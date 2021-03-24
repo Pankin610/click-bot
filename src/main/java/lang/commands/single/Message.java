@@ -1,15 +1,18 @@
 package lang.commands.single;
 
 import environments.Environment;
-import lang.commands.SingleCommand;
 
-public class Message extends SingleCommand {
+/**
+ * This command should be used only in Console environment for testing purposes.
+ */
+
+public final class Message extends SingleCommand {
     private final String mess;
     public Message(String m_mess){
         mess = m_mess;
     }
     @Override
-    public void exec(Environment envi){
+    public void execute(Environment envi){
         System.out.println(mess);
     }
 }

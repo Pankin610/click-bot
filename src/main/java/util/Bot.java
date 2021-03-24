@@ -18,7 +18,9 @@ public class Bot {
       exception.printStackTrace();
     }
   }
-
+  public void wait(int wait_time) {
+    robot.delay(wait_time);
+  }
   public void moveMouse(int x, int y) {
     robot.mouseMove(x, y);
     robot.delay(kDefaultDelay);
@@ -41,9 +43,9 @@ public class Bot {
     leftClick();
     leftClick();
   }
-  void pressKey(int key_event_code) {
+  public void pressKey(int key_event_code) {
     robot.keyPress(key_event_code);
-    robot.delay(kDefaultDelay);    
+    robot.delay(kDefaultDelay);
   }
   public void typeLetter(char letter) {
     switch (letter) {
