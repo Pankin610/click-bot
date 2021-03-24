@@ -4,7 +4,7 @@ package util;
  * Class used to describe mouse and pixel position on screen
  */
 
-public class Coordinate {
+public final class Coordinate {
     public int x, y;
     public Coordinate(){
         this(0,0);

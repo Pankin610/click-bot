@@ -7,23 +7,23 @@ import lang.commands.Command;
 import lang.conditions.Condition;
 import util.builders.BlockBuilder;
 
-public final class IfCondition extends BlockCommand {
+public final class IfCondition extends GroupCommand {
     private static final String id = "IF_CONDITION";
-    private final Condition cond;
-    public IfCondition(Command[] m_commands, Condition m_condition){
-        super(m_commands);
-        cond = m_condition;
+    private final Condition condition;
+    public IfCondition(Command[] commands, Condition condition){
+        super(commands);
+        this.condition = condition;
     }
-    public IfCondition(BlockBuilder m_commands, Condition m_condition){
-        this(m_commands.toArray(),m_condition);
+    public IfCondition(BlockBuilder commands, Condition condition){
+        this(commands.toArray(),condition);
     }
     @Override
     public void execute(Environment envi) throws ExecException {
         try {
-            if (cond.eval(envi)) for (Command com : commands) com.execute(envi);
+            if (condition.eval(envi)) commands.execute(envi);
         }
         catch(EvaluationException e){
-            throw new ExecException(e.getMessage());
+            throw new ExecException(e);
         }
     }
 

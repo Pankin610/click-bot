@@ -7,6 +7,10 @@ import program.Program;
 import util.Bot;
 import util.Coordinate;
 
+/**
+ * Environment in which Bot implementation of Commands is used.
+ */
+
 public final class DesktopEnvironment extends AbstractEnvironment {
     private final Bot bot;
 

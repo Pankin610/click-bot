@@ -7,22 +7,20 @@ import lang.commands.Command;
 import lang.conditions.Condition;
 import util.builders.BlockBuilder;
 
-public final class While extends BlockCommand {
+public final class While extends GroupCommand {
     private static final String id = "WHILE";
     private final Condition condition;
-    public While(Command[] m_commands, Condition m_condition){
-        super(m_commands);
-        condition = m_condition;
+    public While(Command[] commands, Condition condition){
+        super(commands);
+        this.condition = condition;
     }
-    public While(BlockBuilder m_commands, Condition m_condition){
-        this(m_commands.toArray(),m_condition);
+    public While(BlockBuilder commands, Condition condition){
+        this(commands.toArray(),condition);
     }
     @Override
     public void execute(Environment envi) throws ExecException {
         try {
-            while (condition.eval(envi)) {
-                for (Command com : commands) com.execute(envi);
-            }
+            while (condition.eval(envi)) commands.execute(envi);
         }
         catch(EvaluationException ex){
             throw new ExecException(ex);

@@ -5,21 +5,19 @@ import exceptions.ExecException;
 import lang.commands.Command;
 import util.builders.BlockBuilder;
 
-public final class Repeat extends BlockCommand {
+public final class Repeat extends GroupCommand {
     private static final String id = "REPEAT";
     private final int num;
-    public Repeat(Command[] m_commands, int m_num){
-        super(m_commands);
-        num = m_num;
+    public Repeat(Command[] commands, int num){
+        super(commands);
+        this.num = num;
     }
-    public Repeat(BlockBuilder m_commands, int m_num){
-        this(m_commands.toArray(),m_num);
+    public Repeat(BlockBuilder commands, int num){
+        this(commands.toArray(),num);
     }
     @Override
     public void execute(Environment envi) throws ExecException {
-        for (int i = 0; i < num; i++) {
-            for (Command com : commands) com.execute(envi);
-        }
+        for (int i = 0; i < num; i++) commands.execute(envi);
     }
 
     @Override

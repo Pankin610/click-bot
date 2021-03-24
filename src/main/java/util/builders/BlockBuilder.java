@@ -5,7 +5,7 @@ import lang.commands.Command;
 import java.util.Iterator;
 
 /**
- * This class can be used to created blocks of Commands, which later can be used to initialize subclass of BlockCommand.
+ * This class can be used to created blocks of Commands, which later can be used to initialize subclass of GroupCommand.
  */
 
 public final class BlockBuilder implements Builder<Command> {
