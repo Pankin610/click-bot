@@ -20,7 +20,7 @@ public final class While extends GroupCommand {
     @Override
     public void execute(Environment envi) throws ExecException {
         try {
-            while (condition.eval(envi)) commands.execute(envi);
+            while (condition.eval(envi)) executeBlock(envi);
         }
         catch(EvaluationException ex){
             throw new ExecException(ex);

@@ -20,7 +20,7 @@ public final class IfCondition extends GroupCommand {
     @Override
     public void execute(Environment envi) throws ExecException {
         try {
-            if (condition.eval(envi)) commands.execute(envi);
+            if (condition.eval(envi)) executeBlock(envi);
         }
         catch(EvaluationException e){
             throw new ExecException(e);

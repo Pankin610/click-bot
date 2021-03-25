@@ -17,7 +17,7 @@ public final class Repeat extends GroupCommand {
     }
     @Override
     public void execute(Environment envi) throws ExecException {
-        for (int i = 0; i < num; i++) commands.execute(envi);
+        for (int i = 0; i < num; i++) executeBlock(envi);
     }
 
     @Override

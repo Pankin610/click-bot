@@ -1,8 +1,9 @@
 package lang.commands.group;
 
+import environments.Environment;
+import exceptions.ExecException;
 import lang.commands.AbstractCommand;
 import lang.commands.Command;
-import util.BlockOfCommands;
 import util.builders.BlockBuilder;
 
 /**
@@ -10,11 +11,15 @@ import util.builders.BlockBuilder;
  * Blocks of commands are some kind of exception - they can be fully implemented without invoking environment methods.
  */
 public abstract class GroupCommand extends AbstractCommand {
-    protected final BlockOfCommands commands;
+    protected final Command[] commands;
     protected GroupCommand(Command[] commands){
-        this.commands = new BlockOfCommands(commands);
+        this.commands = new Command[commands.length];
+        System.arraycopy(commands, 0, this.commands, 0, commands.length);
     }
     protected GroupCommand(BlockBuilder commands){
         this(commands.toArray());
+    }
+    protected void executeBlock(Environment envi) throws ExecException {
+        for(Command command : commands) command.execute(envi);
     }
 }
