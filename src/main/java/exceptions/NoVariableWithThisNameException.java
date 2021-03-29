@@ -5,7 +5,7 @@ package exceptions;
  * (use name of this variable in the constructor).
  */
 @SuppressWarnings("serial")
-public class NoVariableWithThisNameException extends Exception {
+public class NoVariableWithThisNameException extends RuntimeException {
     private String name="name";
     public NoVariableWithThisNameException(){}
     public NoVariableWithThisNameException(String name){
