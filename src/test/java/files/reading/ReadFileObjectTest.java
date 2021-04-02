@@ -3,13 +3,14 @@ package files.reading;
 import lang.CodeFactory;
 import lang.commands.Command;
 import lang.variables.Variable;
-import util.VariableContainer;
 import org.junit.Test;
 import program.Program;
+import util.containers.VariableContainer;
+import util.containers.VariableList;
 
 import java.util.Scanner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ReadFileObjectTest {
     @Test
@@ -26,7 +27,7 @@ public class ReadFileObjectTest {
     @Test
     public void test2() {
         Scanner cin = new ReadFileObject("src/main/java/testing/test.txt").getScanner();
-        VariableContainer con = new VariableContainer();
+        VariableContainer con = new VariableList();
         String[] res = new String[]{"my_int: 7", "var1: 10", "var2: 11"};
         for(int i=0;i<3;i++){
             con.add(CodeFactory.getVariableByID(cin.next()).parseFromString(cin));

@@ -1,13 +1,14 @@
 package lang.variables;
 
+import exceptions.IncomparableVariablesException;
 import exceptions.IncorrectVariableAssignment;
 import lang.CodeFragment;
 
-import java.util.ListIterator;
+import java.util.Scanner;
 
-public final class StringVariable extends AbstractVariable implements Comparable<StringVariable> {
+public final class StringVariable extends AbstractVariable {
     private static final String id = "STR"; // can be changed to STRING if needed
-    private String val = "";
+    private String val;
     public StringVariable(String m_name, String m_val) {
         super(m_name);
         val = m_val;
@@ -23,7 +24,8 @@ public final class StringVariable extends AbstractVariable implements Comparable
     }
 
     @Override
-    public CodeFragment parseFromString(ListIterator<String> lines) {
+    @SuppressWarnings("unchecked")
+    public CodeFragment parseFromString(Scanner scanner) {
         return null;
     }
 
@@ -42,14 +44,6 @@ public final class StringVariable extends AbstractVariable implements Comparable
         throw new IncorrectVariableAssignment(this, value);
     }
 
-    // simple comparator
-    // could implement comparing with regular Strings but that would be asymmetric
-    public int compareTo(StringVariable other) {
-        String this_value = getValue();
-        String other_value = other.getValue();
-        return this_value.compareTo(other_value);
-    }
-
     public Integer toInteger() {
         return Integer.parseInt(val);
     }
@@ -57,5 +51,17 @@ public final class StringVariable extends AbstractVariable implements Comparable
     @Override
     public String getId() {
         return id;
+    }
+
+    // simple comparator
+    // could implement comparing with regular Strings but that would be asymmetric
+    @Override
+    public int compareTo(Variable other) {
+        if(other instanceof StringVariable){
+            String this_value = this.getValue();
+            String other_value = ((StringVariable) other).getValue();
+            return this_value.compareTo(other_value);
+        }
+        throw new IncomparableVariablesException(this.getName(),other.getName());
     }
 }

@@ -21,8 +21,8 @@ public class IntegerVariableBasicTest {
 
     @Test
     public void isLessThanTest() throws IncomparableVariablesException {
-        assertTrue(var1.isLessThan(var2));
-        assertFalse(var2.isLessThan(var1));
+        assertTrue(var1.compareTo(var2) < 0);
+        assertFalse(var2.compareTo(var1) < 0);
     }
 
     @Test
@@ -37,10 +37,10 @@ public class IntegerVariableBasicTest {
         var1.add(2);
         assertNotEquals(var1.getValue().intValue(),7);
         assertEquals(var1.getValue(),var2.getValue());
-        assertFalse(var1.isLessThan(var2));
-        assertFalse(var2.isLessThan(var2));
+        assertFalse(var1.compareTo(var2) < 0);
+        assertFalse(var2.compareTo(var2) < 0);
         var1.increment();
-        assertTrue(var2.isLessThan(var1));
+        assertTrue(var2.compareTo(var1) < 0);
         var2.increment();
         assertEquals(var1.getValue(),var2.getValue());
         var1.decrement();

@@ -1,19 +1,21 @@
 package lang.variables;
 
-import exceptions.IncomparableVariablesException;
 import exceptions.NonImplementedMethodException;
 import lang.AbstractCodeFragment;
+
 import java.util.Objects;
 
-public abstract class AbstractVariable extends AbstractCodeFragment implements Variable {
+public abstract class AbstractVariable extends AbstractCodeFragment implements Variable{
     private final String name;
     protected AbstractVariable(String name){
         this.name = name;
     }
+
     @Override
     public String getName(){
         return name;
     }
+
     // the default equals method, compares considering the variable name
     // to compare variables by value use the getValue method
     @Override
@@ -32,5 +34,10 @@ public abstract class AbstractVariable extends AbstractCodeFragment implements V
     @Override
     public Object getValue() {
         throw new NonImplementedMethodException("getValue");
+    }
+
+    @Override
+    public int compareTo(Variable o) {
+        throw new NonImplementedMethodException("compareTo");
     }
 }

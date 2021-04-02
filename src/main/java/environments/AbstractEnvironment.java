@@ -7,7 +7,8 @@ import lang.variables.Mouse;
 import lang.variables.Variable;
 import program.Program;
 import util.Coordinate;
-import util.VariableContainer;
+import util.containers.VariableContainer;
+import util.containers.VariableList;
 
 /**
  * Abstract environment contains default (Console) implementation of methods associated with instances of Command interface,
@@ -15,7 +16,7 @@ import util.VariableContainer;
  */
 
 public abstract class AbstractEnvironment implements Environment {
-    protected final VariableContainer variables = new VariableContainer();
+    protected final VariableContainer variables = new VariableList();
     protected Mouse myMouse = new Mouse("Mouse",0,0);
     protected AbstractEnvironment(Program program){
         variables.addAll(program.getVariables());
@@ -82,7 +83,6 @@ public abstract class AbstractEnvironment implements Environment {
 
     @Override
     public boolean isThereVariable(String varName) {
-        if(variables == null)   return false;
         for(Variable var : variables)   if(varName.equals(var.getName()))  return true;
         return false;
     }

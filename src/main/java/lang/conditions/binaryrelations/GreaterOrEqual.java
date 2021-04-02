@@ -19,7 +19,7 @@ public final class GreaterOrEqual extends BinaryRelation {
         try{
             Variable var1 = envi.getVarByName(variable1);
             Variable var2 = envi.getVarByName(variable2);
-            return var2.isLessThan(var1) || var1.getValue().equals(var2.getValue());
+            return var1.compareTo(var2) > 0 || var1.getValue().equals(var2.getValue());
         }
         catch (NoVariableWithThisNameException e){
             throw new EvaluationException("No variable with name: " + e.getName() + " (LessOrEqual)");

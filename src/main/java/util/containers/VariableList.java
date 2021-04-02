@@ -1,4 +1,4 @@
-package util;
+package util.containers;
 
 import exceptions.NoUniqueVariableNameException;
 import exceptions.NoVariableWithThisNameException;
@@ -8,14 +8,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-/**
-  * A class for storing and accessing variables inside scripts.
-  * Should be stored in an Environment object.
-  */
-
-public final class VariableContainer implements Iterable<Variable> {
+public class VariableList implements VariableContainer {
     private final ArrayList<Variable> variables = new ArrayList<>();
 
+    @Override
     public void add(Variable v) {
         if (v == null) {
             throw new NullPointerException();
@@ -38,6 +34,7 @@ public final class VariableContainer implements Iterable<Variable> {
         variables.remove(v);
     }
 
+    @Override
     public Variable get(String name) {
         for (Variable var : variables) {
             if (var.getName().equals(name)) {
@@ -47,6 +44,7 @@ public final class VariableContainer implements Iterable<Variable> {
         throw new NoVariableWithThisNameException(name);
     }
 
+    @Override
     public Variable[] toArray(){
         Variable[] res = new Variable[variables.size()];
         int ind = 0;
@@ -59,6 +57,7 @@ public final class VariableContainer implements Iterable<Variable> {
         return variables.iterator();
     }
 
+    @Override
     public void addAll(Variable... vars){
         Collections.addAll(variables, vars);
     }

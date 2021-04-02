@@ -16,7 +16,7 @@ public final class Greater extends BinaryRelation {
     @Override
     public boolean eval(Environment envi) throws EvaluationException {
         try{
-            return envi.getVarByName(variable2).isLessThan(envi.getVarByName(variable1));
+            return envi.getVarByName(variable1).compareTo(envi.getVarByName(variable2)) > 0;
         }
         catch (NoVariableWithThisNameException e){
             throw new EvaluationException("No variable with name: " + e.getName() + " (Greater)");

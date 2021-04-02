@@ -2,6 +2,7 @@ package files.reading;
 
 import exceptions.WrongFileFormatException;
 import lang.CodeFactory;
+import lang.variables.VariableDescription;
 import program.Program;
 import program.ProgramDescription;
 import util.builders.ProgramBuilder;
@@ -56,7 +57,7 @@ public final class ReadFileObject {
         if(!"VARIABLES".equals(scanner.next())) throw new WrongFileFormatException("Variables preamble");
         int num = scanner.nextInt();
         for(int i=0;i<num;i++){
-            res.addVariable(CodeFactory.getVariableByID(scanner.next()).parseFromString(scanner));
+            res.addVariable(new VariableDescription(CodeFactory.parseVariable(scanner)));
         }
     }
 
