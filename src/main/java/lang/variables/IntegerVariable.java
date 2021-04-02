@@ -1,12 +1,13 @@
 package lang.variables;
 
 import exceptions.IncomparableVariablesException;
+import exceptions.IncorrectVariableAssignment;
 import lang.CodeFragment;
 
 import java.util.ListIterator;
 import java.util.Objects;
 
-public final class IntegerVariable extends AbstractVariable {
+public final class IntegerVariable extends AbstractVariable implements Comparable<IntegerVariable> {
     private static final String id = "INT";
     private Integer val;
     public IntegerVariable(String m_name, Integer m_val){
@@ -17,13 +18,22 @@ public final class IntegerVariable extends AbstractVariable {
     public Integer getValue(){
         return val;
     }
+
+    // regular java objects serve the role of literals
     @Override
-    public boolean isLessThan(Variable other) throws IncomparableVariablesException {
-        if(other instanceof IntegerVariable){
-            return this.getValue()<((IntegerVariable) other).getValue();
+    public void setValue(Object value) {
+        if (value instanceof Integer) {
+            val = (Integer) value;
         }
-        throw new IncomparableVariablesException(this.getName(),other.getName());
+        if (value instanceof IntegerVariable) {
+            val = ((IntegerVariable)value).getValue();
+        }
+        if (value instanceof StringVariable) {
+            val = ((StringVariable)value).toInteger();
+        }
+        throw new IncorrectVariableAssignment(this, value);
     }
+
     public void changeValue(Integer v){
         val = v;
     }
@@ -41,20 +51,6 @@ public final class IntegerVariable extends AbstractVariable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-        if(o instanceof IntegerVariable)    return val.equals(((IntegerVariable) o).val);
-        if(o instanceof Integer)            return val.equals(o);
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(val);
-    }
-
-    @Override
     public String getStringRepresentation() {
         return "INT " + getName() + " " + val;
     }
@@ -64,8 +60,13 @@ public final class IntegerVariable extends AbstractVariable {
         return null;
     }
 
-    @Override // TODO useless override
+    @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public int compareTo(IntegerVariable other) {
+        return getValue().compareTo(other.getValue());
     }
 }

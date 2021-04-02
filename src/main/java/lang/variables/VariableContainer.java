@@ -1,10 +1,5 @@
 package lang.variables;
 
-import exceptions.NoUniqueVariableNameException;
-import exceptions.NoVariableWithThisNameException;
-
-import java.util.ArrayList;
-
 /*
 A class for storing and accessing variables inside scripts.
 Should be stored in an Environment object.
