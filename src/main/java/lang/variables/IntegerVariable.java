@@ -1,24 +1,23 @@
 package lang.variables;
 
 import exceptions.IncomparableVariablesException;
-import lang.CodeFragment;
 
-import java.util.ListIterator;
 import java.util.Objects;
+import java.util.Scanner;
 
 public final class IntegerVariable extends AbstractVariable {
     private static final String id = "INT";
     private Integer val;
-    public IntegerVariable(String m_name, Integer m_val){
-        super(m_name);
-        val = m_val;
+    public IntegerVariable(String name, Integer val){
+        super(name);
+        this.val = val;
     }
     @Override
     public Integer getValue(){
         return val;
     }
     @Override
-    public boolean isLessThan(Variable other) throws IncomparableVariablesException {
+    public boolean isLessThan(Variable other) {
         if(other instanceof IntegerVariable){
             return this.getValue()<((IntegerVariable) other).getValue();
         }
@@ -55,13 +54,19 @@ public final class IntegerVariable extends AbstractVariable {
     }
 
     @Override
+    public String toString(){
+        return getName() + ": " + val;
+    }
+
+    @Override
     public String getStringRepresentation() {
         return "INT " + getName() + " " + val;
     }
 
     @Override
-    public CodeFragment parseFromString(ListIterator<String> lines) {
-        return null;
+    @SuppressWarnings("unchecked")
+    public IntegerVariable parseFromString(Scanner scanner) {
+        return new IntegerVariable(scanner.next(),scanner.nextInt());
     }
 
     @Override

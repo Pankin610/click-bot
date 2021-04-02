@@ -2,9 +2,8 @@ package lang.conditions;
 
 import environments.Environment;
 import lang.CodeFactory;
-import lang.CodeFragment;
 
-import java.util.ListIterator;
+import java.util.Scanner;
 
 public final class False implements Condition {
     private static final String id = "FALSE";
@@ -20,8 +19,8 @@ public final class False implements Condition {
     }
 
     @Override
-    public CodeFragment parseFromString(ListIterator<String> lines) {
-        lines.next();
+    @SuppressWarnings("unchecked")
+    public Condition parseFromString(Scanner scanner) {
         return CodeFactory.FALSE;
     }
 

@@ -4,6 +4,7 @@ import environments.Environment;
 import lang.CodeFragment;
 
 import java.util.ListIterator;
+import java.util.Scanner;
 
 /**
  * Commands should be implemented as calls to Environment methods with corresponding parameters
@@ -28,9 +29,13 @@ public interface Command extends Executable, CodeFragment {
         }
 
         @Override
-        public Command parseFromString(ListIterator<String> lines) {
-            lines.next();
+        public Command parseFromString(Scanner scanner) {
             return NOTHING;
+        }
+
+        @Override
+        public String toString() {
+            return "NOTHING";
         }
     };
 }

@@ -5,7 +5,7 @@ package exceptions;
  * (use the names of variables in the constructor).
  */
 @SuppressWarnings("serial")
-public class IncomparableVariablesException extends Exception {
+public class IncomparableVariablesException extends RuntimeException {
     private String name1="name1";
     private String name2="name2";
     public IncomparableVariablesException(){}

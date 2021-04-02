@@ -1,6 +1,6 @@
 package exceptions;
 @SuppressWarnings("serial")
-public class NonImplementedMethodException extends Exception {
+public class NonImplementedMethodException extends RuntimeException {
     public NonImplementedMethodException(){}
     public NonImplementedMethodException(String s){
         super(s);

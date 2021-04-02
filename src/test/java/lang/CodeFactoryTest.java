@@ -9,9 +9,9 @@ import static org.junit.Assert.*;
 public class CodeFactoryTest {
     @Test
     public void getInstanceByID() {
-        assertEquals("WHILE",CodeFactory.getInstanceByID("WHILE").getId());
-        assertEquals("LESS_EQ",CodeFactory.getInstanceByID("LESS_EQ").getId());
+        assertEquals("WHILE",CodeFactory.getCommandByID("WHILE").getId());
+        assertEquals("LESS_EQ",CodeFactory.getConditionByID("LESS_EQ").getId());
         Variable var = new IntegerVariable("var",7);
-        assertEquals(var.getId(),CodeFactory.getInstanceByID(var.getId()).getId());
+        assertEquals(var.getId(),CodeFactory.getVariableByID(var.getId()).getId());
     }
 }

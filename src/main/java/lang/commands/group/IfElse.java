@@ -2,9 +2,13 @@ package lang.commands.group;
 
 import environments.Environment;
 import exceptions.ExecException;
+import lang.CodeFactory;
+import lang.CodeFragment;
 import lang.commands.Command;
 import lang.conditions.Condition;
 import util.builders.BlockBuilder;
+
+import java.util.Scanner;
 
 public final class IfElse extends GroupCommand {
     private static final String id = "IF_ELSE";
@@ -35,5 +39,33 @@ public final class IfElse extends GroupCommand {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public String getStringRepresentation() {
+        StringBuilder res = new StringBuilder(getId() + ' ' + commands.length + ' ' + commands2.length + '\n');
+        res.append(condition.getStringRepresentation());
+        for(Command com : commands){
+            res.append('\n');
+            res.append(com.getStringRepresentation());
+        }
+        for(Command com : commands2){
+            res.append('\n');
+            res.append(com.getStringRepresentation());
+        }
+        return res.toString();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Command parseFromString(Scanner scanner) {
+        int num1 = scanner.nextInt();
+        int num2 = scanner.nextInt();
+        Condition con = CodeFactory.parseCondition(scanner);
+        BlockBuilder ifBlock = new BlockBuilder();
+        BlockBuilder elseBlock = new BlockBuilder();
+        ifBlock.parseFromString(scanner,num1);
+        elseBlock.parseFromString(scanner,num2);
+        return new IfElse(ifBlock,elseBlock,con);
     }
 }

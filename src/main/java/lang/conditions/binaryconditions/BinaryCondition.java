@@ -14,4 +14,9 @@ public abstract class BinaryCondition extends AbstractCondition {
         condition1 = m_condition1;
         condition2 = m_condition2;
     }
+
+    @Override
+    public String getStringRepresentation() {
+        return getId() + " " + condition1.getStringRepresentation() + " " + condition2.getStringRepresentation();
+    }
 }

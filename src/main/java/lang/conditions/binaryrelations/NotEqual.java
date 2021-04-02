@@ -3,6 +3,9 @@ package lang.conditions.binaryrelations;
 import environments.Environment;
 import exceptions.EvaluationException;
 import exceptions.NoVariableWithThisNameException;
+import lang.conditions.Condition;
+
+import java.util.Scanner;
 
 public final class NotEqual extends BinaryRelation {
     private static final String id = "NOT_EQ";
@@ -22,5 +25,13 @@ public final class NotEqual extends BinaryRelation {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Condition parseFromString(Scanner scanner) {
+        String name1 = scanner.next();
+        String name2 = scanner.next();
+        return new NotEqual(name1,name2);
     }
 }

@@ -4,7 +4,7 @@ package exceptions;
  * This Exception should be thrown when invariant of name-uniques in Environment or Program was unkept.
  */
 @SuppressWarnings("serial")
-public class NoUniqueVariableNameException extends Exception {
+public class NoUniqueVariableNameException extends RuntimeException {
     private String name = "name";
     public NoUniqueVariableNameException(){}
     public NoUniqueVariableNameException(String name){

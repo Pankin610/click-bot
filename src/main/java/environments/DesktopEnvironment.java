@@ -1,8 +1,6 @@
 package environments;
 
 import exceptions.ExecException;
-import exceptions.NoVariableWithThisNameException;
-import lang.variables.Variable;
 import program.Program;
 import util.Bot;
 import util.Coordinate;
@@ -17,11 +15,6 @@ public final class DesktopEnvironment extends AbstractEnvironment {
     public DesktopEnvironment(Program program, Bot bot) {
         super(program);
         this.bot = bot;
-    }
-
-    @Override
-    public void runProgram(Program program) throws ExecException {
-        super.runProgram(program);
     }
 
     @Override
@@ -68,16 +61,6 @@ public final class DesktopEnvironment extends AbstractEnvironment {
     @Override
     public void drag(Coordinate where) {
         super.drag(where);
-    }
-
-    @Override
-    public Variable getVarByName(String name) throws NoVariableWithThisNameException {
-        return super.getVarByName(name);
-    }
-
-    @Override
-    public boolean isThereVariable(String varName) {
-        return super.isThereVariable(varName);
     }
 
     @Override

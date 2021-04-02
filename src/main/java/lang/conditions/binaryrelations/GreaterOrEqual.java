@@ -4,7 +4,10 @@ import environments.Environment;
 import exceptions.EvaluationException;
 import exceptions.IncomparableVariablesException;
 import exceptions.NoVariableWithThisNameException;
+import lang.conditions.Condition;
 import lang.variables.Variable;
+
+import java.util.Scanner;
 
 public final class GreaterOrEqual extends BinaryRelation {
     private static final String id = "GREATER_EQ";
@@ -29,5 +32,13 @@ public final class GreaterOrEqual extends BinaryRelation {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Condition parseFromString(Scanner scanner) {
+        String name1 = scanner.next();
+        String name2 = scanner.next();
+        return new GreaterOrEqual(name1,name2);
     }
 }

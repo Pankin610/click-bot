@@ -1,8 +1,10 @@
 package util.builders;
 
+import lang.CodeFactory;
 import lang.commands.Command;
 
 import java.util.Iterator;
+import java.util.Scanner;
 
 /**
  * This class can be used to created blocks of Commands, which later can be used to initialize subclass of GroupCommand.
@@ -78,6 +80,17 @@ public final class BlockBuilder implements Builder<Command> {
     public void viewContentId(){
         for(Command element : commands){
             System.out.println(element.getId());
+        }
+    }
+
+    /**
+     * Creating BlockBuilder from file description.
+     * @param scanner from ReadFileObject.
+     * @param num number of Commands to parse.
+     */
+    public void parseFromString(Scanner scanner, int num){
+        for(int i=0;i<num;i++){
+            append(CodeFactory.parseCommand(scanner));
         }
     }
 }

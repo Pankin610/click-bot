@@ -4,6 +4,9 @@ import environments.Environment;
 import exceptions.EvaluationException;
 import exceptions.IncomparableVariablesException;
 import exceptions.NoVariableWithThisNameException;
+import lang.conditions.Condition;
+
+import java.util.Scanner;
 
 public final class Less extends BinaryRelation {
     private static final String id = "LESS";
@@ -26,5 +29,13 @@ public final class Less extends BinaryRelation {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Condition parseFromString(Scanner scanner) {
+        String name1 = scanner.next();
+        String name2 = scanner.next();
+        return new Less(name1,name2);
     }
 }

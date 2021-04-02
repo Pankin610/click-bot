@@ -2,8 +2,13 @@ package lang.commands.group;
 
 import environments.Environment;
 import exceptions.ExecException;
+import lang.CodeFactory;
+import lang.CodeFragment;
 import lang.commands.Command;
+import lang.conditions.Condition;
 import util.builders.BlockBuilder;
+
+import java.util.Scanner;
 
 public final class Repeat extends GroupCommand {
     private static final String id = "REPEAT";
@@ -23,5 +28,26 @@ public final class Repeat extends GroupCommand {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Command parseFromString(Scanner scanner) {
+        int num_com = scanner.nextInt();
+        int num_rep = scanner.nextInt();
+        BlockBuilder block = new BlockBuilder();
+        block.parseFromString(scanner,num_com);
+        return new Repeat(block,num_rep);
+    }
+
+    @Override
+    public String getStringRepresentation() {
+        StringBuilder res = new StringBuilder(getId() + ' ' + commands.length + '\n');
+        res.append(num);
+        for(Command com : commands){
+            res.append('\n');
+            res.append(com.getStringRepresentation());
+        }
+        return res.toString();
     }
 }
