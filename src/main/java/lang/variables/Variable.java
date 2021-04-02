@@ -6,5 +6,5 @@ import lang.CodeFragment;
 public interface Variable extends CodeFragment {
     Object getValue();
     String getName();
-    boolean isLessThan(Variable other) throws IncomparableVariablesException;
+    void setValue(Object value);
 }

@@ -2,10 +2,13 @@ package lang.variables;
 
 import exceptions.IncomparableVariablesException;
 
+import exceptions.IncorrectVariableAssignment;
+import lang.CodeFragment;
+
 import java.util.Objects;
 import java.util.Scanner;
 
-public final class IntegerVariable extends AbstractVariable {
+public final class IntegerVariable extends AbstractVariable implements Comparable<IntegerVariable> {
     private static final String id = "INT";
     private Integer val;
     public IntegerVariable(String name, Integer val){
@@ -16,13 +19,22 @@ public final class IntegerVariable extends AbstractVariable {
     public Integer getValue(){
         return val;
     }
+
+    // regular java objects serve the role of literals
     @Override
-    public boolean isLessThan(Variable other) {
-        if(other instanceof IntegerVariable){
-            return this.getValue()<((IntegerVariable) other).getValue();
+    public void setValue(Object value) {
+        if (value instanceof Integer) {
+            val = (Integer) value;
         }
-        throw new IncomparableVariablesException(this.getName(),other.getName());
+        if (value instanceof IntegerVariable) {
+            val = ((IntegerVariable)value).getValue();
+        }
+        if (value instanceof StringVariable) {
+            val = ((StringVariable)value).toInteger();
+        }
+        throw new IncorrectVariableAssignment(this, value);
     }
+
     public void changeValue(Integer v){
         val = v;
     }
@@ -72,5 +84,10 @@ public final class IntegerVariable extends AbstractVariable {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public int compareTo(IntegerVariable other) {
+        return getValue().compareTo(other.getValue());
     }
 }
