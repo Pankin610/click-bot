@@ -7,6 +7,7 @@ import program.Program;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Same as ReadFileObject, it is first approximation of file-handling in this project.
@@ -22,35 +23,33 @@ public final class WriteFileObject {
      * @param program program to be saved
      * @throws FileNotFoundException when something with given file gone wrong.
      */
-    public void saveToFile(Program program) throws FileNotFoundException {
+    public void saveToFile(Program program) throws IOException {
         try{
             file = new FileOutputStream(path);
             saveProgramToFile(program);
+        } finally {
             file.close();
-        } catch (IOException e){
-            e.printStackTrace();
-            throw new FileNotFoundException("There are problems with file:\n" + path);
         }
     }
 
     private void writeVariables(Program program) throws IOException {
+        file.write(("VARIABLES " + program.getNumOfVariables()).getBytes(StandardCharsets.UTF_8));
         for(Variable var : program.getVariables()){
-            String rep = var.getStringRepresentation();
-            file.write(rep.getBytes(),0,rep.length());
+            file.write(var.getStringRepresentation().getBytes(StandardCharsets.UTF_8));
         }
     }
 
     private void writeCommands(Program program) throws IOException {
+        file.write(("COMMANDS " + program.getNumOfCommands()).getBytes(StandardCharsets.UTF_8));
         for(Command com : program.getCommands()){
-            String rep = com.getStringRepresentation();
-            file.write(rep.getBytes(),0,rep.length());
+            file.write(com.getStringRepresentation().getBytes(StandardCharsets.UTF_8));
         }
     }
 
     private void saveProgramToFile(Program program) throws IOException {
-        /* TODO: preamble for variables */
+        file.write("PROGRAM ".getBytes(StandardCharsets.UTF_8));
+        file.write(program.getName().getBytes(StandardCharsets.UTF_8));
         writeVariables(program);
-        /* TODO: preamble for commands */
         writeCommands(program);
     }
 

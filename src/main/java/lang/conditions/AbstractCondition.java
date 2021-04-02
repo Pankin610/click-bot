@@ -1,4 +1,6 @@
 package lang.conditions;
 
-public abstract class AbstractCondition implements Condition {
+import lang.AbstractCodeFragment;
+
+public abstract class AbstractCondition extends AbstractCodeFragment implements Condition {
 }

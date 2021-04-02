@@ -3,9 +3,12 @@ package lang.commands.group;
 import environments.Environment;
 import exceptions.EvaluationException;
 import exceptions.ExecException;
+import lang.CodeFactory;
 import lang.commands.Command;
 import lang.conditions.Condition;
 import util.builders.BlockBuilder;
+
+import java.util.Scanner;
 
 public final class IfCondition extends GroupCommand {
     private static final String id = "IF_CONDITION";
@@ -30,5 +33,26 @@ public final class IfCondition extends GroupCommand {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Command parseFromString(Scanner scanner) {
+        int num = scanner.nextInt();
+        Condition con = CodeFactory.parseCondition(scanner);
+        BlockBuilder block = new BlockBuilder();
+        block.parseFromString(scanner,num);
+        return new IfCondition(block,con);
+    }
+
+    @Override
+    public String getStringRepresentation() {
+        StringBuilder res = new StringBuilder(getId() + ' ' + commands.length + '\n');
+        res.append(condition.getStringRepresentation());
+        for(Command com : commands){
+            res.append('\n');
+            res.append(com.getStringRepresentation());
+        }
+        return res.toString();
     }
 }

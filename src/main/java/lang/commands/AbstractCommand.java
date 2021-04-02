@@ -1,4 +1,6 @@
 package lang.commands;
 
-public abstract class AbstractCommand implements Command {
+import lang.AbstractCodeFragment;
+
+public abstract class AbstractCommand extends AbstractCodeFragment implements Command {
 }

@@ -4,7 +4,7 @@ package exceptions;
  * Throw this exception, when something gone wrong during evaluation of Condition.
  */
 @SuppressWarnings("serial")
-public class EvaluationException extends Exception {
+public class EvaluationException extends RuntimeException {
     public EvaluationException(){}
     public EvaluationException(String s){
         super(s);

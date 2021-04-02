@@ -2,12 +2,15 @@ package lang.conditions.binaryconditions;
 
 import environments.Environment;
 import exceptions.EvaluationException;
+import lang.CodeFactory;
 import lang.conditions.Condition;
+
+import java.util.Scanner;
 
 public final class Or extends BinaryCondition {
     private static final String id = "OR";
-    public Or(Condition m_condition1, Condition m_condition2) {
-        super(m_condition1, m_condition2);
+    public Or(Condition condition1, Condition condition2) {
+        super(condition1, condition2);
     }
     @Override
     public boolean eval(Environment envi) throws EvaluationException {
@@ -17,5 +20,13 @@ public final class Or extends BinaryCondition {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Condition parseFromString(Scanner scanner) {
+        Condition con1 = CodeFactory.parseCondition(scanner);
+        Condition con2 = CodeFactory.parseCondition(scanner);
+        return new Or(con1,con2);
     }
 }

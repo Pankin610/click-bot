@@ -5,6 +5,7 @@ import lang.commands.group.IfCondition;
 import lang.commands.group.IfElse;
 import lang.commands.group.Repeat;
 import lang.commands.group.While;
+import lang.conditions.Condition;
 import lang.conditions.False;
 import lang.conditions.Not;
 import lang.conditions.True;
@@ -13,8 +14,10 @@ import lang.conditions.binaryconditions.Or;
 import lang.conditions.binaryrelations.*;
 import lang.variables.IntegerVariable;
 import lang.variables.Pixel;
+import lang.variables.Variable;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * Factory of final implementations of CodeFragment interface.
@@ -29,8 +32,23 @@ public final class CodeFactory {
      * @param ID of wanted instance.
      * @return instance of final implementation of CodeFragment with given ID.
      */
-    public static CodeFragment getInstanceByID(String ID){
-        return myMap.get(ID);
+    public static Variable getVariableByID(String ID){
+        return varMap.get(ID);
+    }
+    public static Condition getConditionByID(String ID) {
+        return condMap.get(ID);
+    }
+    public static Command getCommandByID(String ID){
+        return commMap.get(ID);
+    }
+    public static Variable parseVariable(Scanner scanner){
+        return getVariableByID(scanner.next()).parseFromString(scanner);
+    }
+    public static Condition parseCondition(Scanner scanner){
+        return getConditionByID(scanner.next()).parseFromString(scanner);
+    }
+    public static Command parseCommand(Scanner scanner){
+        return getCommandByID(scanner.next()).parseFromString(scanner);
     }
     /* Variables */
     public static final IntegerVariable INTEGER_VARIABLE = new IntegerVariable("INTEGER_VARIABLE",0);
@@ -54,26 +72,31 @@ public final class CodeFactory {
     public static final Repeat REPEAT = new Repeat(new Command[]{NOTHING},0);
     public static final While WHILE = new While(new Command[]{NOTHING},TRUE);
     /* To be continued */
-    private static final HashMap<String, CodeFragment> myMap = new HashMap<>();
-    static{
-        /* Every static instance should be put into myMap */
-        myMap.put(INTEGER_VARIABLE.getId(),INTEGER_VARIABLE);
-        myMap.put(PIXEL.getId(),PIXEL);
-        myMap.put(TRUE.getId(),TRUE);
-        myMap.put(FALSE.getId(),FALSE);
-        myMap.put(NOT.getId(),NOT);
-        myMap.put(AND.getId(),AND);
-        myMap.put(OR.getId(),OR);
-        myMap.put(EQUAL.getId(),EQUAL);
-        myMap.put(LESS.getId(),LESS);
-        myMap.put(LESS_OR_EQUAL.getId(),LESS_OR_EQUAL);
-        myMap.put(GREATER.getId(),GREATER);
-        myMap.put(GREATER_OR_EQUAL.getId(),GREATER_OR_EQUAL);
-        myMap.put(NOTHING.getId(),NOTHING);
-        myMap.put(IF_CONDITION.getId(), IF_CONDITION);
-        myMap.put(IF_ELSE.getId(),IF_ELSE);
-        myMap.put(REPEAT.getId(),REPEAT);
-        myMap.put(WHILE.getId(),WHILE);
+    private static final HashMap<String, Variable> varMap = new HashMap<>();
+    private static final HashMap<String, Condition> condMap = new HashMap<>();
+    private static final HashMap<String, Command> commMap = new HashMap<>();
+    static {
+        /* Every static instance should be put in corresponding map */
+        /* VARIABLES */
+        varMap.put(INTEGER_VARIABLE.getId(),INTEGER_VARIABLE);
+        varMap.put(PIXEL.getId(),PIXEL);
+        /* CONDITIONS */
+        condMap.put(TRUE.getId(),TRUE);
+        condMap.put(FALSE.getId(),FALSE);
+        condMap.put(NOT.getId(),NOT);
+        condMap.put(AND.getId(),AND);
+        condMap.put(OR.getId(),OR);
+        condMap.put(EQUAL.getId(),EQUAL);
+        condMap.put(LESS.getId(),LESS);
+        condMap.put(LESS_OR_EQUAL.getId(),LESS_OR_EQUAL);
+        condMap.put(GREATER.getId(),GREATER);
+        condMap.put(GREATER_OR_EQUAL.getId(),GREATER_OR_EQUAL);
+        /* COMMANDS */
+        commMap.put(NOTHING.getId(),NOTHING);
+        commMap.put(IF_CONDITION.getId(), IF_CONDITION);
+        commMap.put(IF_ELSE.getId(),IF_ELSE);
+        commMap.put(REPEAT.getId(),REPEAT);
+        commMap.put(WHILE.getId(),WHILE);
         /* To be continued */
     }
 }

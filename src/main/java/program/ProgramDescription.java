@@ -1,14 +1,13 @@
 package program;
 
-import environments.Environment;
-import exceptions.ExecException;
 import files.reading.ReadFileObject;
 import files.writing.WriteFileObject;
 import lang.commands.Command;
 import lang.variables.Variable;
+import lang.variables.VariableDescription;
 import util.builders.ProgramBuilder;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Implementation of Program functionality. Instances of this class are immutable, with all fields 'final' (and private),
@@ -17,7 +16,7 @@ import java.io.FileNotFoundException;
 
 public final class ProgramDescription implements Program {
     private final Command[] commands;
-    private final Variable[] variables;
+    private final VariableDescription[] variables;
     private final String name;
 
     /**
@@ -25,10 +24,10 @@ public final class ProgramDescription implements Program {
      * @param program description of Program in ProgramBuilder.
      */
     public ProgramDescription(ProgramBuilder program){
-        name = "dummy"; /* naming possibility will be added later */
-        final Variable[] vars = program.getVariables();
+        name = program.programName;
+        final VariableDescription[] vars = program.getVariablesDescription();
         final Command[] comms = program.getCommands();
-        variables = new Variable[vars.length];
+        variables = new VariableDescription[vars.length];
         System.arraycopy(vars, 0, variables, 0, vars.length);
         commands = new Command[comms.length];
         System.arraycopy(comms, 0, commands, 0, comms.length);
@@ -39,12 +38,7 @@ public final class ProgramDescription implements Program {
      * @param file with program description.
      */
     public ProgramDescription(ReadFileObject file){
-        this(new ProgramBuilder(file));
-    }
-
-    @Override
-    public void execute(Environment envi) throws ExecException {
-        for(Command command : commands) command.execute(envi);
+        this(file.getProgramBuilder());
     }
 
     @Override
@@ -54,7 +48,14 @@ public final class ProgramDescription implements Program {
 
     @Override
     public Variable[] getVariables() {
-        return variables;
+        Variable[] res = new Variable[variables.length];
+        for(int i=0;i<variables.length;i++) res[i] = variables[i].getVariable();
+        return res;
+    }
+
+    @Override
+    public int getNumOfVariables() {
+        return variables.length;
     }
 
     @Override
@@ -62,7 +63,12 @@ public final class ProgramDescription implements Program {
         return commands;
     }
 
-    public void saveToFile(WriteFileObject file) throws FileNotFoundException {
+    @Override
+    public int getNumOfCommands() {
+        return commands.length;
+    }
+
+    public void saveToFile(WriteFileObject file) throws IOException {
         file.saveToFile(this);
     }
 }

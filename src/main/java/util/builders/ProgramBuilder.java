@@ -3,24 +3,31 @@ package util.builders;
 import exceptions.NoUniqueVariableNameException;
 import files.reading.ReadFileObject;
 import lang.commands.Command;
-import lang.variables.Variable;
+import lang.variables.VariableDescription;
 
 /**
  * Class used to build programs. Can be used later in Program's constructor.
  */
 
 public final class ProgramBuilder {
-    private final Builder<Variable> variables = new GeneralBuilder<>(Variable.class,Variable[].class);
+    private final Builder<VariableDescription> variables = new GeneralBuilder<>(VariableDescription.class,VariableDescription[].class);
     private final Builder<Command> commands = new GeneralBuilder<>(Command.class,Command[].class);
+    public String programName;
     public ProgramBuilder(){}
 
     /**
      * Creates ProgramBuilder basing on file description of program.
      * @param file with description of the program.
      */
-    @SuppressWarnings("unused")
     public ProgramBuilder(ReadFileObject file){
-        /* TODO: implementation of Program-parsing from file. */
+        ProgramBuilder tmp = file.getProgramBuilder();
+        this.programName = tmp.programName;
+        for(Command com : tmp.commands){
+            this.addCommand(com);
+        }
+        for(VariableDescription var : tmp.variables){
+            this.addVariable(var);
+        }
     }
 
     /**
@@ -31,9 +38,9 @@ public final class ProgramBuilder {
     }
 
     /**
-     * @return variables in form of array.
+     * @return variables description in form of array.
      */
-    public Variable[] getVariables() {
+    public VariableDescription[] getVariablesDescription() {
         return variables.toArray();
     }
 
@@ -41,13 +48,13 @@ public final class ProgramBuilder {
      * Add Variable to the list of variables. Checks for uniqueness of variables' names.
      * @param variable variable to be added.
      */
-    public void addVariable(Variable variable) throws NoUniqueVariableNameException {
+    public void addVariable(VariableDescription variable) throws NoUniqueVariableNameException {
         if(checkIfContains(variable.getName())) throw new NoUniqueVariableNameException(variable.getName());
         variables.append(variable);
     }
 
     private boolean checkIfContains(String name){
-        for(Variable var : variables)   if(name.equals(var.getName()))  return true;
+        for(VariableDescription var : variables)   if(name.equals(var.getName()))  return true;
         return false;
     }
 

@@ -7,6 +7,7 @@ import environments.Environment;
  */
 
 public final class Message extends SingleCommand {
+    private static final String id = "MESSAGE";
     private final String mess;
     public Message(String m_mess){
         mess = m_mess;
@@ -14,5 +15,10 @@ public final class Message extends SingleCommand {
     @Override
     public void execute(Environment envi){
         System.out.println(mess);
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 }

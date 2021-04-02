@@ -4,7 +4,7 @@ package exceptions;
  * Throw this exception, when something gone wrong during execution of Executable.
  */
 @SuppressWarnings("serial")
-public class ExecException extends Exception {
+public class ExecException extends RuntimeException {
     public ExecException(){}
     public ExecException(String s){
         super(s);

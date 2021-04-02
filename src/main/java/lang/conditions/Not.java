@@ -2,9 +2,9 @@ package lang.conditions;
 
 import environments.Environment;
 import exceptions.EvaluationException;
-import lang.CodeFragment;
+import lang.CodeFactory;
 
-import java.util.ListIterator;
+import java.util.Scanner;
 
 public final class Not extends AbstractCondition {
     private static final String id = "NOT";
@@ -26,5 +26,11 @@ public final class Not extends AbstractCondition {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Condition parseFromString(Scanner scanner) {
+        return new Not(CodeFactory.parseCondition(scanner));
     }
 }

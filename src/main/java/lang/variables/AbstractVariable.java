@@ -1,13 +1,14 @@
 package lang.variables;
 
 import exceptions.IncomparableVariablesException;
-
+import exceptions.NonImplementedMethodException;
+import lang.AbstractCodeFragment;
 import java.util.Objects;
 
-public abstract class AbstractVariable implements Variable {
+public abstract class AbstractVariable extends AbstractCodeFragment implements Variable {
     private final String name;
-    protected AbstractVariable(String m_name){
-        name = m_name;
+    protected AbstractVariable(String name){
+        this.name = name;
     }
     @Override
     public String getName(){
@@ -24,8 +25,12 @@ public abstract class AbstractVariable implements Variable {
         return false;
     }
     // same with hashing, it considers the name of the variable
-    @Override
     public int hashCode() {
         return Objects.hash(getName(), getValue());
+    }
+
+    @Override
+    public Object getValue() {
+        throw new NonImplementedMethodException("getValue");
     }
 }

@@ -2,10 +2,12 @@ package environments;
 
 import exceptions.ExecException;
 import exceptions.NoVariableWithThisNameException;
+import lang.commands.Command;
 import lang.variables.Mouse;
 import lang.variables.Variable;
 import program.Program;
 import util.Coordinate;
+import util.VariableContainer;
 
 /**
  * Abstract environment contains default (Console) implementation of methods associated with instances of Command interface,
@@ -13,17 +15,16 @@ import util.Coordinate;
  */
 
 public abstract class AbstractEnvironment implements Environment {
-    protected final Variable[] variables;
-    protected Mouse myMouse;
+    protected final VariableContainer variables = new VariableContainer();
+    protected Mouse myMouse = new Mouse("Mouse",0,0);
     protected AbstractEnvironment(Program program){
-        myMouse = new Mouse("Mouse",0,0);
-        Variable[] m_variables = program.getVariables();
-        variables = new Variable[m_variables.length];
-        System.arraycopy(m_variables,0,variables,0,m_variables.length);
+        variables.addAll(program.getVariables());
     }
     @Override
     public void runProgram(Program program) throws ExecException {
-        program.execute(this);
+        for(Command com : program.getCommands()){
+            com.execute(this);
+        }
     }
 
     @Override

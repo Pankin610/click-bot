@@ -4,11 +4,12 @@ import exceptions.NoUniqueVariableNameException;
 import lang.CodeFactory;
 import lang.commands.Command;
 import lang.variables.IntegerVariable;
-import lang.variables.Variable;
+import lang.variables.VariableDescription;
 import org.junit.Before;
 import org.junit.Test;
 import util.builders.ProgramBuilder;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 public class ProgramBuilderTest {
@@ -21,7 +22,7 @@ public class ProgramBuilderTest {
         tmp = new ProgramBuilder();
         tmp.addCommand(CodeFactory.NOTHING);
         tmp.addCommand(CodeFactory.IF_CONDITION);
-        tmp.addVariable(var1);
+        tmp.addVariable(new VariableDescription(var1));
     }
 
     @Test
@@ -33,21 +34,21 @@ public class ProgramBuilderTest {
 
     @Test
     public void getVariables() {
-        Variable[] var = tmp.getVariables();
-        assertSame(var[0],var1);
+        VariableDescription[] var = tmp.getVariablesDescription();
+        assertSame(var[0].getVariable().getValue(),var1.getValue());
     }
 
     @Test
     public void addVariable() throws NoUniqueVariableNameException {
-        tmp.addVariable(var2);
-        Variable[] var = tmp.getVariables();
-        assertSame(var[0],var1);
-        assertSame(var[1],var2);
+        tmp.addVariable(new VariableDescription(var2));
+        VariableDescription[] var = tmp.getVariablesDescription();
+        assertEquals(var[0].getVariable().getValue(),var1.getValue());
+        assertEquals(var[1].getVariable().getValue(),var2.getValue());
     }
 
     @Test(expected = NoUniqueVariableNameException.class)
     public void uniqueTest() throws NoUniqueVariableNameException {
-        tmp.addVariable(var1);
+        tmp.addVariable(new VariableDescription(var1));
     }
 
     @Test
@@ -64,7 +65,7 @@ public class ProgramBuilderTest {
     @Test
     public void viewVariables() throws NoUniqueVariableNameException {
         tmp.viewVariablesId();
-        tmp.addVariable(var2);
+        tmp.addVariable(new VariableDescription(var2));
         tmp.viewVariablesId();
     }
 

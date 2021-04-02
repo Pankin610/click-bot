@@ -3,6 +3,10 @@ package lang.conditions.binaryrelations;
 import environments.Environment;
 import exceptions.EvaluationException;
 import exceptions.NoVariableWithThisNameException;
+import lang.CodeFragment;
+import lang.conditions.Condition;
+
+import java.util.Scanner;
 
 public final class Equal extends BinaryRelation {
     private static final String id = "EQUAL";
@@ -22,5 +26,13 @@ public final class Equal extends BinaryRelation {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Condition parseFromString(Scanner scanner) {
+        String name1 = scanner.next();
+        String name2 = scanner.next();
+        return new Equal(name1,name2);
     }
 }
