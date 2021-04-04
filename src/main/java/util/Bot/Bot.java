@@ -1,4 +1,4 @@
-package util;
+package util.Bot;
 
 import java.awt.*;
 import java.awt.event.InputEvent;
@@ -73,6 +73,7 @@ public class Bot {
       case 'x': pressKey(KeyEvent.VK_X); break;
       case 'y': pressKey(KeyEvent.VK_Y); break;
       case 'z': pressKey(KeyEvent.VK_Z); break;
+      case ' ': pressKey(KeyEvent.VK_SPACE); break;
       default:
         throw new IllegalArgumentException("Cannot type letter " + letter);
     }
