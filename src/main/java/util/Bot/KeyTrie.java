@@ -48,7 +48,7 @@ class KeyTrie {
             current.addSon(key.string_code.charAt(i));
             current = current.getSon(key.string_code.charAt(i));
         }
-        current.setKeyCode(key.integer_code);
+        current.setKey(key);
     }
     // just adding all the keys defined in the Key enum
     static {
@@ -65,8 +65,8 @@ class KeyTrie {
         return res.toString();
     }
     // get an integer sequence of codes for a coded string
-    public static ArrayList<Integer> getIntegerCodes(String s) {
-        ArrayList<Integer> result = new ArrayList<>();
+    public static ArrayList<Key> getKeys(String s) {
+        ArrayList<Key> result = new ArrayList<>();
         TrieNode current = root;
         for (int i = 0; i < s.length(); i++) {
             TrieNode next = current.getSon(s.charAt(i));
@@ -75,7 +75,7 @@ class KeyTrie {
             }
             current = next;
             if (current.isLeaf()) {
-                result.add(current.getKeyCode());
+                result.add(current.getKey());
                 current = root;
             }
         }

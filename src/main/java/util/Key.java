@@ -42,4 +42,13 @@ public enum Key {
         string_code = m_string_code;
         integer_code = m_integer_code;
     }
+
+    public static Key getKeyByIntegerCode(int code) {
+        for (Key key : values()) {
+            if (key.integer_code == code) {
+                return key;
+            }
+        }
+        return null;
+    }
 }
