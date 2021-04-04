@@ -21,6 +21,7 @@ public interface CodeFragment {
      * @return proper instance of CodeFragment's implementation.
      */
     <T extends CodeFragment> T parseFromString(Scanner scanner); /* signature may be changed later */
+    //TODO make the method static?
 
     /**
      * Every final implementation of this interface should contain static field with unique ID,

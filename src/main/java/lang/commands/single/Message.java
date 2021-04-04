@@ -16,7 +16,6 @@ public final class Message extends SingleCommand {
     public void execute(Environment envi){
         System.out.println(mess);
     }
-
     @Override
     public String getId() {
         return id;

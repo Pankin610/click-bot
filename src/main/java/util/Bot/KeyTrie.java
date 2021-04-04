@@ -35,12 +35,13 @@ import exceptions.InvalidKeyCodeException;
 import util.Key;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /*
     For now it's just a class with static-only fields and classes, representing a Trie of the most
     basic keys. But in the future in can be expanded to add arbitrary keys and methods.
  */
-class KeyTrie {
+public class KeyTrie {
     static TrieNode root = new TrieNode();
     static void addKey(Key key) {
         TrieNode current = root;
@@ -57,7 +58,7 @@ class KeyTrie {
         }
     }
     // code a sequence
-    public static String getSequenceCode(ArrayList<Key> sequence) {
+    public static String getSequenceCode(Collection<Key> sequence) {
         StringBuilder res = new StringBuilder();
         for (Key key : sequence) {
             res.append(key.string_code);

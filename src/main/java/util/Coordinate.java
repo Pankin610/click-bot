@@ -22,4 +22,8 @@ public final class Coordinate {
         Coordinate other = (Coordinate)o;
         return x == other.x && y == other.y;
     }
+    @Override
+    public String toString() {
+        return String.valueOf(x) + y;
+    }
 }
