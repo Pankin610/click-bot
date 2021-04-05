@@ -5,7 +5,7 @@ import lang.commands.Command;
 
 import java.util.Scanner;
 
-public final class Wait extends SingleCommand {
+public final class Wait extends AbstractSingleCommand {
     private static final String id = "WAIT";
     private final int wait_time;
     public Wait(int wait_time_milliseconds){

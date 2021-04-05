@@ -6,11 +6,14 @@ import util.Coordinate;
 
 public final class Pixel extends AbstractVariable {
     private static final String id = "PIXEL";
-    public Pixel(String m_name, int m_x, int m_y){
-        super(m_name);
-        cords = new Coordinate(m_x, m_y);
-    }
     private Coordinate cords;
+    public Pixel(String name, int x, int y){
+        super(name);
+        this.cords = new Coordinate(x, y);
+    }
+    public Pixel(String name, Coordinate cords){
+        this(name, cords.x, cords.y);
+    }
 
     /**
      * Getter for cords.
@@ -36,7 +39,8 @@ public final class Pixel extends AbstractVariable {
     }
 
     /**
-     * Method shoving some sort of 'color' of given Pixel. Exact class responsible for handling colors will be implemented later.
+     * Method shoving some sort of 'color' of given Pixel.
+     * Exact class responsible for handling colors will be implemented later.
      * Probably it will be variation of normal Integers.
      * @param envi environment in which command should be called.
      * @return returns color of given Pixel.

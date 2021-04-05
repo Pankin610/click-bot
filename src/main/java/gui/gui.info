@@ -1,0 +1,18 @@
+Naming convention:
+name_od_window.fxml (fxml file, if needed) <=>
+NameOfWindowController (Controller, should implement Controller interface) <=>
+NameOfWindowWindow (Window implementation, should implement SideWindow interface)
+
+Packages:
+application: Main and SideWindows
+controllers: Controllers
+graphics: Graphic content of project (icons, etc.)
+scenes: fxml files
+
+StartWindow and ProjectWindow are exceptions from general rule of managing windows in this project.
+They are just different views of same window (main program window), but same logic applies to them, so that's why.
+
+Generally, controllers should not be called directly from other parts of program (only inside SideWindow methods).
+SideWindow's methods should be used instead (it's safer).
+Also, all methods and fields inside SideWindow should be static.
+Also, class itself should be abstract (later it may be changed to private constructor).

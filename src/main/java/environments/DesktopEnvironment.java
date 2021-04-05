@@ -1,6 +1,5 @@
 package environments;
 
-import exceptions.ExecException;
 import program.Program;
 import util.Bot;
 import util.Coordinate;

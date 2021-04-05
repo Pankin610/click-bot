@@ -10,7 +10,7 @@ import util.builders.BlockBuilder;
 
 import java.util.Scanner;
 
-public final class While extends GroupCommand {
+public final class While extends AbstractGroupCommand {
     private static final String id = "WHILE";
     private final Condition condition;
     public While(Command[] commands, Condition condition){

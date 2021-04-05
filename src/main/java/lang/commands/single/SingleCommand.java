@@ -1,9 +1,6 @@
 package lang.commands.single;
 
-import lang.commands.AbstractCommand;
+import lang.commands.Command;
 
-/**
- * Abstract class used when command describe single action.
- */
-public abstract class SingleCommand extends AbstractCommand {
+public interface SingleCommand extends Command {
 }

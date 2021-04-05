@@ -3,7 +3,6 @@ package lang.conditions.binaryrelations;
 import environments.Environment;
 import exceptions.EvaluationException;
 import exceptions.NoVariableWithThisNameException;
-import lang.CodeFragment;
 import lang.conditions.Condition;
 
 import java.util.Scanner;

@@ -65,7 +65,7 @@ public final class ReadFileObject {
         if(!"COMMANDS".equals(scanner.next()))  throw new WrongFileFormatException("Commands preamble");
         int num = scanner.nextInt();
         for(int i=0;i<num;i++){
-            res.addCommand(CodeFactory.getCommandByID(scanner.next()).parseFromString(scanner));
+            res.addCommand(CodeFactory.parseCommand(scanner));
         }
     }
 

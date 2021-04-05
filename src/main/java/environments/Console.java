@@ -1,6 +1,5 @@
 package environments;
 
-import lang.variables.Variable;
 import program.Program;
 import util.Coordinate;
 

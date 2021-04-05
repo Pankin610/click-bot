@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 /**
- * This class can be used to created blocks of Commands, which later can be used to initialize subclass of GroupCommand.
+ * This class can be used to created blocks of Commands, which later can be used to initialize subclass of AbstractGroupCommand.
  */
 
 public final class BlockBuilder implements Builder<Command> {

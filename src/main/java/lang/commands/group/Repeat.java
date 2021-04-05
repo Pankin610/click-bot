@@ -2,15 +2,12 @@ package lang.commands.group;
 
 import environments.Environment;
 import exceptions.ExecException;
-import lang.CodeFactory;
-import lang.CodeFragment;
 import lang.commands.Command;
-import lang.conditions.Condition;
 import util.builders.BlockBuilder;
 
 import java.util.Scanner;
 
-public final class Repeat extends GroupCommand {
+public final class Repeat extends AbstractGroupCommand {
     private static final String id = "REPEAT";
     private final int num;
     public Repeat(Command[] commands, int num){
