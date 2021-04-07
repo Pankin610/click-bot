@@ -34,7 +34,30 @@ public enum Key {
     Space(" ", KeyEvent.VK_SPACE),
     Esc("ESC", KeyEvent.VK_ESCAPE),
     Shift("SHIFT", KeyEvent.VK_SHIFT),
-    Ctrl("CTRL", KeyEvent.VK_CONTROL);
+    Ctrl("CTRL", KeyEvent.VK_CONTROL),
+    CapsLock("CAPS_LOCK", KeyEvent.VK_CAPS_LOCK),
+    _1("1", KeyEvent.VK_1),
+    _2("2", KeyEvent.VK_2),
+    _3("3", KeyEvent.VK_3),
+    _4("4", KeyEvent.VK_4),
+    _5("5", KeyEvent.VK_5),
+    _6("6", KeyEvent.VK_6),
+    _7("7", KeyEvent.VK_7),
+    _8("8", KeyEvent.VK_8),
+    _9("9", KeyEvent.VK_9),
+    _0("0", KeyEvent.VK_0),
+    F1("F1", KeyEvent.VK_F1),
+    F2("F2", KeyEvent.VK_F2),
+    F3("F3", KeyEvent.VK_F3),
+    F4("F4", KeyEvent.VK_F4),
+    F5("F5", KeyEvent.VK_F5),
+    F6("F6", KeyEvent.VK_F6),
+    F7("F7", KeyEvent.VK_F7),
+    F8("F8", KeyEvent.VK_F8),
+    F9("F9", KeyEvent.VK_F9),
+    F10("F10", KeyEvent.VK_F10),
+    F11("F11", KeyEvent.VK_F11),
+    F12("F12", KeyEvent.VK_F12);
 
     public final String string_code;
     public final int integer_code;
