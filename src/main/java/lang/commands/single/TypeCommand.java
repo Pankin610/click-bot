@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Scanner;
 
-public final class TypeCommand extends SingleCommand {
+public final class TypeCommand extends AbstractSingleCommand {
     private static final String id = "TYPE";
     final Key[] key_list;
     public TypeCommand(String m_sequence) {

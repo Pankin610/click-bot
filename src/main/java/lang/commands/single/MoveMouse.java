@@ -7,7 +7,6 @@ import util.Coordinate;
 import java.util.Scanner;
 
 public final class MoveMouse extends AbstractSingleCommand {
-{
     private static final String id = "MOVE";
     private final Coordinate destination;
     public MoveMouse(Coordinate destination) {
