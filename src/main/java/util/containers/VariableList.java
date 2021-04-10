@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
+/**
+ * Implementation of VariableContainer interface.
+ */
+
 public class VariableList implements VariableContainer {
     private final ArrayList<Variable> variables = new ArrayList<>();
 
@@ -19,6 +23,11 @@ public class VariableList implements VariableContainer {
         // checking if there is a variable with the same name
         if(checkSameNameVariable(v.getName()))  throw new NoUniqueVariableNameException(v.getName());
         variables.add(v);
+    }
+
+    @Override
+    public void addAll(Variable... vars){
+        Collections.addAll(variables, vars);
     }
 
     private boolean checkSameNameVariable(String name){
@@ -55,10 +64,5 @@ public class VariableList implements VariableContainer {
     @Override
     public Iterator<Variable> iterator() {
         return variables.iterator();
-    }
-
-    @Override
-    public void addAll(Variable... vars){
-        Collections.addAll(variables, vars);
     }
 }

@@ -5,6 +5,7 @@ import lang.commands.group.IfCondition;
 import lang.commands.group.IfElse;
 import lang.commands.group.Repeat;
 import lang.commands.group.While;
+import lang.commands.single.Wait;
 import lang.conditions.Condition;
 import lang.conditions.False;
 import lang.conditions.Not;
@@ -14,6 +15,7 @@ import lang.conditions.binaryconditions.Or;
 import lang.conditions.binaryrelations.*;
 import lang.variables.IntegerVariable;
 import lang.variables.Pixel;
+import lang.variables.StringVariable;
 import lang.variables.Variable;
 
 import java.util.HashMap;
@@ -53,6 +55,7 @@ public final class CodeFactory {
     /* Variables */
     public static final IntegerVariable INTEGER_VARIABLE = new IntegerVariable("INTEGER_VARIABLE",0);
     public static final Pixel PIXEL = new Pixel("PIXEL",0,0);
+    public static final StringVariable STRING_VARIABLE = new StringVariable("STRING_VARIABLE","");
     /* Conditions */
     public static final True TRUE = new True();
     public static final False FALSE = new False();
@@ -71,6 +74,7 @@ public final class CodeFactory {
     public static final IfElse IF_ELSE = new IfElse(new Command[]{NOTHING}, new Command[]{NOTHING},TRUE);
     public static final Repeat REPEAT = new Repeat(new Command[]{NOTHING},0);
     public static final While WHILE = new While(new Command[]{NOTHING},TRUE);
+    public static final Wait WAIT = new Wait(1000);
     /* To be continued */
     private static final HashMap<String, Variable> varMap = new HashMap<>();
     private static final HashMap<String, Condition> condMap = new HashMap<>();
@@ -80,6 +84,7 @@ public final class CodeFactory {
         /* VARIABLES */
         varMap.put(INTEGER_VARIABLE.getId(),INTEGER_VARIABLE);
         varMap.put(PIXEL.getId(),PIXEL);
+        varMap.put(STRING_VARIABLE.getId(),STRING_VARIABLE);
         /* CONDITIONS */
         condMap.put(TRUE.getId(),TRUE);
         condMap.put(FALSE.getId(),FALSE);
@@ -87,6 +92,7 @@ public final class CodeFactory {
         condMap.put(AND.getId(),AND);
         condMap.put(OR.getId(),OR);
         condMap.put(EQUAL.getId(),EQUAL);
+        condMap.put(NOT_EQUAL.getId(),NOT_EQUAL);
         condMap.put(LESS.getId(),LESS);
         condMap.put(LESS_OR_EQUAL.getId(),LESS_OR_EQUAL);
         condMap.put(GREATER.getId(),GREATER);
@@ -97,6 +103,7 @@ public final class CodeFactory {
         commMap.put(IF_ELSE.getId(),IF_ELSE);
         commMap.put(REPEAT.getId(),REPEAT);
         commMap.put(WHILE.getId(),WHILE);
+        commMap.put(WAIT.getId(),WAIT);
         /* To be continued */
     }
 }

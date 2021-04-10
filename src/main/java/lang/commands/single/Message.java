@@ -6,7 +6,7 @@ import environments.Environment;
  * This command should be used only in Console environment for testing purposes.
  */
 
-public final class Message extends SingleCommand {
+public final class Message extends AbstractSingleCommand {
     private static final String id = "MESSAGE";
     private final String mess;
     public Message(String m_mess){

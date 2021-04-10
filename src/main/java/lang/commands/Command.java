@@ -3,7 +3,6 @@ package lang.commands;
 import environments.Environment;
 import lang.CodeFragment;
 
-import java.util.ListIterator;
 import java.util.Scanner;
 
 /**
@@ -29,6 +28,7 @@ public interface Command extends Executable, CodeFragment {
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public Command parseFromString(Scanner scanner) {
             return NOTHING;
         }

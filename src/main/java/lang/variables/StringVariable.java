@@ -2,16 +2,18 @@ package lang.variables;
 
 import exceptions.IncomparableVariablesException;
 import exceptions.IncorrectVariableAssignment;
-import lang.CodeFragment;
 
 import java.util.Scanner;
 
+/**
+ * Variable storing single-word String (may be changed later).
+ */
 public final class StringVariable extends AbstractVariable {
     private static final String id = "STR"; // can be changed to STRING if needed
     private String val;
-    public StringVariable(String m_name, String m_val) {
-        super(m_name);
-        val = m_val;
+    public StringVariable(String name, String val) {
+        super(name);
+        this.val = val;
     }
     @Override
     public String getValue() {
@@ -20,13 +22,15 @@ public final class StringVariable extends AbstractVariable {
 
     @Override
     public String getStringRepresentation() {
-        return "STR " + getName() + " " + val;
+        return getId() + ' ' + getName() + ' '  + val;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public CodeFragment parseFromString(Scanner scanner) {
-        return null;
+    public Variable parseFromString(Scanner scanner) {
+        String name = scanner.next();
+        String res = scanner.next();
+        return new StringVariable(name,res);
     }
 
     // regular java objects serve the role of literals

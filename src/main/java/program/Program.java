@@ -1,5 +1,6 @@
 package program;
 
+import files.reading.ReadFileObject;
 import files.writing.WriteFileObject;
 import lang.commands.Command;
 import lang.variables.Variable;
@@ -19,4 +20,20 @@ public interface Program {
      * @throws FileNotFoundException when there are problems with given file.
      */
     void saveToFile(WriteFileObject file) throws IOException;
+    static Program getProgramFromFile(ReadFileObject file){
+        return new ProgramDescription(file);
+    }
+
+    /**
+     * Method showing content of Program: name, variables and commands.
+     */
+    default void show(){
+        System.out.println(getName());
+        for(Variable var : getVariables()){
+            System.out.println(var.getStringRepresentation());
+        }
+        for(Command com : getCommands()){
+            System.out.println(com.getStringRepresentation());
+        }
+    }
 }

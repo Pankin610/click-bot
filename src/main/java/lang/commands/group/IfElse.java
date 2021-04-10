@@ -3,14 +3,13 @@ package lang.commands.group;
 import environments.Environment;
 import exceptions.ExecException;
 import lang.CodeFactory;
-import lang.CodeFragment;
 import lang.commands.Command;
 import lang.conditions.Condition;
 import util.builders.BlockBuilder;
 
 import java.util.Scanner;
 
-public final class IfElse extends GroupCommand {
+public final class IfElse extends AbstractGroupCommand {
     private static final String id = "IF_ELSE";
     private final Command[] commands2;
     private final Condition condition;

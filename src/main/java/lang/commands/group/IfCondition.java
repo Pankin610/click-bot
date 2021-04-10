@@ -10,7 +10,7 @@ import util.builders.BlockBuilder;
 
 import java.util.Scanner;
 
-public final class IfCondition extends GroupCommand {
+public final class IfCondition extends AbstractGroupCommand {
     private static final String id = "IF_CONDITION";
     private final Condition condition;
     public IfCondition(Command[] commands, Condition condition){
