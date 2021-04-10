@@ -1,7 +1,7 @@
 package environments;
 
 import program.Program;
-import util.Bot;
+import util.Bot.Bot;
 import util.Coordinate;
 
 /**
