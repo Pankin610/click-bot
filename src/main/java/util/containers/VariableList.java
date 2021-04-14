@@ -7,6 +7,7 @@ import lang.variables.Variable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * Implementation of VariableContainer interface.
@@ -17,9 +18,7 @@ public class VariableList implements VariableContainer {
 
     @Override
     public void add(Variable v) {
-        if (v == null) {
-            throw new NullPointerException();
-        }
+        Objects.requireNonNull(v,"null variable inside VariableContainer::add method");
         // checking if there is a variable with the same name
         if(checkSameNameVariable(v.getName()))  throw new NoUniqueVariableNameException(v.getName());
         variables.add(v);

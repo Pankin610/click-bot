@@ -28,4 +28,9 @@ public abstract class StartWindow implements SideWindow {
     public static Pane getPane() {
         return pane;
     }
+
+    public static void show(){
+        controller.reload();
+        WindowsManager.root.setCenter(pane);
+    }
 }

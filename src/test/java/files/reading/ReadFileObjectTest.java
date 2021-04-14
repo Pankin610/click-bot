@@ -30,7 +30,7 @@ public class ReadFileObjectTest {
         VariableContainer con = new VariableList();
         String[] res = new String[]{"my_int: 7", "var1: 10", "var2: 11"};
         for(int i=0;i<3;i++){
-            con.add(CodeFactory.getVariableByID(cin.next()).parseFromString(cin));
+            con.add(CodeFactory.parseVariable(cin));
         }
         Variable[] tmp = con.toArray();
         for(int i=0;i<3;i++){

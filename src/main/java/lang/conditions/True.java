@@ -1,12 +1,12 @@
 package lang.conditions;
 
 import environments.Environment;
-import lang.CodeFactory;
 
 import java.util.Scanner;
 
 public final class True implements Condition {
     private static final String id = "TRUE";
+    public static final True TRUE = new True();
     @Override
     public boolean eval(Environment envi) {
         return true;
@@ -20,7 +20,7 @@ public final class True implements Condition {
     @Override
     @SuppressWarnings("unchecked")
     public Condition parseFromString(Scanner scanner) {
-        return CodeFactory.TRUE;
+        return TRUE;
     }
 
     @Override

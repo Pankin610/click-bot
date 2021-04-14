@@ -10,7 +10,7 @@ import util.Coordinate;
  * This interface describes methods which implementation is necessary to make command calls correct.
  */
 public interface Environment {
-    void runProgram(Program program) throws ExecException;
+    void runProgram() throws ExecException;
     void pressKey(int key);
     void moveMouseTo(Coordinate destination);
     void moveMouseBy(Coordinate cords);

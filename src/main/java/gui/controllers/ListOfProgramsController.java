@@ -4,6 +4,7 @@ import exceptions.WrongFileFormatException;
 import files.CreatedPrograms;
 import files.reading.ReadFileObject;
 import gui.applications.ListOfProgramsWindow;
+import gui.applications.ProgramMenu;
 import gui.applications.ProjectWindow;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -44,5 +45,6 @@ public class ListOfProgramsController implements Controller {
         if(name == null)    throw new WrongFileFormatException("problem during opening file");
         ListOfProgramsWindow.close();
         ProjectWindow.show(CreatedPrograms.getFileByName(name));
+        ProgramMenu.settingProjectScene();
     }
 }

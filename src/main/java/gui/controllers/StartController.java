@@ -1,5 +1,7 @@
 package gui.controllers;
 
+import environments.Console;
+import environments.Environment;
 import files.CreatedPrograms;
 import files.reading.ReadFileObject;
 import gui.applications.ListOfProgramsWindow;
@@ -37,10 +39,11 @@ public class StartController implements Controller {
         ListOfProgramsWindow.show();
     }
 
-    public void runProgram(ActionEvent event){ /* for now, runProgram only display description of a program inside file */
+    public void runProgram(ActionEvent event){
         String name = choiceBox.getValue();
         Program program = Program.getProgramFromFile(new ReadFileObject(CreatedPrograms.getPathByName(name)));
-        program.show();
+        Environment envi = new Console(program); /* for now, program is executed in default environment (which is Console) */
+        envi.runProgram();
     }
 
     public void removeDisabledRunButton(ActionEvent event){

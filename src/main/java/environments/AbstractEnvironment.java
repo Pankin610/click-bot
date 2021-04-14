@@ -18,11 +18,13 @@ import util.containers.VariableList;
 public abstract class AbstractEnvironment implements Environment {
     protected final VariableContainer variables = new VariableList();
     protected Mouse myMouse = new Mouse("Mouse",0,0);
+    protected final Program program;
     protected AbstractEnvironment(Program program){
+        this.program = program;
         variables.addAll(program.getVariables());
     }
     @Override
-    public void runProgram(Program program) throws ExecException {
+    public void runProgram() throws ExecException {
         for(Command com : program.getCommands()){
             com.execute(this);
         }

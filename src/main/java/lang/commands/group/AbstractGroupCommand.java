@@ -22,7 +22,8 @@ public abstract class AbstractGroupCommand extends AbstractCommand implements Gr
     protected AbstractGroupCommand(BlockBuilder commands){
         this(commands.toArray());
     }
-    protected void executeBlock(Environment envi) throws ExecException {
+    @Override
+    public void executeBlock(Environment envi) throws ExecException {
         for(Command command : commands) command.execute(envi);
     }
 

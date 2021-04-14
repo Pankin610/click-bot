@@ -33,6 +33,7 @@ public abstract class ProjectWindow implements SideWindow {
     }
 
     public static void show(String name){
+
         controller.nameProgramLabel.setText(name);
         controller.programTree.setRoot(new TreeItem<>(name));
         WindowsManager.root.setCenter(pane);

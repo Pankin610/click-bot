@@ -15,40 +15,40 @@ public class GeneralBuilderTest {
     @Before
     public void setUp(){
         tmp = new GeneralBuilder<>(Command.class,Command[].class);
-        tmp.append(CodeFactory.NOTHING);
-        tmp.append(CodeFactory.IF_CONDITION);
+        tmp.append(CodeFactory.getCommandByID("NOTHING"));
+        tmp.append(CodeFactory.getCommandByID("IF_CONDITION"));
     }
     
     @Test
     public void forEach() {
         for(Command com : tmp){
-            assertTrue(com == CodeFactory.NOTHING || com == CodeFactory.IF_CONDITION);
+            assertTrue(com == CodeFactory.getCommandByID("NOTHING") || com == CodeFactory.getCommandByID("IF_CONDITION"));
         }
     }
 
     @Test
     public void toArray() {
         Command[] com = tmp.toArray();
-        assertSame(com[0],CodeFactory.NOTHING);
-        assertSame(com[1],CodeFactory.IF_CONDITION);
+        assertSame(com[0],CodeFactory.getCommandByID("NOTHING"));
+        assertSame(com[1],CodeFactory.getCommandByID("IF_CONDITION"));
     }
 
     @Test
     public void append() {
-        tmp.append(CodeFactory.NOTHING);
-        tmp.append(CodeFactory.NOTHING);
+        tmp.append(CodeFactory.getCommandByID("NOTHING"));
+        tmp.append(CodeFactory.getCommandByID("NOTHING"));
         Command[] com = tmp.toArray();
-        assertSame(com[0],CodeFactory.NOTHING);
-        assertSame(com[1],CodeFactory.IF_CONDITION);
-        assertSame(com[2],CodeFactory.NOTHING);
-        assertSame(com[3],CodeFactory.NOTHING);
+        assertSame(com[0],CodeFactory.getCommandByID("NOTHING"));
+        assertSame(com[1],CodeFactory.getCommandByID("IF_CONDITION"));
+        assertSame(com[2],CodeFactory.getCommandByID("NOTHING"));
+        assertSame(com[3],CodeFactory.getCommandByID("NOTHING"));
     }
 
     @Test
     public void size() {
         assertEquals(tmp.size(),2);
-        tmp.append(CodeFactory.NOTHING);
-        tmp.append(CodeFactory.NOTHING);
+        tmp.append(CodeFactory.getCommandByID("NOTHING"));
+        tmp.append(CodeFactory.getCommandByID("NOTHING"));
         assertEquals(tmp.size(),4);
     }
 }
