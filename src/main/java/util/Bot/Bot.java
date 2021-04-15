@@ -44,43 +44,14 @@ public class Bot {
   public void pressKey(int key_event_code) {
     robot.keyPress(key_event_code);
     robot.delay(kDefaultDelay);
+    robot.keyRelease(key_event_code);
   }
-  public void typeLetter(char letter) {
-    switch (letter) {
-      case 'a': pressKey(KeyEvent.VK_A); break;
-      case 'b': pressKey(KeyEvent.VK_B); break;
-      case 'c': pressKey(KeyEvent.VK_C); break;
-      case 'd': pressKey(KeyEvent.VK_D); break;
-      case 'e': pressKey(KeyEvent.VK_E); break;
-      case 'f': pressKey(KeyEvent.VK_F); break;
-      case 'g': pressKey(KeyEvent.VK_G); break;
-      case 'h': pressKey(KeyEvent.VK_H); break;
-      case 'i': pressKey(KeyEvent.VK_I); break;
-      case 'j': pressKey(KeyEvent.VK_J); break;
-      case 'k': pressKey(KeyEvent.VK_K); break;
-      case 'l': pressKey(KeyEvent.VK_L); break;
-      case 'm': pressKey(KeyEvent.VK_M); break;
-      case 'n': pressKey(KeyEvent.VK_N); break;
-      case 'o': pressKey(KeyEvent.VK_O); break;
-      case 'p': pressKey(KeyEvent.VK_P); break;
-      case 'q': pressKey(KeyEvent.VK_Q); break;
-      case 'r': pressKey(KeyEvent.VK_R); break;
-      case 's': pressKey(KeyEvent.VK_S); break;
-      case 't': pressKey(KeyEvent.VK_T); break;
-      case 'u': pressKey(KeyEvent.VK_U); break;
-      case 'v': pressKey(KeyEvent.VK_V); break;
-      case 'w': pressKey(KeyEvent.VK_W); break;
-      case 'x': pressKey(KeyEvent.VK_X); break;
-      case 'y': pressKey(KeyEvent.VK_Y); break;
-      case 'z': pressKey(KeyEvent.VK_Z); break;
-      case ' ': pressKey(KeyEvent.VK_SPACE); break;
-      default:
-        throw new IllegalArgumentException("Cannot type letter " + letter);
-    }
+  public void holdKey(int key_event_code) {
+    robot.keyPress(key_event_code);
+    robot.delay(kDefaultDelay);
   }
-  public void typeText(String s) {
-    for (int i = 0; i < s.length(); i++ ) {
-      typeLetter(s.charAt(i));
-    }
+  public void releaseKey(int key_event_code) {
+    robot.keyRelease(key_event_code);
+    robot.delay(kDefaultDelay);
   }
 }

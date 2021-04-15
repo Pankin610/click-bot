@@ -66,7 +66,7 @@ public class KeyTrie {
         return res.toString();
     }
     // get an integer sequence of codes for a coded string
-    public static ArrayList<Key> getKeys(String s) {
+    public static Collection<Key> getKeys(String s) {
         ArrayList<Key> result = new ArrayList<>();
         TrieNode current = root;
         for (int i = 0; i < s.length(); i++) {

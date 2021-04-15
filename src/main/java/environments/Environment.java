@@ -12,6 +12,8 @@ import util.Coordinate;
 public interface Environment {
     void runProgram(Program program) throws ExecException;
     void pressKey(int key);
+    void holdKey(int key);
+    void releaseKey(int key);
     void moveMouseTo(Coordinate destination);
     void moveMouseBy(Coordinate cords);
     void wait(int tim);
