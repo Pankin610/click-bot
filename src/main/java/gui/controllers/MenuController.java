@@ -1,10 +1,8 @@
 package gui.controllers;
 
+import gui.SceneType;
 import gui.WindowsManager;
-import gui.applications.AboutWindow;
-import gui.applications.ListOfProgramsWindow;
-import gui.applications.ProgramNameWindow;
-import gui.applications.StartWindow;
+import gui.applications.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -38,28 +36,26 @@ public class MenuController implements Controller{
     }
 
     public void newAction() {
-        setActiveProject(true);
-        ProgramNameWindow.show();
+        WindowsManager.openNewDialog();
     }
 
     public void aboutAction() {
-        AboutWindow.show();
+        WindowsManager.showAboutWindow();
     }
 
     public void openAction() {
-        setActiveProject(true);
-        ListOfProgramsWindow.show();
+        WindowsManager.showListOfProgram();
     }
 
     public void settingsAction() {
     }
 
     public void saveProject() {
+
     }
 
     public void closeProject() {
-        setActiveProject(false);
-        StartWindow.show();
+        WindowsManager.changeScene(SceneType.START_SCENE);
     }
 
     @Override

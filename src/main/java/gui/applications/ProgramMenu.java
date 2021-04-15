@@ -1,5 +1,6 @@
 package gui.applications;
 
+import gui.SceneType;
 import gui.WindowsManager;
 import gui.controllers.MenuController;
 import javafx.fxml.FXMLLoader;
@@ -25,11 +26,10 @@ public class ProgramMenu implements SideWindow {
 
     public static void init(){} /* used to load static initialization */
 
-    public static void settingProjectScene(){
-        controller.setActiveProject(true);
-    }
-
-    public static void settingStartScene(){
-        controller.setActiveProject(false);
+    /**
+     * Use whenever Scene is changed.
+     */
+    public static void settingScene(SceneType type){
+        controller.setActiveProject(type == SceneType.PROJECT_SCENE);
     }
 }

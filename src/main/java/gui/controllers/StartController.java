@@ -4,6 +4,7 @@ import environments.Console;
 import environments.Environment;
 import files.CreatedPrograms;
 import files.reading.ReadFileObject;
+import gui.WindowsManager;
 import gui.applications.ListOfProgramsWindow;
 import gui.applications.ProgramNameWindow;
 import javafx.event.ActionEvent;
@@ -32,14 +33,14 @@ public class StartController implements Controller {
     }
 
     public void createNew(){
-        ProgramNameWindow.show();
+        WindowsManager.openNewDialog();
     }
 
-    public void openExisting(ActionEvent event){
-        ListOfProgramsWindow.show();
+    public void openExisting() {
+        WindowsManager.showListOfProgram();
     }
 
-    public void runProgram(ActionEvent event){
+    public void runProgram() {
         String name = choiceBox.getValue();
         Program program = Program.getProgramFromFile(new ReadFileObject(CreatedPrograms.getPathByName(name)));
         Environment envi = new Console(program); /* for now, program is executed in default environment (which is Console) */

@@ -1,6 +1,7 @@
 package gui.applications;
 
 import files.reading.ReadFileObject;
+import gui.SceneType;
 import gui.WindowsManager;
 import gui.controllers.ProjectController;
 import javafx.fxml.FXMLLoader;
@@ -32,15 +33,12 @@ public abstract class ProjectWindow implements SideWindow {
         return pane;
     }
 
-    public static void show(String name){
-
+    public static void prepareNew(String name){
         controller.nameProgramLabel.setText(name);
         controller.programTree.setRoot(new TreeItem<>(name));
-        WindowsManager.root.setCenter(pane);
     }
 
-    public static void show(ReadFileObject file){
+    public static void prepareExisting(ReadFileObject file){
         controller.load(file);
-        WindowsManager.root.setCenter(pane);
     }
 }

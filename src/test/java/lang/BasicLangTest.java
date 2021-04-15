@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class CodeTypeTest {
+public class BasicLangTest {
     @Test
     public void getInstanceByID() {
         assertEquals("WHILE",CodeFactory.getCommandByID("WHILE").getId());

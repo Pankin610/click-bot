@@ -3,6 +3,8 @@ package gui.controllers;
 import exceptions.WrongFileFormatException;
 import files.CreatedPrograms;
 import files.reading.ReadFileObject;
+import gui.SceneType;
+import gui.WindowsManager;
 import gui.applications.ListOfProgramsWindow;
 import gui.applications.ProgramMenu;
 import gui.applications.ProjectWindow;
@@ -42,9 +44,9 @@ public class ListOfProgramsController implements Controller {
     public void openAction() {
         String name = programList.getSelectionModel().getSelectedItem();
         System.out.println(name);
-        if(name == null)    throw new WrongFileFormatException("problem during opening file");
+        if(name == null || name.trim().isEmpty() )
+            throw new WrongFileFormatException("Problem during opening file (empty name)");
         ListOfProgramsWindow.close();
-        ProjectWindow.show(CreatedPrograms.getFileByName(name));
-        ProgramMenu.settingProjectScene();
+        WindowsManager.openExistingProject(name);
     }
 }

@@ -4,6 +4,7 @@ import gui.WindowsManager;
 import gui.controllers.ProgramNameController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,6 +21,8 @@ public abstract class ProgramNameWindow implements SideWindow {
         }
         stage.setResizable(false);
         stage.setTitle("Program's name");
+        stage.initOwner(WindowsManager.stage);
+        stage.initModality(Modality.APPLICATION_MODAL);
         controller = loader.getController();
     }
     public static ProgramNameController getController() {
@@ -28,6 +31,10 @@ public abstract class ProgramNameWindow implements SideWindow {
 
     public static String getName(){
         return controller.testField.getText();
+    }
+
+    public static Stage getStage() {
+        return stage;
     }
 
     public static void show(){

@@ -14,6 +14,7 @@ import java.util.Scanner;
 /**
  * Factory of final implementations of CodeFragment interface.
  * Methods inside this class can parse instance of CodeFragment using description inside Scanner (created from file).
+ * Later this may be implemented using reflections.
  */
 
 public final class CodeFactory {

@@ -4,6 +4,7 @@ import gui.WindowsManager;
 import gui.controllers.ListOfProgramsController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,7 +21,8 @@ public abstract  class ListOfProgramsWindow implements SideWindow {
         }
         stage.setResizable(false);
         stage.setTitle("List of programs");
-        stage.alwaysOnTopProperty();
+        stage.initOwner(WindowsManager.stage);
+        stage.initModality(Modality.APPLICATION_MODAL);
         controller = loader.getController();
     }
     public static ListOfProgramsController getController() {
