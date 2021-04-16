@@ -1,5 +1,7 @@
 package util.Bot;
 
+import util.Coordinate;
+
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -53,5 +55,8 @@ public class Bot {
   public void releaseKey(int key_event_code) {
     robot.keyRelease(key_event_code);
     robot.delay(kDefaultDelay);
+  }
+  public Color getPixelColor(Coordinate cord) {
+    return robot.getPixelColor(cord.x, cord.y);
   }
 }

@@ -4,6 +4,8 @@ import environments.Environment;
 import exceptions.IncorrectVariableAssignment;
 import util.Coordinate;
 
+import java.awt.*;
+
 public final class Pixel extends AbstractVariable {
     private static final String id = "PIXEL";
     private Coordinate cords;
@@ -24,6 +26,17 @@ public final class Pixel extends AbstractVariable {
         return cords;
     }
 
+    /**
+     * Method shoving some sort of 'color' of given Pixel.
+     * Exact class responsible for handling colors will be implemented later.
+     * Probably it will be variation of normal Integers.
+     * @param envi environment in which command should be called.
+     * @return returns color of given Pixel.
+     */
+    public Color getColor(Environment environment) {
+        return environment.getPixelColor(cords);
+    }
+
     @Override
     public void setValue(Object value) {
         if (value instanceof Pixel) {
@@ -36,17 +49,6 @@ public final class Pixel extends AbstractVariable {
             cords = (Coordinate)value;
         }
         throw new IncorrectVariableAssignment(this, value);
-    }
-
-    /**
-     * Method shoving some sort of 'color' of given Pixel.
-     * Exact class responsible for handling colors will be implemented later.
-     * Probably it will be variation of normal Integers.
-     * @param envi environment in which command should be called.
-     * @return returns color of given Pixel.
-     */
-    public Integer getColor(Environment envi){
-        return envi.getPixel(cords);
     }
 
     @Override

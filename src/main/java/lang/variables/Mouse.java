@@ -4,6 +4,8 @@ import environments.Environment;
 import exceptions.IncorrectVariableAssignment;
 import util.Coordinate;
 
+import java.awt.*;
+
 public class Mouse extends AbstractVariable {
     // TODO add an environment field to move the mouse in it?
     private Coordinate position;
@@ -31,8 +33,8 @@ public class Mouse extends AbstractVariable {
         throw new IncorrectVariableAssignment(this, value);
     }
 
-    public Integer getColor(Environment envi){
-        return envi.getPixel(position);
+    public Color getColor(Environment envi){
+        return envi.getPixelColor(position);
     }
     public void moveTo(Coordinate destination){
         position = destination;

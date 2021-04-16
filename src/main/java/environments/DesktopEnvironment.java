@@ -4,6 +4,8 @@ import program.Program;
 import util.Bot.Bot;
 import util.Coordinate;
 
+import java.awt.*;
+
 /**
  * Environment in which Bot implementation of Commands is used.
  */
@@ -39,12 +41,12 @@ public final class DesktopEnvironment extends AbstractEnvironment {
 
     @Override
     public void clickLeft() {
-        super.clickLeft();
+        bot.leftClick();
     }
 
     @Override
     public void clickRight() {
-        super.clickRight();
+        bot.rightClick();
     }
 
     @Override
@@ -63,8 +65,8 @@ public final class DesktopEnvironment extends AbstractEnvironment {
     }
 
     @Override
-    public Integer getPixel(Coordinate cords) {
-        return super.getPixel(cords);
+    public Color getPixelColor(Coordinate cords) {
+        return bot.getPixelColor(cords);
     }
     //Overrode methods (desktop implementation, using real mouse and keyboard)
 }

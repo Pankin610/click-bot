@@ -3,6 +3,8 @@ package environments;
 import program.Program;
 import util.Coordinate;
 
+import java.awt.*;
+
 /**
  * Class describing how program should behave in console environment.
  * Most methods associated with commands should be implemented in superclass.
@@ -11,13 +13,13 @@ import util.Coordinate;
 public final class Console extends AbstractEnvironment {
     public Console(Program program) {
         super(program);
-        PixelArray = new Integer[x_size][y_size];
+        PixelArray = new Color[x_size][y_size];
     }
 
     /**
      * Fields handling simulation of normal desktop screen.
      */
-    private Integer[][] PixelArray;
+    private Color[][] PixelArray;
     private static final int x_size = 10;
     private static final int y_size = 10;
     public static boolean checkCords(Coordinate cords) {
@@ -25,7 +27,7 @@ public final class Console extends AbstractEnvironment {
     }
 
     @Override
-    public Integer getPixel(Coordinate cords) {
+    public Color getPixelColor(Coordinate cords) {
         if(checkCords(cords))  throw new IndexOutOfBoundsException();
         return PixelArray[cords.x][cords.y];
     }
@@ -35,7 +37,7 @@ public final class Console extends AbstractEnvironment {
      * @param cords cords of Pixel in array.
      * @param val target value.
      */
-    public void changeColor(Coordinate cords, Integer val) {
+    public void changeColor(Coordinate cords, Color val) {
         if(checkCords(cords))  throw new IndexOutOfBoundsException();
         PixelArray[cords.x][cords.y] = val;
     }

@@ -10,6 +10,8 @@ import util.Coordinate;
 import util.containers.VariableContainer;
 import util.containers.VariableList;
 
+import java.awt.*;
+
 /**
  * Abstract environment contains default (Console) implementation of methods associated with instances of Command interface,
  * such as PushButton, Move, Hold, etc...
@@ -26,6 +28,16 @@ public abstract class AbstractEnvironment implements Environment {
         for(Command com : program.getCommands()){
             com.execute(this);
         }
+    }
+
+    @Override
+    public void holdKey(int key) {
+        System.out.println("Holding key: " + key);
+    }
+
+    @Override
+    public void releaseKey(int key) {
+        System.out.println("Releasing key: " + key);
     }
 
     @Override
@@ -88,9 +100,7 @@ public abstract class AbstractEnvironment implements Environment {
     }
 
     @Override
-    public Integer getPixel(Coordinate cords) {
-        return 0;
+    public Color getPixelColor(Coordinate cords) {
+        return new Color(0);
     }
-
-
 }

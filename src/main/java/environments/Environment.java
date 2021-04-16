@@ -6,6 +6,8 @@ import lang.variables.Variable;
 import program.Program;
 import util.Coordinate;
 
+import java.awt.*;
+
 /**
  * This interface describes methods which implementation is necessary to make command calls correct.
  */
@@ -22,6 +24,7 @@ public interface Environment {
     void scroll();
     void hold(int tim);
     void drag(Coordinate where);
+    Color getPixelColor(Coordinate cord);
 
     /**
      * Getter for variables, based on names.
@@ -37,7 +40,4 @@ public interface Environment {
      * @return true if Variable with given name exists in program description.
      */
     boolean isThereVariable(String name);
-
-    Integer getPixel(Coordinate cords);
-    /* To be continued... */
 }
