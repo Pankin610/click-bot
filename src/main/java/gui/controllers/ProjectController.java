@@ -7,7 +7,6 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import lang.commands.Command;
-import lang.commands.group.GroupCommand;
 import util.builders.ProgramBuilder;
 
 import java.net.URL;
@@ -35,29 +34,17 @@ public class ProjectController implements Controller {
 
     }
 
+    /**
+     * Loads tree representation of program inside file.
+     * @param file {@link ReadFileObject} with description of program
+     */
     public void load(ReadFileObject file){
         ProgramBuilder program = new ProgramBuilder(file);
         nameProgramLabel.setText(program.programName);
         TreeItem<String> root = new TreeItem<>(program.programName);
-        for(Command com : program.getCommands()){
-            if(com != Command.NOTHING)
-                root.getChildren().add(createNode(com));
+        for(Command comm : program.getCommands()){
+            root.getChildren().add(comm.getTreeRepresentation());
         }
         programTree.setRoot(root);
-    }
-
-    private TreeItem<String> createNode(Command com){
-        if(com instanceof GroupCommand){
-            return createGroupNode((GroupCommand) com);
-        }
-        return new TreeItem<>(com.getStringRepresentation());
-    }
-
-    private TreeItem<String> createGroupNode(GroupCommand command){
-        TreeItem<String> root = new TreeItem<>(command.getId());
-        for(Command com : command){
-            root.getChildren().add(createNode(com));
-        }
-        return root;
     }
 }

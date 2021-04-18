@@ -9,6 +9,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
+/**
+ * Class responsible for pop-up window which shows before creation of new project.
+ */
 public abstract class ProgramNameWindow implements SideWindow {
     private final static ProgramNameController controller;
     private final static Stage stage = new Stage();
@@ -43,5 +47,9 @@ public abstract class ProgramNameWindow implements SideWindow {
 
     public static void close(){
         stage.close();
+    }
+
+    public static void reload(){
+        controller.reload();
     }
 }

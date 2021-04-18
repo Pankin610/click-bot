@@ -1,8 +1,5 @@
 package lang;
 
-import exceptions.NonImplementedMethodException;
-import javafx.scene.control.TreeItem;
-
 import java.util.Scanner;
 
 /**
@@ -24,7 +21,6 @@ public interface CodeFragment {
      * @return proper instance of CodeFragment's implementation.
      */
     <T extends CodeFragment> T parseFromString(Scanner scanner); /* signature may be changed later */
-    //TODO make the method static?
 
     /**
      * Every final implementation of this interface should contain static final field with unique ID,
@@ -32,14 +28,4 @@ public interface CodeFragment {
      * @return ID of corresponding class.
      */
     String getId();
-
-
-    /**
-     * This method should describe how CodeFragment should be showed as tree node inside project-creation window.
-     * @return TreeItem with representation.
-     * For now, it may be non implemented.
-     */
-    default TreeItem<String> getTreeRepresentation(){
-        throw new NonImplementedMethodException("getTreeRepresentation");
-    }
 }

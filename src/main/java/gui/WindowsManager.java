@@ -82,6 +82,7 @@ public class WindowsManager {
      * Open dialog for name of new project.
      */
     public static void openNewDialog(){
+        ProgramNameWindow.reload();
         ProgramNameWindow.show();
     }
 

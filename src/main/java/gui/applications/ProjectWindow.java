@@ -1,16 +1,17 @@
 package gui.applications;
 
 import files.reading.ReadFileObject;
-import gui.SceneType;
 import gui.WindowsManager;
 import gui.controllers.ProjectController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.Pane;
-import util.builders.ProgramBuilder;
 
 import java.io.IOException;
 
+/**
+ * Project window is responsible for project-creating scene of main program.
+ */
 public abstract class ProjectWindow implements SideWindow {
     private static final Pane pane;
     private static final ProjectController controller;

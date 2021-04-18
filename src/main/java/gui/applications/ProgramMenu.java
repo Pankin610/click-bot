@@ -8,7 +8,10 @@ import javafx.scene.control.MenuBar;
 
 import java.io.IOException;
 
-public class ProgramMenu implements SideWindow {
+/**
+ * Class representing menu bar visible on the main window.
+ */
+public abstract class ProgramMenu implements SideWindow {
     private final static MenuController controller;
     private final static MenuBar menu;
     static{

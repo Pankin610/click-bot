@@ -7,6 +7,9 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
+/**
+ * This window is starting pane of application.
+ */
 public abstract class StartWindow implements SideWindow {
     private static final Pane pane;
     private static final StartController controller;

@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This class is responsible for window with list of existing programs and option to open any of these.
+ */
 public abstract  class ListOfProgramsWindow implements SideWindow {
     private final static ListOfProgramsController controller;
     private final static Stage stage = new Stage();
