@@ -117,10 +117,14 @@ public class WindowsManager {
      * Self-explaining.
      */
     public static void showSettingsWindow() {
-
+        SettingsWindow.show();
     }
 
     public static VariableContainer getProjectVariables() {
         return ProjectWindow.getController().getVariables();
+    }
+
+    public static FXMLLoader getLoader(String file) {
+        return new FXMLLoader(WindowsManager.class.getResource("scenes/" + file + ".fxml"));
     }
 }

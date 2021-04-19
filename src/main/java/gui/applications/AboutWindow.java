@@ -16,7 +16,7 @@ public abstract class AboutWindow implements SideWindow {
     private static final AboutController controller;
     private static final Stage stage = new Stage();
     static{
-        FXMLLoader loader = new FXMLLoader(WindowsManager.class.getResource("scenes/about.fxml"));
+        FXMLLoader loader = WindowsManager.getLoader("about");
         try {
             stage.setScene(new Scene(loader.load()));
         } catch (IOException e) {

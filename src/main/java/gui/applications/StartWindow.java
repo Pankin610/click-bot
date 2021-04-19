@@ -14,7 +14,7 @@ public abstract class StartWindow implements SideWindow {
     private static final Pane pane;
     private static final StartController controller;
     static{
-        FXMLLoader loader = new FXMLLoader(WindowsManager.class.getResource("scenes/start.fxml"));
+        FXMLLoader loader = WindowsManager.getLoader("start");
         Pane tmpPane = null;
         try {
             tmpPane = loader.load();

@@ -18,7 +18,7 @@ public abstract class ProgramMenu implements SideWindow {
     private final static MenuController controller;
     private final static MenuBar menu;
     static{
-        FXMLLoader loader = new FXMLLoader(WindowsManager.class.getResource("scenes/menu.fxml"));
+        FXMLLoader loader = WindowsManager.getLoader("menu");
         MenuBar tmp = null;
         try {
             tmp = loader.load();

@@ -17,7 +17,7 @@ public abstract class ProgramNameWindow implements SideWindow {
     private final static ProgramNameController controller;
     private final static Stage stage = new Stage();
     static{
-        FXMLLoader loader = new FXMLLoader(WindowsManager.class.getResource("scenes/program_name.fxml"));
+        FXMLLoader loader = WindowsManager.getLoader("program_name");
         try {
             stage.setScene(new Scene(loader.load()));
         } catch (IOException e) {

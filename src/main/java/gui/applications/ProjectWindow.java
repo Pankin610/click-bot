@@ -16,7 +16,7 @@ public abstract class ProjectWindow implements SideWindow {
     private static final Pane pane;
     private static final ProjectController controller;
     static{
-        FXMLLoader loader = new FXMLLoader(WindowsManager.class.getResource("scenes/project.fxml"));
+        FXMLLoader loader = WindowsManager.getLoader("project");
         Pane tmpPane = null;
         try {
             tmpPane = loader.load();
