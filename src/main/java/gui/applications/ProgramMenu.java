@@ -5,6 +5,9 @@ import gui.WindowsManager;
 import gui.controllers.MenuController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.MenuBar;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 
 import java.io.IOException;
 
@@ -24,6 +27,7 @@ public abstract class ProgramMenu implements SideWindow {
         }
         menu = tmp;
         controller = loader.getController();
+        controller.saveItem.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         WindowsManager.root.setTop(menu);
     }
 

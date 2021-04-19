@@ -1,20 +1,22 @@
 package gui.controllers;
 
+import files.Paths;
+import files.writing.WriteFileObject;
 import gui.SceneType;
 import gui.WindowsManager;
-import gui.applications.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TreeItem;
+import util.builders.ProgramBuilder;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MenuController implements Controller{
 
-    @FXML
     public MenuItem closeItem;
-    @FXML
     public MenuBar menuBar;
     public MenuItem closeProjectItem;
     public MenuItem saveItem;
@@ -48,10 +50,32 @@ public class MenuController implements Controller{
     }
 
     public void settingsAction() {
+        WindowsManager.showSettingsWindow();
     }
 
-    public void saveProject() {
+    /**
+     * Corresponds to {@link #saveItem}. Saves current project inside file with same name as project.
+     * Overrides existing files.
+     * For now, all saving operations are redirected to tmp.txt file.
+     * @throws IOException when something with file opening gone wrong.
+     */
+    public void saveProject() throws IOException { /* for now, variables are omitted */
+        /* root of current project */
+        TreeItem<String> root = WindowsManager.getRootOfProject();
 
+        /* creating program based on this root */
+        ProgramBuilder program = new ProgramBuilder(root);
+
+        /* path to file, where program should be saved */ //for now, all programs are saved to tmp file.
+        String path = Paths.PATH_WITH_PROGRAMS.getPath() + /* program.programName*/ "tmp" + ".txt";
+
+        program.viewCommands(); /* only for testing */
+
+        /* preparing WriteFileObject */
+        WriteFileObject file = new WriteFileObject(path);
+
+        /* saving program to file */
+        program.saveToFile(file);
     }
 
     public void closeProject() {

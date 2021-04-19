@@ -4,6 +4,7 @@ import files.CreatedPrograms;
 import gui.applications.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TreeItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -53,7 +54,7 @@ public class WindowsManager {
     }
 
     /**
-     * Change actual scene inside main window. Before calling this method scenes should be prepared, reloaded, etc.
+     * Changes actual scene inside main window. Before calling this method scenes should be prepared, reloaded, etc.
      * @param type of scene.
      */
     public static void changeScene(SceneType type){
@@ -63,14 +64,14 @@ public class WindowsManager {
     }
 
     /**
-     * Show window with list of created programs.
+     * Shows window with list of created programs.
      */
     public static void showListOfProgram() {
         ListOfProgramsWindow.show();
     }
 
     /**
-     * Open project window with existing project.
+     * Opens project window with existing project.
      * @param name of existing project.
      */
     public static void openExistingProject(String name) {
@@ -79,7 +80,7 @@ public class WindowsManager {
     }
 
     /**
-     * Open dialog for name of new project.
+     * Opens dialog for name of new project.
      */
     public static void openNewDialog(){
         ProgramNameWindow.reload();
@@ -87,7 +88,7 @@ public class WindowsManager {
     }
 
     /**
-     * Open project window with empty project with given name.
+     * Opens project window with empty project with given name.
      * @param name of project.
      */
     public static void openNewProject(String name){
@@ -95,7 +96,24 @@ public class WindowsManager {
         changeScene(SceneType.PROJECT_SCENE);
     }
 
+    /**
+     * Shows window with information about project.
+     */
     public static void showAboutWindow() {
         AboutWindow.show();
+    }
+
+    /**
+     * @return {@code TreeItem} with current project.
+     */
+    public static TreeItem<String> getRootOfProject(){
+        return ProjectWindow.getController().programTree.getRoot();
+    }
+
+    /**
+     * Self-explaining.
+     */
+    public static void showSettingsWindow() {
+
     }
 }

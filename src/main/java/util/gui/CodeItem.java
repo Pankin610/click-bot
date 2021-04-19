@@ -13,10 +13,19 @@ public class CodeItem extends TreeItem<String> {
 
     public CodeItem(Command command){
         this.command = command;
-        setValue(command.getId());
+        setValue(command.getId()); /* default value - of course it may be changed is getTreeRepresentation method */
     }
 
     public Command getCommand() {
         return command;
+    }
+
+    /**
+     * @return String representation of Command via
+     * {@link lang.CodeFragment#getStringRepresentation() getStringRepresentation()}.
+     */
+    @Override
+    public String toString() {
+        return command.getStringRepresentation();
     }
 }

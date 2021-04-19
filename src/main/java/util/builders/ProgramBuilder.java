@@ -2,8 +2,14 @@ package util.builders;
 
 import exceptions.NoUniqueVariableNameException;
 import files.reading.ReadFileObject;
+import files.writing.WriteFileObject;
+import javafx.scene.control.TreeItem;
 import lang.commands.Command;
 import lang.variables.VariableDescription;
+import program.ProgramDescription;
+import util.gui.CodeItem;
+
+import java.io.IOException;
 
 /**
  * Class used to build programs. Can be used later in Program's constructor.
@@ -27,6 +33,13 @@ public final class ProgramBuilder {
         }
         for(VariableDescription var : tmp.variables){
             this.addVariable(var);
+        }
+    }
+
+    public ProgramBuilder(TreeItem<String> root){ //TODO: adding variables
+        this.programName = root.getValue();
+        for(TreeItem<String> item : root.getChildren()){
+            this.addCommand(((CodeItem) item).getCommand());
         }
     }
 
@@ -93,5 +106,9 @@ public final class ProgramBuilder {
      */
     public void viewCommandsId(){
         commands.viewContentId();
+    }
+
+    public void saveToFile(WriteFileObject file) throws IOException {
+        file.saveToFile(new ProgramDescription(this));
     }
 }
