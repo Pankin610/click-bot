@@ -4,11 +4,11 @@ import files.Paths;
 import files.writing.WriteFileObject;
 import gui.SceneType;
 import gui.WindowsManager;
-import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
 import util.builders.ProgramBuilder;
+import util.containers.VariableContainer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -63,8 +63,11 @@ public class MenuController implements Controller{
         /* root of current project */
         TreeItem<String> root = WindowsManager.getRootOfProject();
 
-        /* creating program based on this root */
-        ProgramBuilder program = new ProgramBuilder(root);
+        /* variables of current project */
+        VariableContainer vars = WindowsManager.getProjectVariables();
+
+        /* creating program based on collected data */
+        ProgramBuilder program = new ProgramBuilder(root, vars);
 
         /* path to file, where program should be saved */ //for now, all programs are saved to tmp file.
         String path = Paths.PATH_WITH_PROGRAMS.getPath() + /* program.programName*/ "tmp" + ".txt";

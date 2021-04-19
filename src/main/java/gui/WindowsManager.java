@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import lang.variables.VariableDescription;
+import program.Program;
+import util.containers.VariableContainer;
 
 import java.io.IOException;
 
@@ -115,5 +118,9 @@ public class WindowsManager {
      */
     public static void showSettingsWindow() {
 
+    }
+
+    public static VariableContainer getProjectVariables() {
+        return ProjectWindow.getController().getVariables();
     }
 }
