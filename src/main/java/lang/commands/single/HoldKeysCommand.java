@@ -8,7 +8,7 @@ import util.Key;
 import java.util.Collection;
 import java.util.Scanner;
 
-public class HoldKeysCommand extends KeySequenceCommand {
+public final class HoldKeysCommand extends KeySequenceCommand {
     private static final String id = "HOLD";
 
     public HoldKeysCommand(Collection<Key> m_key_sequence) {

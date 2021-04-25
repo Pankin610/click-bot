@@ -10,7 +10,7 @@ import java.util.Scanner;
 /**
  * Simple command which makes noise.
  */
-public class MakeSomeNoise extends AbstractSingleCommand {
+public final class MakeSomeNoise extends AbstractSingleCommand {
     private static final String id = "MAKE_SOME_NOISE";
     private static final MakeSomeNoise MAKE_SOME_NOISE = new MakeSomeNoise();
     @Override

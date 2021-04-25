@@ -8,7 +8,7 @@ import util.Key;
 import java.util.Collection;
 import java.util.Scanner;
 
-public class ReleaseKeysCommand extends KeySequenceCommand {
+public final class ReleaseKeysCommand extends KeySequenceCommand {
     private static final String id = "HOLD";
 
     public ReleaseKeysCommand(Collection<Key> m_key_sequence) {

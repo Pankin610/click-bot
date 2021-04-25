@@ -5,5 +5,5 @@ import lang.commands.AbstractCommand;
 /**
  * Abstract implementation of SingleCommand interface.
  */
-public abstract class AbstractSingleCommand extends AbstractCommand implements SingleCommand{
+public abstract class AbstractSingleCommand extends AbstractCommand implements SingleCommand {
 }
