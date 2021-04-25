@@ -29,7 +29,7 @@ public interface Command extends Executable, CodeFragment {
      */
     Command NOTHING = new AbstractSingleCommand() {
         @Override
-        public void execute(Environment envi) throws ExecException {}
+        public void execute(Environment envi) {}
 
         @Override
         public String getStringRepresentation() {
@@ -45,6 +45,11 @@ public interface Command extends Executable, CodeFragment {
         @Override
         public String getId() {
             return "NOTHING";
+        }
+
+        @Override
+        public CodeItem getTreeRepresentation() {
+            return new CodeItem(this);
         }
     };
 }
