@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public final class MakeSomeNoise extends AbstractSingleCommand {
     private static final String id = "MAKE_SOME_NOISE";
-    private static final MakeSomeNoise MAKE_SOME_NOISE = new MakeSomeNoise();
+    public static final MakeSomeNoise MAKE_SOME_NOISE = new MakeSomeNoise();
     @Override
     public void execute(Environment envi) {
         Toolkit.getDefaultToolkit().beep();

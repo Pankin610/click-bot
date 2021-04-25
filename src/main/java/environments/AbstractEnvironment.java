@@ -103,6 +103,11 @@ public abstract class AbstractEnvironment implements Environment {
 
     @Override
     public Color getPixelColor(Coordinate cords) {
-        return new Color(0);
+        return new Color(0x000000);
+    }
+
+    @Override
+    public Coordinate getPosition() {
+        return new Coordinate(0,0);
     }
 }

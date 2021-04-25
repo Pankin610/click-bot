@@ -18,7 +18,8 @@ public enum Conditions {
     LESS(new Less(null,null)),
     LESS_OR_EQUAL(new LessOrEqual(null,null)),
     GREATER(new Greater(null,null)),
-    GREATER_OR_EQUAL(new GreaterOrEqual(null,null));
+    GREATER_OR_EQUAL(new GreaterOrEqual(null,null)),
+    CHECK_MOUSE_COLOR(new CheckMouseColor(0));
 
     private final Condition cond;
     Conditions(Condition cond){

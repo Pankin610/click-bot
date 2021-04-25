@@ -1,6 +1,7 @@
 package gui.controllers;
 
 import environments.Console;
+import environments.DesktopEnvironment;
 import environments.Environment;
 import files.CreatedPrograms;
 import files.reading.ReadFileObject;
@@ -43,7 +44,7 @@ public class StartController implements Controller {
     public void runProgram() {
         String name = choiceBox.getValue();
         Program program = Program.getProgramFromFile(new ReadFileObject(CreatedPrograms.getPathByName(name)));
-        Environment envi = new Console(program); /* for now, program is executed in default environment (which is Console) */
+        Environment envi = new DesktopEnvironment(program); /* for now, program is executed in default environment (which is Console) */
         envi.runProgram();
     }
 

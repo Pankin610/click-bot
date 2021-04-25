@@ -4,6 +4,8 @@ import lang.commands.group.IfCondition;
 import lang.commands.group.IfElse;
 import lang.commands.group.Repeat;
 import lang.commands.group.While;
+import lang.commands.single.MakeSomeNoise;
+import lang.commands.single.PressKey;
 import lang.commands.single.Wait;
 import lang.conditions.True;
 
@@ -16,7 +18,9 @@ public enum Commands {
     IF_ELSE(new IfElse(new Command[]{Command.NOTHING}, new Command[]{Command.NOTHING},True.TRUE)),
     REPEAT(new Repeat(new Command[]{Command.NOTHING},0)),
     WHILE(new While(new Command[]{Command.NOTHING},True.TRUE)),
-    WAIT(new Wait(1000));
+    WAIT(new Wait(1000)),
+    PRESS(new PressKey(0)),
+    MAKE_SOME_NOISE(MakeSomeNoise.MAKE_SOME_NOISE);
 
     private final Command comm;
     Commands(Command comm){
