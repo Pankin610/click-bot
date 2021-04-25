@@ -55,9 +55,9 @@ public enum Key {
     F7("F7", KeyEvent.VK_F7),
     F8("F8", KeyEvent.VK_F8),
     F9("F9", KeyEvent.VK_F9),
-    F10("F10", KeyEvent.VK_F10),
-    F11("F11", KeyEvent.VK_F11),
-    F12("F12", KeyEvent.VK_F12);
+    F10("F_10", KeyEvent.VK_F10),
+    F11("F_11", KeyEvent.VK_F11),
+    F12("F_12", KeyEvent.VK_F12);
 
     public final String string_code;
     public final int integer_code;
