@@ -1,7 +1,11 @@
 package lang.commands;
 
 import environments.Environment;
+import exceptions.ExecException;
+import exceptions.NonImplementedMethodException;
 import lang.CodeFragment;
+import lang.commands.single.AbstractSingleCommand;
+import util.gui.CodeItem;
 
 import java.util.Scanner;
 
@@ -10,12 +14,33 @@ import java.util.Scanner;
  * in as generic style as possible.
  */
 public interface Command extends Executable, CodeFragment {
+
+    /**
+     * This method should describe how Command should be showed as tree node inside project-creation window.
+     * @return TreeItem with representation.
+     * For now, it may be non implemented.
+     */
+    default CodeItem getTreeRepresentation() {
+        throw new NonImplementedMethodException("getTreeRepresentation");
+    }
+
     /**
      * Static instance of Command interface representing "do nothing" command.
      */
-    Command NOTHING = new Command() {
+    Command NOTHING = new AbstractSingleCommand() {
         @Override
-        public void execute(Environment envi){}
+        public void execute(Environment envi) {}
+
+        @Override
+        public String getStringRepresentation() {
+            return getId();
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        public Command parseFromString(Scanner scanner) {
+            return this;
+        }
 
         @Override
         public String getId() {
@@ -23,19 +48,8 @@ public interface Command extends Executable, CodeFragment {
         }
 
         @Override
-        public String getStringRepresentation() {
-            return "NOTHING";
-        }
-
-        @Override
-        @SuppressWarnings("unchecked")
-        public Command parseFromString(Scanner scanner) {
-            return NOTHING;
-        }
-
-        @Override
-        public String toString() {
-            return "NOTHING";
+        public CodeItem getTreeRepresentation() {
+            return new CodeItem(this);
         }
     };
 }

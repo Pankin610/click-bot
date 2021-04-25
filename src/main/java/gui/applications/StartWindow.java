@@ -7,11 +7,14 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
+/**
+ * This window is starting pane of application.
+ */
 public abstract class StartWindow implements SideWindow {
     private static final Pane pane;
     private static final StartController controller;
     static{
-        FXMLLoader loader = new FXMLLoader(WindowsManager.class.getResource("scenes/start.fxml"));
+        FXMLLoader loader = WindowsManager.getLoader("start");
         Pane tmpPane = null;
         try {
             tmpPane = loader.load();
@@ -27,5 +30,10 @@ public abstract class StartWindow implements SideWindow {
 
     public static Pane getPane() {
         return pane;
+    }
+
+    public static void show(){
+        controller.reload();
+        WindowsManager.root.setCenter(pane);
     }
 }

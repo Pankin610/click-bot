@@ -20,16 +20,16 @@ public class ProgramBuilderTest {
     @Before
     public void setUp() throws NoUniqueVariableNameException {
         tmp = new ProgramBuilder();
-        tmp.addCommand(CodeFactory.NOTHING);
-        tmp.addCommand(CodeFactory.IF_CONDITION);
+        tmp.addCommand(CodeFactory.getCommandByID("NOTHING"));
+        tmp.addCommand(CodeFactory.getCommandByID("IF_CONDITION"));
         tmp.addVariable(new VariableDescription(var1));
     }
 
     @Test
     public void getCommands() {
         Command[] com = tmp.getCommands();
-        assertSame(com[0],CodeFactory.NOTHING);
-        assertSame(com[1],CodeFactory.IF_CONDITION);
+        assertSame(com[0],CodeFactory.getCommandByID("NOTHING"));
+        assertSame(com[1],CodeFactory.getCommandByID("IF_CONDITION"));
     }
 
     @Test
@@ -53,13 +53,13 @@ public class ProgramBuilderTest {
 
     @Test
     public void addCommand() {
-        tmp.addCommand(CodeFactory.WHILE);
-        tmp.addCommand(CodeFactory.NOTHING);
+        tmp.addCommand(CodeFactory.getCommandByID("WHILE"));
+        tmp.addCommand(CodeFactory.getCommandByID("NOTHING"));
         Command[] com = tmp.getCommands();
-        assertSame(com[0],CodeFactory.NOTHING);
-        assertSame(com[1],CodeFactory.IF_CONDITION);
-        assertSame(com[2],CodeFactory.WHILE);
-        assertSame(com[3],CodeFactory.NOTHING);
+        assertSame(com[0],CodeFactory.getCommandByID("NOTHING"));
+        assertSame(com[1],CodeFactory.getCommandByID("IF_CONDITION"));
+        assertSame(com[2],CodeFactory.getCommandByID("WHILE"));
+        assertSame(com[3],CodeFactory.getCommandByID("NOTHING"));
     }
 
     @Test
@@ -72,8 +72,8 @@ public class ProgramBuilderTest {
     @Test
     public void viewCommands() {
         tmp.viewCommandsId();
-        tmp.addCommand(CodeFactory.WHILE);
-        tmp.addCommand(CodeFactory.NOTHING);
+        tmp.addCommand(CodeFactory.getCommandByID("WHILE"));
+        tmp.addCommand(CodeFactory.getCommandByID("NOTHING"));
         tmp.viewCommandsId();
     }
 }

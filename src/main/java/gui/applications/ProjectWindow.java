@@ -6,15 +6,17 @@ import gui.controllers.ProjectController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.Pane;
-import util.builders.ProgramBuilder;
 
 import java.io.IOException;
 
+/**
+ * Project window is responsible for project-creating scene of main program.
+ */
 public abstract class ProjectWindow implements SideWindow {
     private static final Pane pane;
     private static final ProjectController controller;
     static{
-        FXMLLoader loader = new FXMLLoader(WindowsManager.class.getResource("scenes/project.fxml"));
+        FXMLLoader loader = WindowsManager.getLoader("project");
         Pane tmpPane = null;
         try {
             tmpPane = loader.load();
@@ -32,14 +34,12 @@ public abstract class ProjectWindow implements SideWindow {
         return pane;
     }
 
-    public static void show(String name){
+    public static void prepareNew(String name){
         controller.nameProgramLabel.setText(name);
         controller.programTree.setRoot(new TreeItem<>(name));
-        WindowsManager.root.setCenter(pane);
     }
 
-    public static void show(ReadFileObject file){
+    public static void prepareExisting(ReadFileObject file){
         controller.load(file);
-        WindowsManager.root.setCenter(pane);
     }
 }

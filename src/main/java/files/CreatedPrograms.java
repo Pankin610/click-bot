@@ -10,7 +10,7 @@ import java.io.File;
 
 public class CreatedPrograms {
     private CreatedPrograms(){}
-    private static final String path = "src/main/java/testing/testPrograms/";
+    private static final String path = Paths.PATH_WITH_PROGRAMS.getPath();
     private static final File file = new File(path);
     public static String[] getNames(){
         String[] res = file.list();

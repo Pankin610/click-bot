@@ -3,7 +3,7 @@ package lang.commands.single;
 import lang.commands.AbstractCommand;
 
 /**
- * Abstract class used when command describe single action.
+ * Abstract implementation of SingleCommand interface.
  */
 public abstract class AbstractSingleCommand extends AbstractCommand implements SingleCommand{
 }
