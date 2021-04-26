@@ -72,8 +72,7 @@ public final class DesktopEnvironment extends AbstractEnvironment {
 
     @Override
     public void errorNoise() {
-        Toolkit.getDefaultToolkit().beep();
-        bot.delay();
+        bot.beep();
     }
     
     @Override

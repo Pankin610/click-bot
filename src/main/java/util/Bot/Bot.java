@@ -61,4 +61,8 @@ public class Bot {
   public void delay(){
     robot.delay(kDefaultDelay);
   }
+  public void beep(){
+    Toolkit.getDefaultToolkit().beep();
+    robot.delay(kDefaultDelay);
+  }
 }
