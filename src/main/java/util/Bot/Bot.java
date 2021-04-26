@@ -4,7 +4,6 @@ import util.Coordinate;
 
 import java.awt.*;
 import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 
 public class Bot {
   Robot robot;
@@ -58,5 +57,8 @@ public class Bot {
   }
   public Color getPixelColor(Coordinate cord) {
     return robot.getPixelColor(cord.x, cord.y);
+  }
+  public void delay(){
+    robot.delay(kDefaultDelay);
   }
 }

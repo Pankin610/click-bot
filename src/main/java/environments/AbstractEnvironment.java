@@ -27,6 +27,7 @@ public abstract class AbstractEnvironment implements Environment {
     }
     @Override
     public void runProgram() throws ExecException {
+        //TODO make this inside new Thread (endgame)
         for(Command com : program.getCommands()){
             com.execute(this);
         }
@@ -104,5 +105,10 @@ public abstract class AbstractEnvironment implements Environment {
     @Override
     public Color getPixelColor(Coordinate cords) {
         return new Color(0);
+    }
+
+    @Override
+    public void errorNoise() {
+        System.out.println("beep");
     }
 }

@@ -4,7 +4,6 @@ import environments.Environment;
 import lang.commands.Command;
 import util.gui.CodeItem;
 
-import java.awt.*;
 import java.util.Scanner;
 
 /**
@@ -15,7 +14,7 @@ public final class MakeSomeNoise extends AbstractSingleCommand {
     private static final MakeSomeNoise MAKE_SOME_NOISE = new MakeSomeNoise();
     @Override
     public void execute(Environment envi) {
-        Toolkit.getDefaultToolkit().beep();
+        envi.errorNoise();
     }
 
     @Override

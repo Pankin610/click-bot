@@ -68,5 +68,10 @@ public final class DesktopEnvironment extends AbstractEnvironment {
     public Color getPixelColor(Coordinate cords) {
         return bot.getPixelColor(cords);
     }
-    //Overrode methods (desktop implementation, using real mouse and keyboard)
+
+    @Override
+    public void errorNoise() {
+        Toolkit.getDefaultToolkit().beep();
+        bot.delay();
+    }
 }

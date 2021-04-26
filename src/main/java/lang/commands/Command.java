@@ -1,7 +1,6 @@
 package lang.commands;
 
 import environments.Environment;
-import exceptions.ExecException;
 import exceptions.NonImplementedMethodException;
 import lang.CodeFragment;
 import lang.commands.single.AbstractSingleCommand;
