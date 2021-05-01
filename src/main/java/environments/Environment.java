@@ -25,6 +25,7 @@ public interface Environment {
     void drag(Coordinate where);
     Color getPixelColor(Coordinate cord);
     Coordinate getPosition();
+    int executeSystem(String command);
 
     /**
      * Getter for variables, based on names.
