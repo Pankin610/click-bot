@@ -3,7 +3,6 @@ package environments;
 import exceptions.ExecException;
 import exceptions.NoVariableWithThisNameException;
 import lang.variables.Variable;
-import program.Program;
 import util.Coordinate;
 
 import java.awt.*;
@@ -25,6 +24,7 @@ public interface Environment {
     void hold(int tim);
     void drag(Coordinate where);
     Color getPixelColor(Coordinate cord);
+    Coordinate getPosition();
 
     /**
      * Getter for variables, based on names.

@@ -2,10 +2,7 @@ package lang.commands.single;
 
 import environments.Environment;
 import lang.commands.Command;
-import util.Bot.KeyTrie;
-import util.Key;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public final class PressKey extends AbstractSingleCommand {
@@ -20,7 +17,7 @@ public final class PressKey extends AbstractSingleCommand {
     }
     @Override
     public String getStringRepresentation() {
-        return getId() + " " + Key.getKeyByIntegerCode(key).string_code;
+        return getId() + " " + key;
     }
     @Override
     public String getId() {

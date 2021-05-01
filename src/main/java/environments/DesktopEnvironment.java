@@ -5,6 +5,7 @@ import util.Bot.Bot;
 import util.Coordinate;
 
 import java.awt.*;
+import java.io.IOException;
 
 /**
  * Environment in which Bot implementation of Commands is used.
@@ -13,9 +14,9 @@ import java.awt.*;
 public final class DesktopEnvironment extends AbstractEnvironment {
     private final Bot bot;
 
-    public DesktopEnvironment(Program program, Bot bot) {
+    public DesktopEnvironment(Program program) {
         super(program);
-        this.bot = bot;
+        this.bot = new Bot();
     }
 
     @Override
@@ -68,5 +69,19 @@ public final class DesktopEnvironment extends AbstractEnvironment {
     public Color getPixelColor(Coordinate cords) {
         return bot.getPixelColor(cords);
     }
-    //Overrode methods (desktop implementation, using real mouse and keyboard)
+
+    @Override
+    public Coordinate getPosition() {
+        Point pnt = MouseInfo.getPointerInfo().getLocation();
+        return new Coordinate(pnt);
+    }
+
+    public static void main(String[] args) throws AWTException, IOException {
+        Robot robot = new Robot();
+        for(int i=0;i<10;i++){
+            System.in.read();
+            Coordinate cord = new Coordinate(MouseInfo.getPointerInfo().getLocation());
+            System.out.println(robot.getPixelColor(cord.x, cord.y).getRGB());
+        }
+    }
 }

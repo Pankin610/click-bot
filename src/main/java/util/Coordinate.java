@@ -1,5 +1,7 @@
 package util;
 
+import java.awt.*;
+
 /**
  * Class used to describe mouse and pixel position on screen
  */
@@ -14,6 +16,12 @@ public final class Coordinate {
         this.x = x;
         this.y = y;
     }
+
+    public Coordinate(Point point) {
+        this.x = point.x;
+        this.y = point.y;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Coordinate)) {
