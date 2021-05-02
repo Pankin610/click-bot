@@ -2,12 +2,8 @@ package gui.controllers;
 
 import exceptions.WrongFileFormatException;
 import files.CreatedPrograms;
-import files.reading.ReadFileObject;
-import gui.SceneType;
 import gui.WindowsManager;
 import gui.applications.ListOfProgramsWindow;
-import gui.applications.ProgramMenu;
-import gui.applications.ProjectWindow;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;

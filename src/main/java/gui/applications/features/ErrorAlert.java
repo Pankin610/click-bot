@@ -1,4 +1,4 @@
-package gui.applications;
+package gui.applications.features;
 
 import javafx.scene.control.Alert;
 import javafx.stage.Modality;

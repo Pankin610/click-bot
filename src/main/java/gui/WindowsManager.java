@@ -2,13 +2,14 @@ package gui;
 
 import files.CreatedPrograms;
 import gui.applications.*;
+import gui.applications.features.AboutWindow;
+import gui.applications.features.SettingsWindow;
+import gui.applications.projecting.ProjectWindow;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import lang.variables.VariableDescription;
-import program.Program;
 import util.containers.VariableContainer;
 
 import java.io.IOException;

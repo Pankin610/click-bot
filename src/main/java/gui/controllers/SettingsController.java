@@ -1,7 +1,6 @@
 package gui.controllers;
 
-import gui.applications.SettingsWindow;
-import javafx.event.ActionEvent;
+import gui.applications.features.SettingsWindow;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 

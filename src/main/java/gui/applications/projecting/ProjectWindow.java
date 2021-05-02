@@ -1,7 +1,8 @@
-package gui.applications;
+package gui.applications.projecting;
 
 import files.reading.ReadFileObject;
 import gui.WindowsManager;
+import gui.applications.SideWindow;
 import gui.controllers.ProjectController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TreeItem;
