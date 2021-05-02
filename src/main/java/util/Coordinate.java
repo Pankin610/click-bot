@@ -32,6 +32,6 @@ public final class Coordinate {
     }
     @Override
     public String toString() {
-        return String.valueOf(x) + y;
+        return String.valueOf(x) + ' ' + y;
     }
 }

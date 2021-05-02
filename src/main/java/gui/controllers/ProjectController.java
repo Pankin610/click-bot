@@ -1,8 +1,10 @@
 package gui.controllers;
 
 import files.reading.ReadFileObject;
+import gui.WindowsManager;
 import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lang.commands.Command;
@@ -17,7 +19,6 @@ import java.util.ResourceBundle;
 
 public class ProjectController implements Controller {
     public Label nameProgramLabel;
-    public SplitMenuButton addVariableButton;
     public SplitMenuButton addCommandButton;
     public TreeView<String> programTree;
     public TableView<Variable> variableList;
@@ -84,5 +85,9 @@ public class ProjectController implements Controller {
 
     public VariableContainer getVariables() {
         return variables;
+    }
+
+    public void addVariable() {
+        WindowsManager.addVariable();
     }
 }

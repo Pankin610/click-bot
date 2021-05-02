@@ -4,14 +4,17 @@ import files.CreatedPrograms;
 import gui.applications.*;
 import gui.applications.features.AboutWindow;
 import gui.applications.features.SettingsWindow;
+import gui.applications.projecting.AddVariableWindow;
 import gui.applications.projecting.ProjectWindow;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import util.Coordinate;
 import util.containers.VariableContainer;
 
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -127,5 +130,19 @@ public class WindowsManager {
 
     public static FXMLLoader getLoader(String file) {
         return new FXMLLoader(WindowsManager.class.getResource("scenes/" + file + ".fxml"));
+    }
+
+    public static Color getPixelColor(){
+        return new Color(0);
+        //TODO
+    }
+
+    public static Coordinate getCords(){
+        return new Coordinate(0,0);
+        //TODO
+    }
+
+    public static void addVariable(){
+        AddVariableWindow.show();
     }
 }
