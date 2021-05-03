@@ -42,7 +42,7 @@ public class ProjectController implements Controller {
             if(variableList.getItems().isEmpty() || variableList.getSelectionModel().getSelectedItems().isEmpty())
                 return;
             ArrayList<Variable> toBeRemoved = new ArrayList<>(variableList.getSelectionModel().getSelectedItems());
-            for(Variable var : toBeRemoved) variables.remove(var);
+            for(Variable var : toBeRemoved) variables.remove(var.getName());
             variableList.refresh();
         });
         contextMenu.getItems().addAll(addVariable, delete);
@@ -75,7 +75,7 @@ public class ProjectController implements Controller {
             if(variableList.getItems().isEmpty() || variableList.getSelectionModel().getSelectedItems().isEmpty())
                 delete.setDisable(true);
             else    delete.setDisable(false);
-        });
+        }); // disabling delete button if no variable is selected - so far, it is not working in all cases
 
         TableView.TableViewSelectionModel<Variable> selectionModel = variableList.getSelectionModel();
         selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
