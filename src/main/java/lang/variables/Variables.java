@@ -22,6 +22,7 @@ public enum Variables {
     public Variable get(){
         return var;
     }
+    public String getId(){return var.getId();}
 
     public static Collection<String> getIds(){
         return IdMap.values();

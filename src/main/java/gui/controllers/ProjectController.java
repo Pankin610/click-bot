@@ -2,13 +2,15 @@ package gui.controllers;
 
 import files.reading.ReadFileObject;
 import gui.WindowsManager;
+import gui.applications.projecting.ProjectWindow;
 import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lang.commands.Command;
-import lang.variables.IntegerVariable;
+import lang.commands.Commands;
 import lang.variables.Variable;
 import lang.variables.VariableDescription;
 import util.builders.ProgramBuilder;
@@ -59,6 +61,11 @@ public class ProjectController implements Controller {
                 return p.getValue().getStringValue();
             }
         });
+        for(Commands element : Commands.values()){
+            MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_',' '));
+            menu.setOnAction(actionEvent -> element.showWindow(WindowsManager.stage));
+            addCommandButton.getItems().add(menu);
+        }
     }
 
     /**

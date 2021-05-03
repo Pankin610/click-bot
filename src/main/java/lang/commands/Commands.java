@@ -1,5 +1,7 @@
 package lang.commands;
 
+import exceptions.NonImplementedMethodException;
+import javafx.stage.Stage;
 import lang.commands.group.IfCondition;
 import lang.commands.group.IfElse;
 import lang.commands.group.Repeat;
@@ -12,7 +14,12 @@ import util.Coordinate;
  * Enum for all final implementation of Command interface.
  */
 public enum Commands {
-    NOTHING(Command.NOTHING),
+    NOTHING(Command.NOTHING){
+        @Override
+        public void showWindow(Stage owner) {
+            System.out.println(getId());
+        }
+    },
     IF_CONDITION(new IfCondition(new Command[]{Command.NOTHING}, True.TRUE)),
     IF_ELSE(new IfElse(new Command[]{Command.NOTHING}, new Command[]{Command.NOTHING},True.TRUE)),
     REPEAT(new Repeat(new Command[]{Command.NOTHING},0)),
@@ -32,5 +39,10 @@ public enum Commands {
 
     public Command get(){
         return comm;
+    }
+    public String getId(){return comm.getId();}
+    public void showWindow(Stage owner){
+        System.out.println(getId());
+       // throw new NonImplementedMethodException("Command::showWindow in " + this.name());
     }
 }
