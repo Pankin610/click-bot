@@ -25,6 +25,7 @@ public class ListOfProgramsController implements Controller {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programList.getItems().addAll(CreatedPrograms.getNames());
         programList.setOnMouseClicked(mouseEvent -> {
+            if(programList.getSelectionModel().getSelectedItems().size() > 0)   popButton();
             if (mouseEvent.getButton().equals(MouseButton.PRIMARY) &&
                     mouseEvent.getClickCount() == 2 &&
                     programList.getSelectionModel().getSelectedItems().size() > 0)

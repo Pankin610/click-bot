@@ -62,26 +62,30 @@ public class ProjectController implements Controller {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Type column
         initTypeColumn();
-
         // Name column
         initNameColumn();
-
         // Value column
         initValueColumn();
 
         variableList.getColumns().addAll(typeVariableList, nameVariableList, valueVariableList);
         variableList.setContextMenu(contextMenu);
-        variableList.setOnContextMenuRequested(contextMenuEvent -> {
-            if(variableList.getItems().isEmpty() || variableList.getSelectionModel().getSelectedItems().isEmpty())
-                delete.setDisable(true);
-            else    delete.setDisable(false);
-        }); // disabling delete button if no variable is selected - so far, it is not working in all cases
+
+        // disabling delete button if no variable is selected - so far, it is not working in all cases
+        variableList.setOnContextMenuRequested(contextMenuEvent ->
+                delete.setDisable(variableList.getItems().isEmpty() ||
+                        variableList.getSelectionModel().getSelectedItems().isEmpty()));
 
         TableView.TableViewSelectionModel<Variable> selectionModel = variableList.getSelectionModel();
         selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
+
+        // Populating AddCommandButton SplitMenuButton
         for(Commands element : Commands.values()){
             MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_',' '));
-            menu.setOnAction(actionEvent -> element.showWindow(WindowsManager.stage));
+            menu.setOnAction(actionEvent -> {
+                Command command = element.createCommand();
+                if(command == null) return;
+                System.out.println(command.getStringRepresentation());
+            });
             addCommandButton.getItems().add(menu);
         }
     }
