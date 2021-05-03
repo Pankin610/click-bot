@@ -1,9 +1,15 @@
 package gui.controllers;
 
+import exceptions.NoUniqueVariableNameException;
 import gui.WindowsManager;
+import gui.applications.projecting.AddVariableWindow;
+import gui.applications.projecting.ProjectWindow;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import lang.CodeFactory;
+import lang.variables.Variable;
 import lang.variables.Variables;
+import util.Bot.Bot;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,6 +23,7 @@ public class AddVariableController implements Controller {
     public void reload() {
         VariablesNameBox.setText("");
         InitialValueBox.setText("");
+        TypeChoiceBox.setValue("");
     }
 
     @Override
@@ -25,7 +32,19 @@ public class AddVariableController implements Controller {
     }
 
     public void addVariable() {
-        //TODO
+        String type = TypeChoiceBox.getValue();
+        String name = VariablesNameBox.getText();
+        String value = InitialValueBox.getText();
+        Variable var = CodeFactory.parseVariable(type + ' ' + name + ' ' + value);
+        ProjectController controller = ProjectWindow.getController();
+        try{
+            controller.variables.add(var);
+            controller.variableList.refresh();
+        } catch(NoUniqueVariableNameException e){
+            new Bot().beep();
+            System.out.println(e.getName() + " already exists");
+        }
+        AddVariableWindow.close();
     }
 
     public void getPixelColor() {

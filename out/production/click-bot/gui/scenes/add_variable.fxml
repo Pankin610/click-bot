@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="146.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.AddVariableController">
-    <Button defaultButton="true" layoutX="336.0" layoutY="107.0" mnemonicParsing="false" onAction="#addVariable" prefWidth="60.0" text="Add" />
+    <Button layoutX="336.0" layoutY="107.0" mnemonicParsing="false" onAction="#addVariable" prefWidth="60.0" text="Add" />
     <Button layoutX="14.0" layoutY="107.0" mnemonicParsing="false" onAction="#getPixelColor" prefWidth="100.0" text="Pixel's color" />
     <Button layoutX="125.0" layoutY="107.0" mnemonicParsing="false" onAction="#getCursorCords" prefWidth="100.0" text="Cursor's cords" />
     <TextField fx:id="VariablesNameBox" layoutX="125.0" layoutY="47.0" prefWidth="100.0" promptText="Variable's name" />

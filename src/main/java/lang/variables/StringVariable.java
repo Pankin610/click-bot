@@ -21,11 +21,6 @@ public final class StringVariable extends AbstractVariable {
     }
 
     @Override
-    public String getStringRepresentation() {
-        return getId() + ' ' + getName() + ' '  + val;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public Variable parseFromString(Scanner scanner) {
         String name = scanner.next();

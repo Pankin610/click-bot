@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lang.commands.Command;
+import lang.variables.IntegerVariable;
 import lang.variables.Variable;
 import lang.variables.VariableDescription;
 import util.builders.ProgramBuilder;
@@ -26,14 +27,10 @@ public class ProjectController implements Controller {
     public TableColumn<Variable, String> nameVariableList;
     public TableColumn<Variable, String> valueVariableList;
 
-    private final VariableContainer variables = new VariableList();
+    public final VariableContainer variables = new VariableList();
     public AnchorPane mainPane;
 
     public void addCommandWindow() {
-
-    }
-
-    public void addVariableWindow() {
 
     }
 

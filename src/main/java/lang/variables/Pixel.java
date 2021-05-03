@@ -5,6 +5,7 @@ import exceptions.IncorrectVariableAssignment;
 import util.Coordinate;
 
 import java.awt.*;
+import java.util.Scanner;
 
 public final class Pixel extends AbstractVariable {
     private static final String id = "PIXEL";
@@ -30,7 +31,7 @@ public final class Pixel extends AbstractVariable {
      * Method shoving some sort of 'color' of given Pixel.
      * Exact class responsible for handling colors will be implemented later.
      * Probably it will be variation of normal Integers.
-     * @param envi environment in which command should be called.
+     * @param environment environment in which command should be called.
      * @return returns color of given Pixel.
      */
     public Color getColor(Environment environment) {
@@ -54,5 +55,14 @@ public final class Pixel extends AbstractVariable {
     @Override
     public String getId() {
         return id;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Variable parseFromString(Scanner scanner) {
+        String name = scanner.next();
+        int x = scanner.nextInt();
+        int y = scanner.nextInt();
+        return new Pixel(name, new Coordinate(x,y));
     }
 }

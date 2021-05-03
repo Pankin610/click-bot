@@ -32,4 +32,8 @@ public class AddVariableWindow implements SideWindow {
         stage.show();
     }
 
+    public static void close(){
+        stage.close();
+    }
+
 }

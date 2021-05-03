@@ -143,6 +143,8 @@ public class WindowsManager {
         return new FXMLLoader(WindowsManager.class.getResource("scenes/" + file + ".fxml"));
     }
 
+    //TODO clear up this mess
+
     public static Color getPixelColor(){
         final AtomicReference<Color> res = new AtomicReference<>(new Color(0));
         final Stage n_stage = new Stage();
