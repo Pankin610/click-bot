@@ -2,11 +2,8 @@ package gui.controllers;
 
 import files.reading.ReadFileObject;
 import gui.WindowsManager;
-import gui.applications.projecting.ProjectWindow;
 import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lang.commands.Command;
@@ -41,26 +38,43 @@ public class ProjectController implements Controller {
         variables.clear();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        typeVariableList = new TableColumn<>("Type");
         typeVariableList.setCellValueFactory(p -> new ObservableValueBase<>() {
             @Override
             public String getValue() {
                 return p.getValue().getId();
             }
         });
+        typeVariableList.setPrefWidth(50);
+        typeVariableList.sortableProperty().setValue(false);
+
+        nameVariableList = new TableColumn<>("Name");
         nameVariableList.setCellValueFactory(p -> new ObservableValueBase<>() {
             @Override
             public String getValue() {
                 return p.getValue().getName();
             }
         });
+        nameVariableList.setPrefWidth(75);
+        nameVariableList.sortableProperty().setValue(false);
+
+        valueVariableList = new TableColumn<>("Value");
         valueVariableList.setCellValueFactory(p -> new ObservableValueBase<>() {
             @Override
             public String getValue() {
                 return p.getValue().getStringValue();
             }
         });
+        valueVariableList.setPrefWidth(75);
+        valueVariableList.sortableProperty().setValue(false);
+
+        variableList.getColumns().addAll(typeVariableList, nameVariableList, valueVariableList);
+
+        TableView.TableViewSelectionModel<Variable> selectionModel = variableList.getSelectionModel();
+        selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
         for(Commands element : Commands.values()){
             MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_',' '));
             menu.setOnAction(actionEvent -> element.showWindow(WindowsManager.stage));
