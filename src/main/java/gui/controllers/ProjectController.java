@@ -4,6 +4,7 @@ import files.reading.ReadFileObject;
 import gui.WindowsManager;
 import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lang.commands.Command;
@@ -15,6 +16,7 @@ import util.containers.VariableContainer;
 import util.containers.VariableList;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ProjectController implements Controller {
@@ -29,6 +31,23 @@ public class ProjectController implements Controller {
     public final VariableContainer variables = new VariableList();
     public AnchorPane mainPane;
 
+    private final ContextMenu contextMenu;
+    private final MenuItem delete;
+    {
+        contextMenu = new ContextMenu();
+        MenuItem addVariable = new MenuItem("Add variable");
+        addVariable.setOnAction(this::addVariable);
+        delete = new MenuItem("Delete");
+        delete.setOnAction(actionEvent -> {
+            if(variableList.getItems().isEmpty() || variableList.getSelectionModel().getSelectedItems().isEmpty())
+                return;
+            ArrayList<Variable> toBeRemoved = new ArrayList<>(variableList.getSelectionModel().getSelectedItems());
+            for(Variable var : toBeRemoved) variables.remove(var);
+            variableList.refresh();
+        });
+        contextMenu.getItems().addAll(addVariable, delete);
+    }
+
     public void addCommandWindow() {
 
     }
@@ -41,26 +60,33 @@ public class ProjectController implements Controller {
     @SuppressWarnings("unchecked")
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        typeVariableList = new TableColumn<>("Type");
-        typeVariableList.setCellValueFactory(p -> new ObservableValueBase<>() {
-            @Override
-            public String getValue() {
-                return p.getValue().getId();
-            }
-        });
-        typeVariableList.setPrefWidth(50);
-        typeVariableList.sortableProperty().setValue(false);
+        // Type column
+        initTypeColumn();
 
-        nameVariableList = new TableColumn<>("Name");
-        nameVariableList.setCellValueFactory(p -> new ObservableValueBase<>() {
-            @Override
-            public String getValue() {
-                return p.getValue().getName();
-            }
-        });
-        nameVariableList.setPrefWidth(75);
-        nameVariableList.sortableProperty().setValue(false);
+        // Name column
+        initNameColumn();
 
+        // Value column
+        initValueColumn();
+
+        variableList.getColumns().addAll(typeVariableList, nameVariableList, valueVariableList);
+        variableList.setContextMenu(contextMenu);
+        variableList.setOnContextMenuRequested(contextMenuEvent -> {
+            if(variableList.getItems().isEmpty() || variableList.getSelectionModel().getSelectedItems().isEmpty())
+                delete.setDisable(true);
+            else    delete.setDisable(false);
+        });
+
+        TableView.TableViewSelectionModel<Variable> selectionModel = variableList.getSelectionModel();
+        selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
+        for(Commands element : Commands.values()){
+            MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_',' '));
+            menu.setOnAction(actionEvent -> element.showWindow(WindowsManager.stage));
+            addCommandButton.getItems().add(menu);
+        }
+    }
+
+    private void initValueColumn() {
         valueVariableList = new TableColumn<>("Value");
         valueVariableList.setCellValueFactory(p -> new ObservableValueBase<>() {
             @Override
@@ -70,16 +96,30 @@ public class ProjectController implements Controller {
         });
         valueVariableList.setPrefWidth(75);
         valueVariableList.sortableProperty().setValue(false);
+    }
 
-        variableList.getColumns().addAll(typeVariableList, nameVariableList, valueVariableList);
+    private void initNameColumn() {
+        nameVariableList = new TableColumn<>("Name");
+        nameVariableList.setCellValueFactory(p -> new ObservableValueBase<>() {
+            @Override
+            public String getValue() {
+                return p.getValue().getName();
+            }
+        });
+        nameVariableList.setPrefWidth(75);
+        nameVariableList.sortableProperty().setValue(false);
+    }
 
-        TableView.TableViewSelectionModel<Variable> selectionModel = variableList.getSelectionModel();
-        selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
-        for(Commands element : Commands.values()){
-            MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_',' '));
-            menu.setOnAction(actionEvent -> element.showWindow(WindowsManager.stage));
-            addCommandButton.getItems().add(menu);
-        }
+    private void initTypeColumn() {
+        typeVariableList = new TableColumn<>("Type");
+        typeVariableList.setCellValueFactory(p -> new ObservableValueBase<>() {
+            @Override
+            public String getValue() {
+                return p.getValue().getId();
+            }
+        });
+        typeVariableList.setPrefWidth(50);
+        typeVariableList.sortableProperty().setValue(false);
     }
 
     /**
@@ -105,7 +145,7 @@ public class ProjectController implements Controller {
         return variables;
     }
 
-    public void addVariable() {
+    public void addVariable(ActionEvent e) {
         WindowsManager.addVariable();
     }
 }
