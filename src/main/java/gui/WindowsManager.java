@@ -1,21 +1,32 @@
 package gui;
 
 import files.CreatedPrograms;
-import gui.applications.*;
+import gui.applications.ListOfProgramsWindow;
+import gui.applications.ProgramMenu;
+import gui.applications.ProgramNameWindow;
+import gui.applications.StartWindow;
 import gui.applications.features.AboutWindow;
 import gui.applications.features.SettingsWindow;
 import gui.applications.projecting.AddVariableWindow;
 import gui.applications.projecting.ProjectWindow;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import util.Coordinate;
 import util.containers.VariableContainer;
+import util.gui.MouseUtility;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Controllers should use methods from this class to interfere other windows (this is much safer).
@@ -133,13 +144,53 @@ public class WindowsManager {
     }
 
     public static Color getPixelColor(){
-        return new Color(0);
-        //TODO
+        final AtomicReference<Color> res = new AtomicReference<>(new Color(0));
+        final Stage n_stage = new Stage();
+        n_stage.setTitle("Press Q to get color");
+        final AnchorPane pane = new AnchorPane();
+        pane.setPrefWidth(1);
+        pane.setPrefHeight(1);
+        final Scene scene = new Scene(pane);
+        scene.setOnKeyPressed(new EventHandler<>() {
+            @Override
+            synchronized public void handle(KeyEvent keyEvent) {
+                System.out.println(keyEvent.getCode());
+                if (keyEvent.getCode() == KeyCode.Q) {
+                    res.set(MouseUtility.getColor());
+                    n_stage.close();
+                }
+            }
+        });
+        n_stage.setScene(scene);
+        n_stage.initModality(Modality.APPLICATION_MODAL);
+        n_stage.initOwner(stage);
+        n_stage.showAndWait();
+        return res.get();
     }
 
     public static Coordinate getCords(){
-        return new Coordinate(0,0);
-        //TODO
+        final AtomicReference<Coordinate> res = new AtomicReference<>(new Coordinate(0,0));
+        final Stage n_stage = new Stage();
+        n_stage.setTitle("Press Q to get cords");
+        final AnchorPane pane = new AnchorPane();
+        pane.setPrefWidth(1);
+        pane.setPrefHeight(1);
+        final Scene scene = new Scene(pane);
+        scene.setOnKeyPressed(new EventHandler<>() {
+            @Override
+            synchronized public void handle(KeyEvent keyEvent) {
+                System.out.println(keyEvent.getCode());
+                if (keyEvent.getCode() == KeyCode.Q) {
+                    res.set(MouseUtility.getCords());
+                    n_stage.close();
+                }
+            }
+        });
+        n_stage.setScene(scene);
+        n_stage.initModality(Modality.APPLICATION_MODAL);
+        n_stage.initOwner(stage);
+        n_stage.showAndWait();
+        return res.get();
     }
 
     public static void addVariable(){
