@@ -11,7 +11,6 @@ public final class Coordinate {
     public Coordinate(){
         this(0,0);
     }
-    //TODO checking if the screen coordinate is valid - it should be implemented in specific environment
     public Coordinate(int x, int y){
         this.x = x;
         this.y = y;

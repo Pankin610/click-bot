@@ -7,7 +7,6 @@ import util.Coordinate;
 import java.awt.*;
 
 public class Mouse extends AbstractVariable {
-    // TODO add an environment field to move the mouse in it?
     private Coordinate position;
     public Mouse(String m_name, Coordinate m_position) {
         super(m_name);

@@ -30,9 +30,8 @@ public final class HoldKeysCommand extends KeySequenceCommand {
     }
 
     // basic parsing
-    // TODO problem with spaces, scanner does not read the entire line
     @SuppressWarnings("unchecked")
     public Command parseFromString(Scanner scanner) {
-        return new HoldKeysCommand(scanner.next());
+        return new HoldKeysCommand(scanner.nextLine());
     }
 }
