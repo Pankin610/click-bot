@@ -3,8 +3,10 @@ package gui.applications.projecting;
 import gui.WindowsManager;
 import gui.applications.SideWindow;
 import gui.controllers.AddCommandController;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -27,6 +29,10 @@ public class AddCommandWindow implements SideWindow {
         stage.initModality(Modality.APPLICATION_MODAL);
         controller = loader.getController();
     }
+
+    public static EventHandler<KeyEvent> numericOnly = keyEvent -> {
+        if(!"0123456789".contains(keyEvent.getCharacter())) keyEvent.consume();
+    };
 
     public static AddCommandController getController(){
         return controller;
