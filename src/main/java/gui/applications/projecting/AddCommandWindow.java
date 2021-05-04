@@ -3,9 +3,11 @@ package gui.applications.projecting;
 import gui.WindowsManager;
 import gui.applications.SideWindow;
 import gui.controllers.AddCommandController;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -33,6 +35,14 @@ public class AddCommandWindow implements SideWindow {
     public static EventHandler<KeyEvent> numericOnly = keyEvent -> {
         if(!"0123456789".contains(keyEvent.getCharacter())) keyEvent.consume();
     };
+
+    public static EventHandler<KeyEvent> codeOfKey = keyEvent -> {
+        System.out.println(keyEvent.getCode().getCode());
+        controller.textField.setText(String.valueOf(keyEvent.getCode().getCode()));
+        keyEvent.consume();
+    };
+
+    public static EventHandler<KeyEvent> consumeTyped = Event::consume;
 
     public static AddCommandController getController(){
         return controller;

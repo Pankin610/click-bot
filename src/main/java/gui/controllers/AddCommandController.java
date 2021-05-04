@@ -18,9 +18,14 @@ public class AddCommandController implements Controller {
 
     @Override
     public void reload() {
+        // clearing filters and handlers
         textField.removeEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.numericOnly);
+        textField.removeEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.consumeTyped);
+        textField.removeEventFilter(KeyEvent.KEY_PRESSED, AddCommandWindow.codeOfKey);
+        // tiding utility button
         utilityButton.setVisible(false);
         utilityButton.setText("Utility");
+        // default options
         successful_creation = false;
         textFieldLabel.setText("Default");
         AddCommandWindow.getStage().setTitle("Default");

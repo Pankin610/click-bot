@@ -3,8 +3,6 @@ package lang.commands;
 import gui.WindowsManager;
 import gui.applications.projecting.AddCommandWindow;
 import gui.controllers.AddCommandController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import lang.commands.group.IfCondition;
@@ -14,9 +12,6 @@ import lang.commands.group.While;
 import lang.commands.single.*;
 import lang.conditions.True;
 import util.Coordinate;
-import util.gui.MouseUtility;
-
-import java.util.Arrays;
 
 /**
  * Enum for all final implementation of Command interface.
@@ -48,7 +43,23 @@ public enum Commands {
             return res;
         }
     },
-    PRESS(new PressKey(0)),
+    PRESS(new PressKey(0)){
+        @Override
+        public Command createCommand() {
+            AddCommandController controller = AddCommandWindow.getController();
+            controller.reload();
+            Stage stage = AddCommandWindow.getStage();
+            stage.setTitle("Press key");
+            controller.textFieldLabel.setText("Key code");
+            controller.textField.addEventFilter(KeyEvent.KEY_PRESSED, AddCommandWindow.codeOfKey);
+            controller.textField.addEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.consumeTyped);
+            stage.showAndWait();
+            Command res = null;
+            if(controller.successful_creation)
+                res = new PressKey(Integer.parseInt(controller.textField.getCharacters().toString()));
+            return res;
+        }
+    },
     MAKE_SOME_NOISE(MakeSomeNoise.MAKE_SOME_NOISE){
         @Override
         public Command createCommand() {
@@ -92,6 +103,7 @@ public enum Commands {
 
     /**
      * Method invoking after AddCommand button in project scene.
+     * Later this may be moved to Command interface.
      * @return created Command or null when creation process was cancelled.
      */
     public Command createCommand(){
