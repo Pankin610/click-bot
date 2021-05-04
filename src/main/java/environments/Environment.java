@@ -20,6 +20,7 @@ public interface Environment {
     void wait(int tim);
     void clickLeft();
     void clickRight();
+    void clickScroll();
     void scroll();
     void hold(int tim);
     void drag(Coordinate where);
