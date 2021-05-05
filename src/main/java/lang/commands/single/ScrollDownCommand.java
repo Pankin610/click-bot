@@ -1,6 +1,6 @@
 package lang.commands.single;
 
-public class ScrollDownCommand extends ScrollCommand {
+public final class ScrollDownCommand extends ScrollCommand {
     private static final String id = "SCROLL_DOWN";
     public ScrollDownCommand(int count) {
         super(count);

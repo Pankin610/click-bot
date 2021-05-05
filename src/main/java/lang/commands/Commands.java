@@ -27,7 +27,10 @@ public enum Commands {
     EXECUTE_COMMAND(new ExecuteCommand("")),
     SCROLL_DOWN_COMMAND(new ScrollCommand(0)),
     SCROLL_UP_COMMAND(new ScrollUpCommand(0)),
-    SCROLL_COMMAND(new ScrollCommand(0));
+    SCROLL_COMMAND(new ScrollCommand(0)),
+    DRAG(new DragCommand(new Coordinate(0, 0))),
+    RIGHT_CLICK(new RightClickCommand()),
+    LEFT_CLICK(new LeftClickCommand());
 
     private final Command comm;
     Commands(Command comm){
