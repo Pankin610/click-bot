@@ -14,6 +14,7 @@ import lang.variables.VariableDescription;
 import util.builders.ProgramBuilder;
 import util.containers.VariableContainer;
 import util.containers.VariableList;
+import util.gui.CodeItem;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -33,16 +34,17 @@ public class ProjectController implements Controller {
 
     private final ContextMenu contextMenu;
     private final MenuItem delete;
-    {
+
+    { //context menu for TableView initialization
         contextMenu = new ContextMenu();
         MenuItem addVariable = new MenuItem("Add variable");
         addVariable.setOnAction(this::addVariable);
         delete = new MenuItem("Delete");
         delete.setOnAction(actionEvent -> {
-            if(variableList.getItems().isEmpty() || variableList.getSelectionModel().getSelectedItems().isEmpty())
+            if (variableList.getItems().isEmpty() || variableList.getSelectionModel().getSelectedItems().isEmpty())
                 return;
             ArrayList<Variable> toBeRemoved = new ArrayList<>(variableList.getSelectionModel().getSelectedItems());
-            for(Variable var : toBeRemoved) variables.remove(var.getName());
+            for (Variable var : toBeRemoved) variables.remove(var.getName());
             variableList.refresh();
         });
         contextMenu.getItems().addAll(addVariable, delete);
@@ -79,11 +81,18 @@ public class ProjectController implements Controller {
         selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
 
         // Populating AddCommandButton SplitMenuButton
-        for(Commands element : Commands.values()){
-            MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_',' '));
+        for (Commands element : Commands.values()) {
+            MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_', ' '));
             menu.setOnAction(actionEvent -> {
                 Command command = element.createCommand();
-                if(command == null) return;
+                TreeItem<String> selected = programTree.getSelectionModel().getSelectedItem();
+                if (selected == null) {
+                    System.out.println("Select item in Tree!");
+                    return;
+                }
+                if (command == null) return;
+                CodeItem.addAfter(selected, command.getTreeRepresentation());
+                programTree.refresh();
                 System.out.println(command.getStringRepresentation());
             });
             addCommandButton.getItems().add(menu);
@@ -128,17 +137,18 @@ public class ProjectController implements Controller {
 
     /**
      * Loads tree representation of program inside file.
+     *
      * @param file {@link ReadFileObject} with description of program
      */
-    public void load(ReadFileObject file){
+    public void load(ReadFileObject file) {
         this.reload();
         ProgramBuilder program = new ProgramBuilder(file);
         nameProgramLabel.setText(program.programName);
         TreeItem<String> root = new TreeItem<>(program.programName); /* load Commands */
-        for(Command comm : program.getCommands()){
+        for (Command comm : program.getCommands()) {
             root.getChildren().add(comm.getTreeRepresentation());
         }
-        for(VariableDescription var : program.getVariablesDescription()){ /* load Variables */
+        for (VariableDescription var : program.getVariablesDescription()) { /* load Variables */
             variables.add(var.getVariable());
         }
         variableList.setItems(FXCollections.observableList(variables));
