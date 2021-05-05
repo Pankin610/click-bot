@@ -62,7 +62,7 @@ public final class DesktopEnvironment extends AbstractEnvironment {
 
     @Override
     public void drag(Coordinate where) {
-        super.drag(where);
+        bot.drag(where);
     }
 
     @Override
