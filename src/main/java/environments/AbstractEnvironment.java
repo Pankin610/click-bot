@@ -76,8 +76,8 @@ public abstract class AbstractEnvironment implements Environment {
     }
 
     @Override
-    public void scroll(){
-        System.out.println("Scrolling");
+    public void scroll(int where){
+        System.out.println("Scrolling in " + where + " direction");
     }
 
     @Override

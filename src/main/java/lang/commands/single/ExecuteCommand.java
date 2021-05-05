@@ -2,6 +2,9 @@ package lang.commands.single;
 
 import environments.Environment;
 import exceptions.ExecException;
+import lang.commands.Command;
+
+import java.util.Scanner;
 
 // executes a given command in the terminal
 public class ExecuteCommand extends AbstractSingleCommand {
@@ -18,5 +21,11 @@ public class ExecuteCommand extends AbstractSingleCommand {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Command parseFromString(Scanner scanner) {
+        return new ExecuteCommand(scanner.next());
     }
 }

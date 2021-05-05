@@ -20,7 +20,7 @@ public interface Environment {
     void wait(int tim);
     void clickLeft();
     void clickRight();
-    void scroll();
+    void scroll(int where);
     void hold(int tim);
     void drag(Coordinate where);
     Color getPixelColor(Coordinate cord);

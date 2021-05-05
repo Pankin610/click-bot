@@ -23,7 +23,11 @@ public enum Commands {
     TYPE_COMMAND(new TypeCommand("")),
     RELEASE_KEYS_COMMAND(new ReleaseKeysCommand("")),
     MOVE_MOUSE(new MoveMouse(new Coordinate(0,0))),
-    HOLD_KEYS_COMMAND(new HoldKeysCommand(""));
+    HOLD_KEYS_COMMAND(new HoldKeysCommand("")),
+    EXECUTE_COMMAND(new ExecuteCommand("")),
+    SCROLL_DOWN_COMMAND(new ScrollCommand(0)),
+    SCROLL_UP_COMMAND(new ScrollUpCommand(0)),
+    SCROLL_COMMAND(new ScrollCommand(0));
 
     private final Command comm;
     Commands(Command comm){

@@ -1,5 +1,6 @@
 package util.Bot;
 
+import exceptions.ExecException;
 import util.Coordinate;
 
 import java.awt.*;
@@ -41,6 +42,12 @@ public class Bot {
   public void doubleClick() {
     leftClick();
     leftClick();
+  }
+  // parameter 'where' - how many times to scroll the mouse
+  // negative number - scrolls upwards, positive - downwards
+  public void scroll(int where) {
+    robot.mouseWheel(where);
+    robot.delay(kDefaultDelay);
   }
   public void pressKey(int key_event_code) {
     robot.keyPress(key_event_code);
