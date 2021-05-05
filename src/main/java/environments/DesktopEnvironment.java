@@ -50,6 +50,10 @@ public final class DesktopEnvironment extends AbstractEnvironment {
         bot.rightClick();
     }
 
+    public void doubleClick() {
+        bot.doubleClick();
+    }
+
     @Override
     public void scroll(int where) {
         bot.scroll(where);

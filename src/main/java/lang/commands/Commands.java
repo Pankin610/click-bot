@@ -30,6 +30,7 @@ public enum Commands {
     SCROLL_COMMAND(new ScrollCommand(0)),
     DRAG(new DragCommand(new Coordinate(0, 0))),
     RIGHT_CLICK(new RightClickCommand()),
+    DOUBLE_CLICK(new DoubleClickCommand()),
     LEFT_CLICK(new LeftClickCommand());
 
     private final Command comm;
