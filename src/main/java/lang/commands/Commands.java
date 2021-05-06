@@ -25,7 +25,23 @@ public enum Commands {
     },
     IF_CONDITION(new IfCondition(new Command[]{Command.NOTHING}, True.TRUE)),
     IF_ELSE(new IfElse(new Command[]{Command.NOTHING}, new Command[]{Command.NOTHING},True.TRUE)),
-    REPEAT(new Repeat(new Command[]{Command.NOTHING},0)),
+    REPEAT(new Repeat(new Command[]{Command.NOTHING},0)){
+        @Override
+        public Command createCommand() {
+            AddCommandController controller = AddCommandWindow.getController();
+            controller.reload();
+            controller.textFieldLabel.setText("Number of repetitions");
+            controller.textField.addEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.numericOnly);
+            Stage stage = AddCommandWindow.getStage();
+            stage.setTitle("Repeat");
+            stage.showAndWait();
+            Command res = null;
+            if(controller.successful_creation)
+                res = new Repeat(new Command[]{Command.NOTHING},
+                        Integer.parseInt(controller.textField.getCharacters().toString()));
+            return res;
+        }
+    },
     WHILE(new While(new Command[]{Command.NOTHING},True.TRUE)),
     WAIT(new Wait(1000)){
         @Override
