@@ -76,6 +76,11 @@ public abstract class AbstractEnvironment implements Environment {
     }
 
     @Override
+    public void clickScroll() {
+        System.out.println("Clicking scroll");
+    }
+
+    @Override
     public void scroll(){
         System.out.println("Scrolling");
     }

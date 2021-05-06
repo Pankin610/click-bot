@@ -106,9 +106,24 @@ public enum Commands {
         }
     },
     HOLD_KEYS_COMMAND(new HoldKeysCommand("")),
-    MOUSE_LEFT_CLICK(MouseLeftClick.MOUSE_LEFT_CLICK),
-    MOUSE_RIGHT_CLICK(MouseRightClick.MOUSE_RIGHT_CLICK),
-    MOUSE_SCROLL_CLICK(MouseScrollClick.MOUSE_SCROLL_CLICK);
+    MOUSE_LEFT_CLICK(MouseLeftClick.MOUSE_LEFT_CLICK){
+        @Override
+        public Command createCommand() {
+            return MouseLeftClick.MOUSE_LEFT_CLICK;
+        }
+    },
+    MOUSE_RIGHT_CLICK(MouseRightClick.MOUSE_RIGHT_CLICK){
+        @Override
+        public Command createCommand() {
+            return MouseRightClick.MOUSE_RIGHT_CLICK;
+        }
+    },
+    MOUSE_SCROLL_CLICK(MouseScrollClick.MOUSE_SCROLL_CLICK){
+        @Override
+        public Command createCommand() {
+            return MouseScrollClick.MOUSE_SCROLL_CLICK;
+        }
+    };
 
     private final Command comm;
     Commands(Command comm){
