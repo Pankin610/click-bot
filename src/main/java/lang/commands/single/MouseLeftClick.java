@@ -8,31 +8,32 @@ import util.gui.CodeItem;
 import java.util.Scanner;
 
 public class MouseLeftClick extends AbstractSingleCommand {
-    private final static String id = "LEFT_CLICK";
-    public final static MouseLeftClick MOUSE_LEFT_CLICK = new MouseLeftClick();
-    @Override
-    public void execute(Environment envi) throws ExecException {
-        envi.clickLeft();
-    }
+  private final static String id = "LEFT_CLICK";
+  public final static MouseLeftClick MOUSE_LEFT_CLICK = new MouseLeftClick();
 
-    @Override
-    public String getStringRepresentation() {
-        return id;
-    }
+  @Override
+  public void execute(Environment envi) throws ExecException {
+    envi.clickLeft();
+  }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public Command parseFromString(Scanner scanner) {
-        return MOUSE_LEFT_CLICK;
-    }
+  @Override
+  public String getStringRepresentation() {
+    return id;
+  }
 
-    @Override
-    public String getId() {
-        return id;
-    }
+  @SuppressWarnings("unchecked")
+  @Override
+  public Command parseFromString(Scanner scanner) {
+    return MOUSE_LEFT_CLICK;
+  }
 
-    @Override
-    public CodeItem getTreeRepresentation() {
-        return new CodeItem(MOUSE_LEFT_CLICK);
-    }
+  @Override
+  public String getId() {
+    return id;
+  }
+
+  @Override
+  public CodeItem getTreeRepresentation() {
+    return new CodeItem(MOUSE_LEFT_CLICK);
+  }
 }

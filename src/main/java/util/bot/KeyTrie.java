@@ -42,47 +42,51 @@ import java.util.Collection;
     basic keys. But in the future in can be expanded to add arbitrary keys and methods.
  */
 public class KeyTrie {
-    static TrieNode root = new TrieNode();
-    static void addKey(Key key) {
-        TrieNode current = root;
-        for (int i = 0; i < key.string_code.length(); i++) {
-            current.addSon(key.string_code.charAt(i));
-            current = current.getSon(key.string_code.charAt(i));
-        }
-        current.setKey(key);
+  static TrieNode root = new TrieNode();
+
+  static void addKey(Key key) {
+    TrieNode current = root;
+    for (int i = 0; i < key.string_code.length(); i++) {
+      current.addSon(key.string_code.charAt(i));
+      current = current.getSon(key.string_code.charAt(i));
     }
-    // just adding all the keys defined in the Key enum
-    static {
-        for (Key key : Key.values()) {
-            addKey(key);
-        }
+    current.setKey(key);
+  }
+
+  // just adding all the keys defined in the Key enum
+  static {
+    for (Key key : Key.values()) {
+      addKey(key);
     }
-    // code a sequence
-    public static String getSequenceCode(Collection<Key> sequence) {
-        StringBuilder res = new StringBuilder();
-        for (Key key : sequence) {
-            res.append(key.string_code);
-        }
-        return res.toString();
+  }
+
+  // code a sequence
+  public static String getSequenceCode(Collection<Key> sequence) {
+    StringBuilder res = new StringBuilder();
+    for (Key key : sequence) {
+      res.append(key.string_code);
     }
-    // get an integer sequence of codes for a coded string
-    public static Collection<Key> getKeys(String s) {
-        ArrayList<Key> result = new ArrayList<>();
-        TrieNode current = root;
-        for (int i = 0; i < s.length(); i++) {
-            TrieNode next = current.getSon(s.charAt(i));
-            if (next == null) {
-                throw new InvalidKeyCodeException(s, i);
-            }
-            current = next;
-            if (current.isLeaf()) {
-                result.add(current.getKey());
-                current = root;
-            }
-        }
-        if (current != root) {
-            throw new InvalidKeyCodeException(s, s.length() - 1);
-        }
-        return result;
+    return res.toString();
+  }
+
+  // get an integer sequence of codes for a coded string
+  public static Collection<Key> getKeys(String s) {
+    ArrayList<Key> result = new ArrayList<>();
+    TrieNode current = root;
+    for (int i = 0; i < s.length(); i++) {
+      TrieNode next = current.getSon(s.charAt(i));
+      if (next == null) {
+        throw new InvalidKeyCodeException(s, i);
+      }
+      current = next;
+      if (current.isLeaf()) {
+        result.add(current.getKey());
+        current = root;
+      }
     }
+    if (current != root) {
+      throw new InvalidKeyCodeException(s, s.length() - 1);
+    }
+    return result;
+  }
 }

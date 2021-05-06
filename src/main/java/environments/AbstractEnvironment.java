@@ -20,122 +20,124 @@ import java.io.IOException;
 // TODO: Moving Console implementation to console Environment,
 //  abstract implementations should throw UnsupportedOperationException (if necessary)
 public abstract class AbstractEnvironment implements Environment {
-    protected final VariableContainer variables = new VariableList();
-    protected Mouse myMouse = new Mouse("Mouse",0,0);
-    protected final Program program;
-    protected AbstractEnvironment(Program program){
-        this.program = program;
-        variables.addAll(program.getVariables());
-    }
-    @Override
-    public void runProgram() throws ExecException {
-        //TODO make this inside new Thread (endgame)
-        for(Command com : program.getCommands()){
-            com.execute(this);
-        }
-    }
+  protected final VariableContainer variables = new VariableList();
+  protected Mouse myMouse = new Mouse("Mouse", 0, 0);
+  protected final Program program;
 
-    @Override
-    public void holdKey(int key) {
-        System.out.println("Holding key: " + key);
-    }
+  protected AbstractEnvironment(Program program) {
+    this.program = program;
+    variables.addAll(program.getVariables());
+  }
 
-    @Override
-    public void releaseKey(int key) {
-        System.out.println("Releasing key: " + key);
+  @Override
+  public void runProgram() throws ExecException {
+    //TODO make this inside new Thread (endgame)
+    for (Command com : program.getCommands()) {
+      com.execute(this);
     }
+  }
 
-    @Override
-    public void pressKey(int key){
-        System.out.println("Pushing key: " + key);
-    }
+  @Override
+  public void holdKey(int key) {
+    System.out.println("Holding key: " + key);
+  }
 
-    @Override
-    public void moveMouseTo(Coordinate destination){
-        myMouse.moveTo(destination);
-        System.out.println("Moving mouse to:" + destination);
-    }
+  @Override
+  public void releaseKey(int key) {
+    System.out.println("Releasing key: " + key);
+  }
 
-    @Override
-    public void moveMouseBy(Coordinate cords){
-        myMouse.moveBy(cords);
-        System.out.println("Moving mouse by:" + cords);
-    }
+  @Override
+  public void pressKey(int key) {
+    System.out.println("Pushing key: " + key);
+  }
 
-    @Override
-    public void wait(int tim){
-        System.out.println("I'm waiting "+ tim + " time");
-    }
+  @Override
+  public void moveMouseTo(Coordinate destination) {
+    myMouse.moveTo(destination);
+    System.out.println("Moving mouse to:" + destination);
+  }
 
-    @Override
-    public void clickLeft(){
-        System.out.println("Clicking left");
-    }
+  @Override
+  public void moveMouseBy(Coordinate cords) {
+    myMouse.moveBy(cords);
+    System.out.println("Moving mouse by:" + cords);
+  }
 
-    @Override
-    public void clickRight(){
-        System.out.println("Clicking right");
-    }
+  @Override
+  public void wait(int tim) {
+    System.out.println("I'm waiting " + tim + " time");
+  }
 
-    @Override
-    public void scroll(int where){
-        System.out.println("Scrolling in " + where + " direction");
-    }
+  @Override
+  public void clickLeft() {
+    System.out.println("Clicking left");
+  }
 
-    @Override
-    public void clickScroll() {
-        System.out.println("Clicking scroll");
-    }
+  @Override
+  public void clickRight() {
+    System.out.println("Clicking right");
+  }
 
-    @Override
-    public void doubleClick() {
-        System.out.println("Double clicking");
-    }
+  @Override
+  public void scroll(int where) {
+    System.out.println("Scrolling in " + where + " direction");
+  }
 
-    @Override
-    public void hold(int tim) {
-        System.out.println("Holding for "+tim + " time");
-    }
+  @Override
+  public void clickScroll() {
+    System.out.println("Clicking scroll");
+  }
 
-    @Override
-    public void drag(Coordinate where) {
-        System.out.println("Dragging to: "+where);
-    }
+  @Override
+  public void doubleClick() {
+    System.out.println("Double clicking");
+  }
 
-    @Override
-    public Variable getVarByName(String name) throws NoVariableWithThisNameException {
-        for(Variable var : variables)   if(var.getName().equals(name))  return var;
-        throw new NoVariableWithThisNameException(name);
-    }
+  @Override
+  public void hold(int tim) {
+    System.out.println("Holding for " + tim + " time");
+  }
 
-    @Override
-    public boolean isThereVariable(String varName) {
-        for(Variable var : variables)   if(varName.equals(var.getName()))  return true;
-        return false;
-    }
+  @Override
+  public void drag(Coordinate where) {
+    System.out.println("Dragging to: " + where);
+  }
 
-    @Override
-    public Color getPixelColor(Coordinate cords) {
-        return new Color(0x000000);
-    }
+  @Override
+  public Variable getVarByName(String name) throws NoVariableWithThisNameException {
+    for (Variable var : variables) if (var.getName().equals(name)) return var;
+    throw new NoVariableWithThisNameException(name);
+  }
 
-    @Override
-    public Coordinate getPosition() {
-        return new Coordinate(0,0);
-    }
+  @Override
+  public boolean isThereVariable(String varName) {
+    for (Variable var : variables) if (varName.equals(var.getName())) return true;
+    return false;
+  }
 
-    @Override
-    public void executeSystem(String command) {
-        try {
-            Process process = Runtime.getRuntime().exec(command);
-            process.waitFor();
-        } catch (IOException | InterruptedException e) {
-            throw new ExecException("An IOException occurred.", e);
-        }
-    }
+  @Override
+  public Color getPixelColor(Coordinate cords) {
+    return new Color(0x000000);
+  }
 
-    @Override
-    public void errorNoise() {
-        System.out.println("beep");
+  @Override
+  public Coordinate getPosition() {
+    return new Coordinate(0, 0);
+  }
+
+  @Override
+  public void executeSystem(String command) {
+    try {
+      Process process = Runtime.getRuntime().exec(command);
+      process.waitFor();
+    } catch (IOException | InterruptedException e) {
+      throw new ExecException("An IOException occurred.", e);
     }
+  }
+
+  @Override
+  public void errorNoise() {
+    System.out.println("beep");
+  }
 }

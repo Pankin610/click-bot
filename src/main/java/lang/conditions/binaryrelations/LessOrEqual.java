@@ -10,35 +10,35 @@ import lang.variables.Variable;
 import java.util.Scanner;
 
 public final class LessOrEqual extends BinaryRelation {
-    private static final String id = "LESS_EQ";
-    public LessOrEqual(String m_variable1, String m_variable2) {
-        super(m_variable1, m_variable2);
-    }
-    @Override
-    public boolean eval(Environment envi) throws EvaluationException {
-        try{
-            Variable var1 = envi.getVarByName(variable1);
-            Variable var2 = envi.getVarByName(variable2);
-            return var1.compareTo(var2) < 0 || var1.getValue().equals(var2.getValue());
-        }
-        catch (NoVariableWithThisNameException e){
-            throw new EvaluationException("No variable with name: " + e.getName() + " (LessOrEqual)");
-        }
-        catch (IncomparableVariablesException ex){
-            throw new EvaluationException("Incomparable variables (LessOrEqual)");
-        }
-    }
+  private static final String id = "LESS_EQ";
 
-    @Override
-    public String getId() {
-        return id;
-    }
+  public LessOrEqual(String m_variable1, String m_variable2) {
+    super(m_variable1, m_variable2);
+  }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public Condition parseFromString(Scanner scanner) {
-        String name1 = scanner.next();
-        String name2 = scanner.next();
-        return new LessOrEqual(name1,name2);
+  @Override
+  public boolean eval(Environment envi) throws EvaluationException {
+    try {
+      Variable var1 = envi.getVarByName(variable1);
+      Variable var2 = envi.getVarByName(variable2);
+      return var1.compareTo(var2) < 0 || var1.getValue().equals(var2.getValue());
+    } catch (NoVariableWithThisNameException e) {
+      throw new EvaluationException("No variable with name: " + e.getName() + " (LessOrEqual)");
+    } catch (IncomparableVariablesException ex) {
+      throw new EvaluationException("Incomparable variables (LessOrEqual)");
     }
+  }
+
+  @Override
+  public String getId() {
+    return id;
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public Condition parseFromString(Scanner scanner) {
+    String name1 = scanner.next();
+    String name2 = scanner.next();
+    return new LessOrEqual(name1, name2);
+  }
 }

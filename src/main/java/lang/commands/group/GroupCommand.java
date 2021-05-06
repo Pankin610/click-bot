@@ -8,5 +8,5 @@ import lang.commands.Command;
  * Interface representing Commands which call block of other commands.
  */
 public interface GroupCommand extends Command, Iterable<Command> {
-    void executeBlock(Environment envi) throws ExecException;
+  void executeBlock(Environment envi) throws ExecException;
 }

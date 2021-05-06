@@ -8,12 +8,13 @@ import util.gui.CodeItem;
  */
 
 public abstract class AbstractCommand extends AbstractCodeFragment implements Command {
-    /**
-     * Default implementation of getTreeRepresentation method.
-     * @return CodeItem instance with ID of class.
-     */
-    @Override
-    public CodeItem getTreeRepresentation() {
-        return new CodeItem(this);
-    }
+  /**
+   * Default implementation of getTreeRepresentation method.
+   *
+   * @return CodeItem instance with ID of class.
+   */
+  @Override
+  public CodeItem getTreeRepresentation() {
+    return new CodeItem(this);
+  }
 }

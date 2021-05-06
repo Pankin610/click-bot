@@ -10,16 +10,17 @@ import java.util.LinkedList;
  */
 
 public final class TestEnvironment extends AbstractEnvironment {
-    public TestEnvironment(Program program) {
-        super(program);
-    }
-    /**
-     * State field.
-     */
-    public String returns;
+  public TestEnvironment(Program program) {
+    super(program);
+  }
 
-    /**
-     * executionList should contain information about every executed Command, evaluated Condition etc.
-     */
-    public LinkedList<String> executionList;
+  /**
+   * State field.
+   */
+  public String returns;
+
+  /**
+   * executionList should contain information about every executed Command, evaluated Condition etc.
+   */
+  public LinkedList<String> executionList;
 }

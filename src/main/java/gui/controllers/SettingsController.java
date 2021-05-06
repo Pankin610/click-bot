@@ -9,20 +9,20 @@ import java.util.ResourceBundle;
 
 public class SettingsController implements Controller {
 
-    public AnchorPane mainPane;
-    public Button closeButton;
+  public AnchorPane mainPane;
+  public Button closeButton;
 
-    @Override
-    public void reload() {
+  @Override
+  public void reload() {
 
-    }
+  }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+  @Override
+  public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    }
+  }
 
-    public void closeAction() {
-        SettingsWindow.close();
-    }
+  public void closeAction() {
+    SettingsWindow.close();
+  }
 }

@@ -14,33 +14,35 @@ import java.io.IOException;
  * Project window is responsible for project-creating scene of main program.
  */
 public abstract class ProjectWindow implements SideWindow {
-    private static final Pane pane;
-    private static final ProjectController controller;
-    static{
-        FXMLLoader loader = WindowsManager.getLoader("project");
-        Pane tmpPane = null;
-        try {
-            tmpPane = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        pane = tmpPane;
-        controller = loader.getController();
-    }
-    public static ProjectController getController() {
-        return controller;
-    }
+  private static final Pane pane;
+  private static final ProjectController controller;
 
-    public static Pane getPane() {
-        return pane;
+  static {
+    FXMLLoader loader = WindowsManager.getLoader("project");
+    Pane tmpPane = null;
+    try {
+      tmpPane = loader.load();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    pane = tmpPane;
+    controller = loader.getController();
+  }
 
-    public static void prepareNew(String name){
-        controller.nameProgramLabel.setText(name);
-        controller.programTree.setRoot(new TreeItem<>(name));
-    }
+  public static ProjectController getController() {
+    return controller;
+  }
 
-    public static void prepareExisting(ReadFileObject file){
-        controller.load(file);
-    }
+  public static Pane getPane() {
+    return pane;
+  }
+
+  public static void prepareNew(String name) {
+    controller.nameProgramLabel.setText(name);
+    controller.programTree.setRoot(new TreeItem<>(name));
+  }
+
+  public static void prepareExisting(ReadFileObject file) {
+    controller.load(file);
+  }
 }

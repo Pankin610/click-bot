@@ -7,7 +7,7 @@ import program.Program;
  * for example, waiting for user action before executing next command)
  */
 public final class SimulatingEnvironment extends AbstractEnvironment {
-    protected SimulatingEnvironment(Program program) {
-        super(program);
-    }
+  protected SimulatingEnvironment(Program program) {
+    super(program);
+  }
 }

@@ -7,30 +7,33 @@ import java.awt.*;
  */
 
 public final class Coordinate {
-    public int x, y;
-    public Coordinate(){
-        this(0,0);
-    }
-    public Coordinate(int x, int y){
-        this.x = x;
-        this.y = y;
-    }
+  public int x, y;
 
-    public Coordinate(Point point) {
-        this.x = point.x;
-        this.y = point.y;
-    }
+  public Coordinate() {
+    this(0, 0);
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Coordinate)) {
-            return false;
-        }
-        Coordinate other = (Coordinate)o;
-        return x == other.x && y == other.y;
+  public Coordinate(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  public Coordinate(Point point) {
+    this.x = point.x;
+    this.y = point.y;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof Coordinate)) {
+      return false;
     }
-    @Override
-    public String toString() {
-        return String.valueOf(x) + ' ' + y;
-    }
+    Coordinate other = (Coordinate) o;
+    return x == other.x && y == other.y;
+  }
+
+  @Override
+  public String toString() {
+    return String.valueOf(x) + ' ' + y;
+  }
 }

@@ -7,15 +7,16 @@ import lang.conditions.AbstractCondition;
  */
 
 public abstract class BinaryRelation extends AbstractCondition {
-    protected final String variable1;
-    protected final String variable2;
-    protected BinaryRelation(String m_variable1, String m_variable2){
-        variable1 = m_variable1;
-        variable2 = m_variable2;
-    }
+  protected final String variable1;
+  protected final String variable2;
 
-    @Override
-    public String getStringRepresentation() {
-        return getId() + " " + variable1 + " " + variable2;
-    }
+  protected BinaryRelation(String m_variable1, String m_variable2) {
+    variable1 = m_variable1;
+    variable2 = m_variable2;
+  }
+
+  @Override
+  public String getStringRepresentation() {
+    return getId() + " " + variable1 + " " + variable2;
+  }
 }

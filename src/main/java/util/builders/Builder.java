@@ -3,39 +3,43 @@ package util.builders;
 import lang.CodeFragment;
 
 public interface Builder<T extends CodeFragment> extends Iterable<T> {
-    
-    /**
-     * Casts content of Builder into regular array.
-     * @return array of Commands inside Builder.
-     */
-    T[] toArray();
 
-    /**
-     * Append element to the end of the block.
-     * @param element command to be added.
-     */
-    void append(T element);
+  /**
+   * Casts content of Builder into regular array.
+   *
+   * @return array of Commands inside Builder.
+   */
+  T[] toArray();
 
-    /**
-     * Insert element at given index.
-     * @param element element to be inserted.
-     * @param ind mentioned index.
-     */
-    void insertInto(T element, int ind);
+  /**
+   * Append element to the end of the block.
+   *
+   * @param element command to be added.
+   */
+  void append(T element);
 
-    /**
-     * Returns actual size of BlockBuilder.
-     * @return size of block.
-     */
-    int size();
+  /**
+   * Insert element at given index.
+   *
+   * @param element element to be inserted.
+   * @param ind     mentioned index.
+   */
+  void insertInto(T element, int ind);
 
-    /**
-     * Method showing string representation of elements in Builder.
-     */
-    void viewContentFull();
+  /**
+   * Returns actual size of BlockBuilder.
+   *
+   * @return size of block.
+   */
+  int size();
 
-    /**
-     * Method showing IDs of elements in Builder.
-     */
-    void viewContentId();
+  /**
+   * Method showing string representation of elements in Builder.
+   */
+  void viewContentFull();
+
+  /**
+   * Method showing IDs of elements in Builder.
+   */
+  void viewContentId();
 }

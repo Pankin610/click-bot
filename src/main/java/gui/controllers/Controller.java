@@ -7,9 +7,9 @@ import javafx.fxml.Initializable;
  */
 
 public interface Controller extends Initializable {
-    /**
-     * This method should be called before showing the scene,
-     * if something should be actualized due to changed state of data.
-     */
-    void reload();
+  /**
+   * This method should be called before showing the scene,
+   * if something should be actualized due to changed state of data.
+   */
+  void reload();
 }

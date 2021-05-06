@@ -8,10 +8,11 @@ import exceptions.ExecException;
  */
 
 public interface Executable {
-    /**
-     * Execution method should be implemented as calls to Environment's methods.
-     * @param envi Environment in which command should be executed.
-     * @throws ExecException when something gone wrong during execution.
-     */
-    void execute(Environment envi) throws ExecException;
+  /**
+   * Execution method should be implemented as calls to Environment's methods.
+   *
+   * @param envi Environment in which command should be executed.
+   * @throws ExecException when something gone wrong during execution.
+   */
+  void execute(Environment envi) throws ExecException;
 }

@@ -5,26 +5,27 @@ import environments.Environment;
 import java.util.Scanner;
 
 public final class False implements Condition {
-    private static final String id = "FALSE";
-    public static final False FALSE = new False();
-    @Override
-    public boolean eval(Environment envi) {
-        return false;
-    }
+  private static final String id = "FALSE";
+  public static final False FALSE = new False();
 
-    @Override
-    public String getStringRepresentation() {
-        return "FALSE";
-    }
+  @Override
+  public boolean eval(Environment envi) {
+    return false;
+  }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public Condition parseFromString(Scanner scanner) {
-        return FALSE;
-    }
+  @Override
+  public String getStringRepresentation() {
+    return "FALSE";
+  }
 
-    @Override
-    public String getId() {
-        return id;
-    }
+  @Override
+  @SuppressWarnings("unchecked")
+  public Condition parseFromString(Scanner scanner) {
+    return FALSE;
+  }
+
+  @Override
+  public String getId() {
+    return id;
+  }
 }
