@@ -35,15 +35,12 @@ public class CodeItem extends TreeItem<String> {
 
     public static void addAfter(TreeItem<String> me, CodeItem item){
         TreeItem<String> parent = me.getParent();
-        System.out.println("parent: " + parent);
+        if(parent == null)  return;
         ObservableList<TreeItem<String>> list = parent.getChildren();
-        System.out.println("dzieci: " + list);
         int ind = list.indexOf(me);
-        System.out.println("ind: " + ind);
         List<TreeItem<String>> new_list = new ArrayList<>(list.subList(0, ind + 1));
         new_list.add(item);
         new_list.addAll(list.subList(ind + 1, list.size()));
-        System.out.println(new_list);
         list.clear();
         list.addAll(new_list);
     }

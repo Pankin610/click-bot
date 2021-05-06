@@ -28,6 +28,7 @@ public class AddCommandController implements Controller {
         // default options
         successful_creation = false;
         textFieldLabel.setText("Default");
+        textField.setText("");
         AddCommandWindow.getStage().setTitle("Default");
     }
 
@@ -36,7 +37,7 @@ public class AddCommandController implements Controller {
 
     }
 
-    public void addCommand() {
+    public void addCommand() { //TODO: checking correctness of entered data
         successful_creation = true;
         closeButton();
     }
