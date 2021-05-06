@@ -37,7 +37,7 @@ public interface Command extends Executable, CodeFragment {
 
         @SuppressWarnings("unchecked")
         @Override
-        public Command parseFromString(Scanner scanner) { // TODO make static?
+        public Command parseFromString(Scanner scanner) {
             return this;
         }
 

@@ -1,7 +1,7 @@
 package environments;
 
 import program.Program;
-import util.Bot.Bot;
+import util.bot.Bot;
 import util.Coordinate;
 
 import java.awt.*;
@@ -91,6 +91,7 @@ public final class DesktopEnvironment extends AbstractEnvironment {
         return new Coordinate(pnt);
     }
 
+    @SuppressWarnings("all")
     public static void main(String[] args) throws AWTException, IOException {
         Robot robot = new Robot();
         for(int i=0;i<10;i++){

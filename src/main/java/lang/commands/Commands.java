@@ -111,7 +111,12 @@ public enum Commands {
     SCROLL_UP_COMMAND(new ScrollUpCommand(0)),
     SCROLL_COMMAND(new ScrollCommand(0)),
     DRAG(new DragCommand(new Coordinate(0, 0))),
-    DOUBLE_CLICK(new DoubleClickCommand()),
+    DOUBLE_CLICK_COMMAND(DoubleClickCommand.DOUBLE_CLICK_COMMAND){
+        @Override
+        public Command createCommand() {
+            return DoubleClickCommand.DOUBLE_CLICK_COMMAND;
+        }
+    },
     MOUSE_LEFT_CLICK(MouseLeftClick.MOUSE_LEFT_CLICK){
         @Override
         public Command createCommand() {

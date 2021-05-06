@@ -18,6 +18,7 @@ public final class Console extends AbstractEnvironment {
 
     /**
      * Fields handling simulation of normal desktop screen.
+     * TODO: to be removed, instead of that, using mouse commands should throw exception from abstract implementation.
      */
     private Color[][] PixelArray;
     private static final int x_size = 10;

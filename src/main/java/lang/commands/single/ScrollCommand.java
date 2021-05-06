@@ -1,19 +1,20 @@
 package lang.commands.single;
 
 import environments.Environment;
-import exceptions.ExecException;
 
 public class ScrollCommand extends AbstractSingleCommand {
     private static final String id = "SCROLL";
     private final Integer where;
-    public ScrollCommand(int m_where) {
-        where = m_where;
+    public ScrollCommand(int where) {
+        this.where = where;
     }
+
     @Override
-    public void execute(Environment envi) throws ExecException {
+    public void execute(Environment envi) {
         envi.scroll(where);
     }
-    @Override // TODO make a common single command method?
+
+    @Override
     public String getId() {
         return id;
     }

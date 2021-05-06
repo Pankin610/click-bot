@@ -1,6 +1,5 @@
-package util.Bot;
+package util.bot;
 
-import exceptions.ExecException;
 import util.Coordinate;
 
 import java.awt.*;
@@ -51,11 +50,11 @@ public class Bot {
   }
   // simple drag from current location to the given one
   public void drag(Coordinate where) {
-    robot.mousePress(InputEvent.BUTTON1_MASK);
+    robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
     robot.delay(kDefaultDelay);
     robot.mouseMove(where.x, where.y);
     robot.delay(kDefaultDelay);
-    robot.mouseRelease(InputEvent.BUTTON1_MASK);
+    robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
   }
   public void pressKey(int key_event_code) {
     robot.keyPress(key_event_code);

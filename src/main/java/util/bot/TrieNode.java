@@ -1,4 +1,4 @@
-package util.Bot;
+package util.bot;
 
 import exceptions.TrieStructureViolatedException;
 import util.Key;

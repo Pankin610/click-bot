@@ -17,7 +17,8 @@ import java.io.IOException;
  * Abstract environment contains default (Console) implementation of methods associated with instances of Command interface,
  * such as PushButton, Move, Hold, etc...
  */
-
+// TODO: Moving Console implementation to console Environment,
+//  abstract implementations should throw UnsupportedOperationException (if necessary)
 public abstract class AbstractEnvironment implements Environment {
     protected final VariableContainer variables = new VariableList();
     protected Mouse myMouse = new Mouse("Mouse",0,0);
@@ -87,6 +88,11 @@ public abstract class AbstractEnvironment implements Environment {
     }
 
     @Override
+    public void doubleClick() {
+        System.out.println("Double clicking");
+    }
+
+    @Override
     public void hold(int tim) {
         System.out.println("Holding for "+tim + " time");
     }
@@ -119,10 +125,10 @@ public abstract class AbstractEnvironment implements Environment {
     }
 
     @Override
-    public int executeSystem(String command) {
+    public void executeSystem(String command) {
         try {
             Process process = Runtime.getRuntime().exec(command);
-            return process.waitFor();
+            process.waitFor();
         } catch (IOException | InterruptedException e) {
             throw new ExecException("An IOException occurred.", e);
         }

@@ -1,9 +1,8 @@
-package util.Bot;
+package util.bot;
 
 import org.junit.Test;
 import util.Key;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;

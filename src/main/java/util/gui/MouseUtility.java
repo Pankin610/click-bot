@@ -1,6 +1,6 @@
 package util.gui;
 
-import util.Bot.Bot;
+import util.bot.Bot;
 import util.Coordinate;
 
 import java.awt.*;

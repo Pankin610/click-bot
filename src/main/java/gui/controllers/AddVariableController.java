@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import lang.CodeFactory;
 import lang.variables.Variable;
 import lang.variables.Variables;
-import util.Bot.Bot;
+import util.bot.Bot;
 
 import java.net.URL;
 import java.util.ResourceBundle;

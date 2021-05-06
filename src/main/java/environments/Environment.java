@@ -21,13 +21,14 @@ public interface Environment {
     void clickLeft();
     void clickRight();
     void clickScroll();
+    void doubleClick();
     void scroll(int where);
     void hold(int tim);
     void drag(Coordinate where);
     Color getPixelColor(Coordinate cord);
     void errorNoise();
     Coordinate getPosition();
-    int executeSystem(String command);
+    void executeSystem(String command);
 
     /**
      * Getter for variables, based on names.

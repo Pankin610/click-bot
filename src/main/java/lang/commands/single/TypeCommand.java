@@ -3,10 +3,8 @@ package lang.commands.single;
 import environments.Environment;
 import exceptions.ExecException;
 import lang.commands.Command;
-import util.Bot.KeyTrie;
 import util.Key;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Scanner;
 
