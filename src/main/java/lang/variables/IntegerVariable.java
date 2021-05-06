@@ -69,11 +69,6 @@ public final class IntegerVariable extends AbstractVariable {
     }
 
     @Override
-    public String getStringRepresentation() {
-        return "INT " + getName() + " " + val;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public IntegerVariable parseFromString(Scanner scanner) {
         return new IntegerVariable(scanner.next(),scanner.nextInt());

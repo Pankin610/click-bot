@@ -1,6 +1,7 @@
-package gui.applications;
+package gui.applications.features;
 
 import gui.WindowsManager;
+import gui.applications.SideWindow;
 import gui.controllers.AboutController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

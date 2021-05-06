@@ -81,6 +81,11 @@ public final class DesktopEnvironment extends AbstractEnvironment {
     }
 
     @Override
+    public void errorNoise() {
+        bot.beep();
+    }
+    
+    @Override
     public Coordinate getPosition() {
         Point pnt = MouseInfo.getPointerInfo().getLocation();
         return new Coordinate(pnt);

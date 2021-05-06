@@ -25,6 +25,7 @@ public interface Environment {
     void hold(int tim);
     void drag(Coordinate where);
     Color getPixelColor(Coordinate cord);
+    void errorNoise();
     Coordinate getPosition();
     int executeSystem(String command);
 

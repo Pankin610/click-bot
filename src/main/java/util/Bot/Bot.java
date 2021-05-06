@@ -31,13 +31,13 @@ public class Bot {
     robot.delay(kDefaultDelay);
   }
   public void leftClick() {
-    clickMouse(InputEvent.BUTTON1_MASK);
+    clickMouse(InputEvent.BUTTON1_DOWN_MASK);
   }
   public void rightClick() {
-    clickMouse(InputEvent.BUTTON3_MASK);
+    clickMouse(InputEvent.BUTTON3_DOWN_MASK);
   }
   public void scrollClick() {
-    clickMouse(InputEvent.BUTTON2_MASK);
+    clickMouse(InputEvent.BUTTON2_DOWN_MASK);
   }
   public void doubleClick() {
     leftClick();
@@ -72,5 +72,12 @@ public class Bot {
   }
   public Color getPixelColor(Coordinate cord) {
     return robot.getPixelColor(cord.x, cord.y);
+  }
+  public void delay(){
+    robot.delay(kDefaultDelay);
+  }
+  public void beep(){
+    Toolkit.getDefaultToolkit().beep();
+    robot.delay(kDefaultDelay);
   }
 }

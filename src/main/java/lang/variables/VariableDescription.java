@@ -24,6 +24,14 @@ public final class VariableDescription extends AbstractCodeFragment {
         name = var.getName();
     }
 
+    /**
+     * To use this constructor, description must match getStringRepresentation.
+     * @param description of Variable.
+     */
+    public VariableDescription(String description){
+        this(CodeFactory.parseVariable(description));
+    }
+
     @Override
     public String getStringRepresentation() {
         return description;

@@ -2,15 +2,15 @@ package gui.controllers;
 
 import exceptions.WrongFileFormatException;
 import files.CreatedPrograms;
-import files.reading.ReadFileObject;
-import gui.SceneType;
 import gui.WindowsManager;
 import gui.applications.ListOfProgramsWindow;
-import gui.applications.ProgramMenu;
-import gui.applications.ProjectWindow;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +24,13 @@ public class ListOfProgramsController implements Controller {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programList.getItems().addAll(CreatedPrograms.getNames());
+        programList.setOnMouseClicked(mouseEvent -> {
+            if(programList.getSelectionModel().getSelectedItems().size() > 0)   popButton();
+            if (mouseEvent.getButton().equals(MouseButton.PRIMARY) &&
+                    mouseEvent.getClickCount() == 2 &&
+                    programList.getSelectionModel().getSelectedItems().size() > 0)
+                openAction();
+        });
     }
 
     @Override

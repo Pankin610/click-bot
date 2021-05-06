@@ -28,6 +28,7 @@ public abstract class AbstractEnvironment implements Environment {
     }
     @Override
     public void runProgram() throws ExecException {
+        //TODO make this inside new Thread (endgame)
         for(Command com : program.getCommands()){
             com.execute(this);
         }
@@ -81,6 +82,11 @@ public abstract class AbstractEnvironment implements Environment {
     }
 
     @Override
+    public void clickScroll() {
+        System.out.println("Clicking scroll");
+    }
+
+    @Override
     public void hold(int tim) {
         System.out.println("Holding for "+tim + " time");
     }
@@ -120,5 +126,10 @@ public abstract class AbstractEnvironment implements Environment {
         } catch (IOException | InterruptedException e) {
             throw new ExecException("An IOException occurred.", e);
         }
+    }
+
+    @Override
+    public void errorNoise() {
+        System.out.println("beep");
     }
 }

@@ -1,7 +1,7 @@
 package gui.controllers;
 
 import gui.WindowsManager;
-import gui.applications.ErrorAlert;
+import gui.applications.features.ErrorAlert;
 import gui.applications.ProgramNameWindow;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;

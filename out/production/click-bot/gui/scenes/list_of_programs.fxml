@@ -7,9 +7,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.ListOfProgramsController">
    <children>
-      <ListView fx:id="programList" onMouseClicked="#popButton" prefHeight="350.0" prefWidth="350.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <ListView fx:id="programList" prefHeight="350.0" prefWidth="350.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <CheckBox layoutX="-167.0" mnemonicParsing="false" text="CheckBox" />
-      <Button alignment="CENTER" cancelButton="true" layoutX="285.0" layoutY="360.0" mnemonicParsing="false" onAction="#closeAction" prefWidth="50.0" text="Close" />
-      <Button fx:id="openButton" alignment="CENTER" defaultButton="true" disable="true" layoutX="216.0" layoutY="360.0" mnemonicParsing="false" onAction="#openAction" prefWidth="50.0" text="Open" />
+      <Button alignment="CENTER" cancelButton="true" layoutX="223.0" layoutY="360.0" mnemonicParsing="false" onAction="#closeAction" prefWidth="50.0" text="Close" />
+      <Button fx:id="openButton" alignment="CENTER" defaultButton="true" disable="true" layoutX="285.0" layoutY="360.0" mnemonicParsing="false" onAction="#openAction" prefWidth="50.0" text="Open" />
    </children>
 </AnchorPane>

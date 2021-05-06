@@ -31,9 +31,8 @@ public final class ReleaseKeysCommand extends KeySequenceCommand {
     }
 
     // basic parsing
-    // TODO problem with spaces, scanner does not read the entire line
     @SuppressWarnings("unchecked")
     public Command parseFromString(Scanner scanner) {
-        return new ReleaseKeysCommand(scanner.next());
+        return new ReleaseKeysCommand(scanner.nextLine());
     }
 }

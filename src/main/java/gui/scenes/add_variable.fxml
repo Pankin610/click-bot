@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="146.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.AddVariableController">
+    <Button layoutX="336.0" layoutY="107.0" mnemonicParsing="false" onAction="#addVariable" prefWidth="60.0" text="Add" />
+    <Button layoutX="14.0" layoutY="107.0" mnemonicParsing="false" onAction="#getPixelColor" prefWidth="100.0" text="Pixel's color" />
+    <Button layoutX="125.0" layoutY="107.0" mnemonicParsing="false" onAction="#getCursorCords" prefWidth="100.0" text="Cursor's cords" />
+    <TextField fx:id="VariablesNameBox" layoutX="125.0" layoutY="47.0" prefWidth="100.0" promptText="Variable's name" />
+    <TextField fx:id="InitialValueBox" layoutX="236.0" layoutY="47.0" prefWidth="100.0" promptText="Initial value" />
+   <ChoiceBox fx:id="TypeChoiceBox" layoutX="14.0" layoutY="47.0" prefWidth="100.0" />
+   <Label layoutX="51.0" layoutY="14.0" text="Type" />
+   <Label layoutX="159.0" layoutY="14.0" text="Name" />
+   <Label layoutX="271.0" layoutY="14.0" text="Value" />
+</AnchorPane>

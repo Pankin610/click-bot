@@ -8,6 +8,8 @@ import lang.conditions.Conditions;
 import lang.variables.Variable;
 import lang.variables.Variables;
 
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -30,6 +32,19 @@ public final class CodeFactory {
     }
     public static CodeFragment parseCodeFragment(Scanner scanner){
         return getCodeFragmentByID(scanner.next()).parseFromString(scanner);
+    }
+
+    public static Variable parseVariable(String description){
+        return parseVariable(new Scanner(new ByteArrayInputStream(description.getBytes(StandardCharsets.UTF_8))));
+    }
+    public static Condition parseCondition(String description){
+        return parseCondition(new Scanner(new ByteArrayInputStream(description.getBytes(StandardCharsets.UTF_8))));
+    }
+    public static Command parseCommand(String description){
+        return parseCommand(new Scanner(new ByteArrayInputStream(description.getBytes(StandardCharsets.UTF_8))));
+    }
+    public static CodeFragment parseCodeFragment(String description){
+        return parseCodeFragment(new Scanner(new ByteArrayInputStream(description.getBytes(StandardCharsets.UTF_8))));
     }
 
     private static final HashMap<String, Variable> varMap = new HashMap<>();
