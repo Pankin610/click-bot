@@ -51,6 +51,11 @@ public final class DesktopEnvironment extends AbstractEnvironment {
     }
 
     @Override
+    public void clickScroll() {
+        bot.scrollClick();
+    }
+
+    @Override
     public void scroll() {
         super.scroll();
     }
