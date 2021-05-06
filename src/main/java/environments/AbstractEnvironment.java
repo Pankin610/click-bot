@@ -11,6 +11,7 @@ import util.containers.VariableContainer;
 import util.containers.VariableList;
 
 import java.awt.*;
+import java.io.IOException;
 
 /**
  * Abstract environment contains default (Console) implementation of methods associated with instances of Command interface,
@@ -75,8 +76,8 @@ public abstract class AbstractEnvironment implements Environment {
     }
 
     @Override
-    public void scroll(){
-        System.out.println("Scrolling");
+    public void scroll(int where){
+        System.out.println("Scrolling in " + where + " direction");
     }
 
     @Override
@@ -109,5 +110,15 @@ public abstract class AbstractEnvironment implements Environment {
     @Override
     public Coordinate getPosition() {
         return new Coordinate(0,0);
+    }
+
+    @Override
+    public int executeSystem(String command) {
+        try {
+            Process process = Runtime.getRuntime().exec(command);
+            return process.waitFor();
+        } catch (IOException | InterruptedException e) {
+            throw new ExecException("An IOException occurred.", e);
+        }
     }
 }

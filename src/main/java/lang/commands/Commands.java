@@ -26,7 +26,13 @@ public enum Commands {
     HOLD_KEYS_COMMAND(new HoldKeysCommand("")),
     MOUSE_LEFT_CLICK(MouseLeftClick.MOUSE_LEFT_CLICK),
     MOUSE_RIGHT_CLICK(MouseRightClick.MOUSE_RIGHT_CLICK),
-    MOUSE_SCROLL_CLICK(MouseScrollClick.MOUSE_SCROLL_CLICK);
+    MOUSE_SCROLL_CLICK(MouseScrollClick.MOUSE_SCROLL_CLICK),
+    EXECUTE_COMMAND(new ExecuteCommand("")),
+    SCROLL_DOWN_COMMAND(new ScrollCommand(0)),
+    SCROLL_UP_COMMAND(new ScrollUpCommand(0)),
+    SCROLL_COMMAND(new ScrollCommand(0)),
+    DRAG(new DragCommand(new Coordinate(0, 0))),
+    DOUBLE_CLICK(new DoubleClickCommand());
 
     private final Command comm;
     Commands(Command comm){

@@ -51,13 +51,18 @@ public final class DesktopEnvironment extends AbstractEnvironment {
     }
 
     @Override
+    public void doubleClick() {
+        bot.doubleClick();
+    }
+
+    @Override
     public void clickScroll() {
         bot.scrollClick();
     }
 
     @Override
-    public void scroll() {
-        super.scroll();
+    public void scroll(int where) {
+        bot.scroll(where);
     }
 
     @Override
@@ -67,7 +72,7 @@ public final class DesktopEnvironment extends AbstractEnvironment {
 
     @Override
     public void drag(Coordinate where) {
-        super.drag(where);
+        bot.drag(where);
     }
 
     @Override

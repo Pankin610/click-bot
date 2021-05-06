@@ -33,6 +33,7 @@ public final class TypeCommand extends KeySequenceCommand {
 
     // basic parsing
     // TODO problem with spaces, scanner does not read the entire line
+    @Override
     @SuppressWarnings("unchecked")
     public Command parseFromString(Scanner scanner) {
         return new TypeCommand(scanner.next());
