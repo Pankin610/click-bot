@@ -7,6 +7,7 @@ import javafx.scene.control.TreeItem;
 import lang.commands.Command;
 import lang.variables.Variable;
 import lang.variables.VariableDescription;
+import program.Program;
 import program.ProgramDescription;
 import util.containers.VariableContainer;
 import util.gui.CodeItem;
@@ -120,5 +121,9 @@ public final class ProgramBuilder {
 
   public void saveToFile(WriteFileObject file) throws IOException {
     file.saveToFile(new ProgramDescription(this));
+  }
+
+  public Program getProgram(){
+    return new ProgramDescription(this);
   }
 }
