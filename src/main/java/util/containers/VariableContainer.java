@@ -10,10 +10,14 @@ import java.util.List;
  */
 
 public interface VariableContainer extends List<Variable> {
-    // every variable container should support these basic functions
-    void addAll(Variable... vars);
-    void remove(Variable var);
-    void remove(String name);
-    Variable get(String name);
-    Variable[] toArray();
+  // every variable container should support these basic functions
+  void addAll(Variable... vars);
+
+  void remove(Variable var);
+
+  void remove(String name);
+
+  Variable get(String name);
+
+  Variable[] toArray();
 }

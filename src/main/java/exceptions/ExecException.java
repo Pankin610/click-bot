@@ -5,14 +5,18 @@ package exceptions;
  */
 @SuppressWarnings("serial")
 public class ExecException extends RuntimeException {
-    public ExecException(){}
-    public ExecException(String s){
-        super(s);
-    }
-    public ExecException(Throwable t){
-        super(t);
-    }
-    public ExecException(String s, Throwable t){
-        super(s,t);
-    }
+  public ExecException() {
+  }
+
+  public ExecException(String s) {
+    super(s);
+  }
+
+  public ExecException(Throwable t) {
+    super(t);
+  }
+
+  public ExecException(String s, Throwable t) {
+    super(s, t);
+  }
 }
