@@ -13,12 +13,12 @@ import util.containers.VariableList;
 import java.awt.*;
 import java.io.IOException;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Abstract environment contains default (Console) implementation of methods associated with instances of Command interface,
  * such as PushButton, Move, Hold, etc...
  */
-// TODO: Moving Console implementation to console Environment,
-//  abstract implementations should throw UnsupportedOperationException (if necessary)
 public abstract class AbstractEnvironment implements Environment {
   protected final VariableContainer variables = new VariableList();
   protected Mouse myMouse = new Mouse("Mouse", 0, 0);
@@ -39,69 +39,67 @@ public abstract class AbstractEnvironment implements Environment {
 
   @Override
   public void holdKey(int key) {
-    System.out.println("Holding key: " + key);
+    throw new UnsupportedOperationException("This environment doesn't support holding a key.");
   }
 
   @Override
   public void releaseKey(int key) {
-    System.out.println("Releasing key: " + key);
+    throw new UnsupportedOperationException("This environment doesn't support releasing a key.");
   }
 
   @Override
   public void pressKey(int key) {
-    System.out.println("Pushing key: " + key);
+    throw new UnsupportedOperationException("This environment doesn't support pressing a key.");
   }
 
   @Override
   public void moveMouseTo(Coordinate destination) {
-    myMouse.moveTo(destination);
-    System.out.println("Moving mouse to:" + destination);
+    throw new UnsupportedOperationException("This environment doesn't support moving mouse to some destination.");
   }
 
   @Override
   public void moveMouseBy(Coordinate cords) {
-    myMouse.moveBy(cords);
-    System.out.println("Moving mouse by:" + cords);
+    throw new UnsupportedOperationException("This environment doesn't support moving mouse by some coordinate.");
   }
 
   @Override
-  public void wait(int tim) {
-    System.out.println("I'm waiting " + tim + " time");
+  public void waitCommand(int tim) {
+    throw new UnsupportedOperationException("This environment doesn't support waiting.");
   }
 
   @Override
   public void clickLeft() {
-    System.out.println("Clicking left");
+    throw new UnsupportedOperationException("This environment doesn't support left click.");
   }
 
   @Override
   public void clickRight() {
-    System.out.println("Clicking right");
+    throw new UnsupportedOperationException("This environment doesn't support right click.");
   }
 
   @Override
   public void scroll(int where) {
-    System.out.println("Scrolling in " + where + " direction");
+    throw new UnsupportedOperationException("This environment doesn't support scrolling.");
   }
 
   @Override
   public void clickScroll() {
-    System.out.println("Clicking scroll");
+    throw new UnsupportedOperationException("This environment doesn't support scroll click.");
   }
 
   @Override
   public void doubleClick() {
-    System.out.println("Double clicking");
+    throw new UnsupportedOperationException("This environment doesn't support double click.");
   }
 
   @Override
   public void hold(int tim) {
-    System.out.println("Holding for " + tim + " time");
+    throw new UnsupportedOperationException("This environment doesn't support holding.");
   }
 
   @Override
   public void drag(Coordinate where) {
-    System.out.println("Dragging to: " + where);
+    throw new UnsupportedOperationException("This environment doesn't support dragging.");
   }
 
   @Override

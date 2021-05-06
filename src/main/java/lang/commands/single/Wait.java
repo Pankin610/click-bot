@@ -15,7 +15,7 @@ public final class Wait extends AbstractSingleCommand {
 
   @Override
   public void execute(Environment envi) {
-    envi.wait(wait_time);
+    envi.waitCommand(wait_time);
   }
 
   @Override

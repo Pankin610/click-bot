@@ -23,7 +23,7 @@ public interface Environment {
 
   void moveMouseBy(Coordinate cords);
 
-  void wait(int tim);
+  void waitCommand(int tim);
 
   void clickLeft();
 

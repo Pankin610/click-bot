@@ -36,7 +36,7 @@ public final class DesktopEnvironment extends AbstractEnvironment {
   }
 
   @Override
-  public void wait(int tim) {
+  public void waitCommand(int tim) {
     bot.wait(tim);
   }
 

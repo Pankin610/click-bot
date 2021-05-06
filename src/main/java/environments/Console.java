@@ -13,35 +13,75 @@ import java.awt.*;
 public final class Console extends AbstractEnvironment {
   public Console(Program program) {
     super(program);
-    PixelArray = new Color[x_size][y_size];
   }
 
   /**
    * Fields handling simulation of normal desktop screen.
-   * TODO: to be removed, instead of that, using mouse commands should throw exception from abstract implementation.
    */
-  private Color[][] PixelArray;
-  private static final int x_size = 10;
-  private static final int y_size = 10;
-
-  public static boolean checkCords(Coordinate cords) {
-    return cords.x < 0 || cords.x >= x_size || cords.y < 0 || cords.y >= y_size;
+  @Override
+  public void holdKey(int key) {
+    System.out.println("Holding key: " + key);
   }
 
   @Override
-  public Color getPixelColor(Coordinate cords) {
-    if (checkCords(cords)) throw new IndexOutOfBoundsException();
-    return PixelArray[cords.x][cords.y];
+  public void releaseKey(int key) {
+    System.out.println("Releasing key: " + key);
   }
 
-  /**
-   * 'Changing' color of given Pixel.
-   *
-   * @param cords cords of Pixel in array.
-   * @param val   target value.
-   */
-  public void changeColor(Coordinate cords, Color val) {
-    if (checkCords(cords)) throw new IndexOutOfBoundsException();
-    PixelArray[cords.x][cords.y] = val;
+  @Override
+  public void pressKey(int key) {
+    System.out.println("Pushing key: " + key);
   }
+
+  @Override
+  public void moveMouseTo(Coordinate destination) {
+    myMouse.moveTo(destination);
+    System.out.println("Moving mouse to:" + destination);
+  }
+
+  @Override
+  public void moveMouseBy(Coordinate cords) {
+    myMouse.moveBy(cords);
+    System.out.println("Moving mouse by:" + cords);
+  }
+
+  @Override
+  public void waitCommand(int tim) {
+    System.out.println("I'm waiting " + tim + " time");
+  }
+
+  @Override
+  public void clickLeft() {
+    System.out.println("Clicking left");
+  }
+
+  @Override
+  public void clickRight() {
+    System.out.println("Clicking right");
+  }
+
+  @Override
+  public void scroll(int where) {
+    System.out.println("Scrolling in " + where + " direction");
+  }
+
+  @Override
+  public void clickScroll() {
+    System.out.println("Clicking scroll");
+  }
+
+  @Override
+  public void doubleClick() {
+    System.out.println("Double clicking");
+  }
+
+  @Override
+  public void hold(int tim) {
+    System.out.println("Holding for " + tim + " time");
+  }
+
+  @Override
+  public void drag(Coordinate where) {
+    System.out.println("Dragging to: " + where);
+  } 
 }
