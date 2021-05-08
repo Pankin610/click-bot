@@ -3,7 +3,6 @@ package gui.controllers;
 import files.reading.ReadFileObject;
 import gui.WindowsManager;
 import javafx.beans.value.ObservableValueBase;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -58,7 +57,7 @@ public class ProjectController implements Controller {
   private final ContextMenu contextMenuVar;
   private final MenuItem deleteVar;
 
-  { //context menu for TableView initialization
+  { //context menu for TableView with variables
     contextMenuVar = new ContextMenu();
     MenuItem addVariable = new MenuItem("Add variable");
     addVariable.setOnAction(this::addVariable);
@@ -75,7 +74,7 @@ public class ProjectController implements Controller {
 
   private final ContextMenu contextMenuProgram;
   private final MenuItem deleteComm;
-  {
+  { //program context menu
     contextMenuProgram = new ContextMenu();
     deleteComm = new MenuItem("Delete");
     deleteComm.setOnAction(actionEvent -> {
@@ -86,7 +85,6 @@ public class ProjectController implements Controller {
     });
     Menu addComm = new Menu("Add command");
     addComm.getItems().addAll(commandList);
-
     contextMenuProgram.getItems().addAll(addComm, deleteComm);
   }
 
@@ -183,7 +181,7 @@ public class ProjectController implements Controller {
     for (VariableDescription var : program.getVariablesDescription()) { /* load Variables */
       variables.add(var.getVariable());
     }
-    variableList.setItems(FXCollections.observableList(variables));
+    variableList.setItems(variables);
     programTree.setRoot(root);
   }
 
