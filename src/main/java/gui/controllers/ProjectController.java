@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 public class ProjectController implements Controller {
   public Label nameProgramLabel;
@@ -67,7 +68,7 @@ public class ProjectController implements Controller {
         return;
       ArrayList<Variable> toBeRemoved = new ArrayList<>(variableList.getSelectionModel().getSelectedItems());
       for (Variable var : toBeRemoved) variables.remove(var.getName());
-      variableList.refresh();
+      refreshVariables();
     });
     contextMenuVar.getItems().addAll(addVariable, deleteVar);
   }
@@ -88,13 +89,10 @@ public class ProjectController implements Controller {
     contextMenuProgram.getItems().addAll(addComm, deleteComm);
   }
 
-  public void addCommandWindow() {
-
-  }
-
   @Override
   public void reload() {
     variables.clear();
+    refreshVariables();
   }
 
   @SuppressWarnings("unchecked")
@@ -122,8 +120,7 @@ public class ProjectController implements Controller {
             deleteComm.setDisable(programTree.getSelectionModel().getSelectedItem() == null ||
                     programTree.getSelectionModel().getSelectedItem().getParent() == null));
 
-    TableView.TableViewSelectionModel<Variable> selectionModel = variableList.getSelectionModel();
-    selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
+    variableList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
     // Populating AddCommandButton SplitMenuButton
     addCommandButton.getItems().addAll(commandList);
@@ -181,7 +178,7 @@ public class ProjectController implements Controller {
     for (VariableDescription var : program.getVariablesDescription()) { /* load Variables */
       variables.add(var.getVariable());
     }
-    variableList.setItems(variables);
+    refreshVariables();
     programTree.setRoot(root);
   }
 
@@ -191,5 +188,14 @@ public class ProjectController implements Controller {
 
   public void addVariable(ActionEvent e) {
     WindowsManager.addVariable();
+  }
+
+  /**
+   * Refreshes TableView with variables.
+   * Forces TableView to hard refresh (view, selectable items, possible indices etc.)
+   */
+  public void refreshVariables() {
+    variableList.setItems(null);
+    variableList.setItems(variables);
   }
 }
