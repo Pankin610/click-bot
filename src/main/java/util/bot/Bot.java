@@ -24,13 +24,13 @@ public class Bot {
 
   public void moveMouse(int x, int y) {
     robot.mouseMove(x, y);
-    robot.delay(kDefaultDelay);
+    smallDelay();
   }
 
   void clickMouse(int mask) {
     robot.mousePress(mask);
     robot.mouseRelease(mask);
-    robot.delay(kDefaultDelay);
+    smallDelay();
   }
 
   public void leftClick() {
@@ -54,40 +54,48 @@ public class Bot {
   // negative number - scrolls upwards, positive - downwards
   public void scroll(int where) {
     robot.mouseWheel(where);
-    robot.delay(kDefaultDelay);
+    smallDelay();
   }
 
   // simple drag from current location to the given one
   public void drag(Coordinate where) {
     robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-    robot.delay(kDefaultDelay);
+    try {
+      Thread.sleep(4000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     robot.mouseMove(where.x, where.y);
-    robot.delay(kDefaultDelay);
+    smallDelay();
     robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+    smallDelay();
   }
 
   public void pressKey(int key_event_code) {
     robot.keyPress(key_event_code);
-    robot.delay(kDefaultDelay);
+    smallDelay();
     robot.keyRelease(key_event_code);
   }
 
   public void holdKey(int key_event_code) {
     robot.keyPress(key_event_code);
-    robot.delay(kDefaultDelay);
+    smallDelay();
   }
 
   public void releaseKey(int key_event_code) {
     robot.keyRelease(key_event_code);
-    robot.delay(kDefaultDelay);
+    smallDelay();
   }
 
   public Color getPixelColor(Coordinate cord) {
     return robot.getPixelColor(cord.x, cord.y);
   }
 
-  public void delay() {
+  public void smallDelay() {
     robot.delay(kDefaultDelay);
+  }
+  public void bigDelay() {
+    robot.delay(1000);
   }
 
   public void beep() {

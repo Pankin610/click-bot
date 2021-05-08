@@ -16,6 +16,10 @@ public final class Repeat extends AbstractGroupCommand {
     super(commands);
     this.num = num;
   }
+  public Repeat(int num, Command... commands) {
+    super(commands);
+    this.num = num;
+  }
 
   public Repeat(BlockBuilder commands, int num) {
     this(commands.toArray(), num);

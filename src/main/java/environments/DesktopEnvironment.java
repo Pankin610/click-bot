@@ -25,6 +25,16 @@ public final class DesktopEnvironment extends AbstractEnvironment {
   }
 
   @Override
+  public void holdKey(int key) {
+    bot.holdKey(key);
+  }
+
+  @Override
+  public void releaseKey(int key) {
+    bot.releaseKey(key);
+  }
+
+  @Override
   public void moveMouseTo(Coordinate destination) {
     myMouse.moveTo(destination);
     bot.moveMouse(destination.x, destination.y);
@@ -89,6 +99,19 @@ public final class DesktopEnvironment extends AbstractEnvironment {
   public Coordinate getPosition() {
     Point pnt = MouseInfo.getPointerInfo().getLocation();
     return new Coordinate(pnt);
+  }
+
+  @Override
+  public void runProgram() {
+    for (int i = 5; i >= 1; i--) {
+      System.out.println("Running in " + i + "...");
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+    super.runProgram();
   }
 
   @SuppressWarnings("all")
