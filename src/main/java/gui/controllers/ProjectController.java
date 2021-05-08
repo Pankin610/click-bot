@@ -18,6 +18,7 @@ import util.gui.CodeItem;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ProjectController implements Controller {
@@ -32,22 +33,61 @@ public class ProjectController implements Controller {
   public final VariableContainer variables = new VariableList();
   public AnchorPane mainPane;
 
-  private final ContextMenu contextMenu;
-  private final MenuItem delete;
+  private final List<MenuItem> commandList;
+
+  { // populating commandList
+    commandList = new ArrayList<>();
+    for (Commands element : Commands.values()) {
+      MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_', ' '));
+      menu.setOnAction(actionEvent -> {
+        Command command = element.createCommand();
+        TreeItem<String> selected = programTree.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+          System.out.println("Select item in Tree!");
+          return;
+        }
+        if (command == null) return;
+        CodeItem.addAfter(selected, command.getTreeRepresentation());
+        programTree.refresh();
+        System.out.println(command.getStringRepresentation());
+      });
+      commandList.add(menu);
+    }
+  }
+
+  private final ContextMenu contextMenuVar;
+  private final MenuItem deleteVar;
 
   { //context menu for TableView initialization
-    contextMenu = new ContextMenu();
+    contextMenuVar = new ContextMenu();
     MenuItem addVariable = new MenuItem("Add variable");
     addVariable.setOnAction(this::addVariable);
-    delete = new MenuItem("Delete");
-    delete.setOnAction(actionEvent -> {
+    deleteVar = new MenuItem("Delete");
+    deleteVar.setOnAction(actionEvent -> {
       if (variableList.getItems().isEmpty() || variableList.getSelectionModel().getSelectedItems().isEmpty())
         return;
       ArrayList<Variable> toBeRemoved = new ArrayList<>(variableList.getSelectionModel().getSelectedItems());
       for (Variable var : toBeRemoved) variables.remove(var.getName());
       variableList.refresh();
     });
-    contextMenu.getItems().addAll(addVariable, delete);
+    contextMenuVar.getItems().addAll(addVariable, deleteVar);
+  }
+
+  private final ContextMenu contextMenuProgram;
+  private final MenuItem deleteComm;
+  {
+    contextMenuProgram = new ContextMenu();
+    deleteComm = new MenuItem("Delete");
+    deleteComm.setOnAction(actionEvent -> {
+        TreeItem<String> toDeletion = programTree.getSelectionModel().getSelectedItem();
+        if (toDeletion == null || toDeletion.getParent() == null) return;
+        toDeletion.getParent().getChildren().remove(toDeletion);
+        programTree.refresh();
+    });
+    Menu addComm = new Menu("Add command");
+    addComm.getItems().addAll(commandList);
+
+    contextMenuProgram.getItems().addAll(addComm, deleteComm);
   }
 
   public void addCommandWindow() {
@@ -70,33 +110,25 @@ public class ProjectController implements Controller {
     initValueColumn();
 
     variableList.getColumns().addAll(typeVariableList, nameVariableList, valueVariableList);
-    variableList.setContextMenu(contextMenu);
 
-    // disabling delete button if no variable is selected - so far, it is not working in all cases
+    //setting context menus
+    variableList.setContextMenu(contextMenuVar);
+    programTree.setContextMenu(contextMenuProgram);
+
+    // disabling delete button if nothing is selected - so far, it is not working in all cases
     variableList.setOnContextMenuRequested(contextMenuEvent ->
-            delete.setDisable(variableList.getItems().isEmpty() ||
+            deleteVar.setDisable(variableList.getItems().isEmpty() ||
                     variableList.getSelectionModel().getSelectedItems().isEmpty()));
+
+    programTree.setOnContextMenuRequested(contextMenuEvent ->
+            deleteComm.setDisable(programTree.getSelectionModel().getSelectedItem() == null ||
+                    programTree.getSelectionModel().getSelectedItem().getParent() == null));
 
     TableView.TableViewSelectionModel<Variable> selectionModel = variableList.getSelectionModel();
     selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
 
     // Populating AddCommandButton SplitMenuButton
-    for (Commands element : Commands.values()) {
-      MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_', ' '));
-      menu.setOnAction(actionEvent -> {
-        Command command = element.createCommand();
-        TreeItem<String> selected = programTree.getSelectionModel().getSelectedItem();
-        if (selected == null) {
-          System.out.println("Select item in Tree!");
-          return;
-        }
-        if (command == null) return;
-        CodeItem.addAfter(selected, command.getTreeRepresentation());
-        programTree.refresh();
-        System.out.println(command.getStringRepresentation());
-      });
-      addCommandButton.getItems().add(menu);
-    }
+    addCommandButton.getItems().addAll(commandList);
   }
 
   private void initValueColumn() {
