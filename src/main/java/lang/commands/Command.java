@@ -11,6 +11,7 @@ import java.util.Scanner;
 /**
  * Commands should be implemented as calls to Environment methods with corresponding parameters
  * in as generic style as possible.
+ * toString method should describe how CodeFragment should be displayed in GUI.
  */
 public interface Command extends Executable, CodeFragment {
 

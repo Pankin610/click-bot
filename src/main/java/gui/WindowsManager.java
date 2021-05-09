@@ -38,6 +38,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class WindowsManager {
   public static Stage stage;
   public static BorderPane root;
+  public static Scene scene;
 
   static {
     try {
@@ -54,7 +55,8 @@ public class WindowsManager {
    */
   public static void setStage(Stage stage) {
     WindowsManager.stage = stage;
-    stage.setScene(new Scene(root));
+    scene = new Scene(root);
+    stage.setScene(scene);
     stage.setResizable(false);
     stage.setTitle("Click-Bot");
   }

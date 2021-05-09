@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.util.Callback;
 import lang.commands.Command;
 import lang.commands.Commands;
 import lang.commands.single.AbstractSingleCommand;
@@ -140,6 +142,26 @@ public class ProjectController implements Controller {
         return p.getValue().getValue().toString();
       }
     });
+    programColumn.setCellFactory(new Callback<>() {
+      @Override
+      public TreeTableCell<Command, String> call(TreeTableColumn<Command, String> commandStringTreeTableColumn) {
+        Label label = new Label();
+        HBox hbox = new HBox(5, label);
+        label.getStyleClass().add("highlight-on-hover");
+        TreeTableCell<Command, String> cell = new TreeTableCell<>() {
+          @Override
+          protected void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty) setGraphic(null);
+            else setGraphic(hbox);
+          }
+        };
+        cell.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        cell.itemProperty().addListener((observableValue, s, t1) -> label.setText(t1 == null ? "" : t1));
+        return cell;
+      }
+    });
+    WindowsManager.scene.getStylesheets().add(getClass().getResource("tree-table-hover.css").toExternalForm());
   }
 
   private void initValueColumn() {
@@ -240,23 +262,3 @@ public class ProjectController implements Controller {
     list.addAll(new_list);
   }
 }
-
-// just notes, may be useful later
-//    programTree.setShowRoot(false);
-//    programTree.setCellFactory(new Callback<>() {
-//      @Override
-//      public TreeCell<String> call(TreeView<String> treeView) {
-//        Label label = new Label();
-//        HBox hbox = new HBox(5, label);
-//        TreeCell<String> cell = new TreeCell<>(){
-//          @Override
-//          protected void updateItem(String item, boolean empty) {
-//            super.updateItem(item, empty);
-//            if(empty) setGraphic(null);
-//            else  setGraphic(hbox);
-//          }
-//        };
-//        cell.itemProperty().addListener((observableValue, s, t1) -> label.setText(t1 == null ? "" : t1));
-//        return cell;
-//      }
-//    });
