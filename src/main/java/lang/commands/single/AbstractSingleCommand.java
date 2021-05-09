@@ -17,4 +17,9 @@ public abstract class AbstractSingleCommand extends AbstractCommand implements S
   public CodeFragment parseFromTree(TreeItem<CodeFragment> item) {
     return item.getValue();
   }
+
+  @Override
+  public String toString() {
+    return getStringRepresentation();
+  }
 }

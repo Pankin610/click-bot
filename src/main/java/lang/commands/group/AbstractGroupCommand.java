@@ -69,4 +69,9 @@ public abstract class AbstractGroupCommand extends AbstractCommand implements Gr
     }
     return res;
   }
+
+  @Override
+  public String toString() {
+    return getId();
+  }
 }

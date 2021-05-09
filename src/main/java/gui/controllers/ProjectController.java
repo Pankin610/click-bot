@@ -137,7 +137,7 @@ public class ProjectController implements Controller {
     programColumn.setCellValueFactory(p -> new ObservableValueBase<>() {
       @Override
       public String getValue() {
-        return p.getValue().getValue().getStringRepresentation();
+        return p.getValue().getValue().toString();
       }
     });
   }
