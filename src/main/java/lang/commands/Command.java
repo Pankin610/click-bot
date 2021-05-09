@@ -1,7 +1,6 @@
 package lang.commands;
 
 import environments.Environment;
-import javafx.scene.control.TreeItem;
 import lang.CodeFragment;
 import lang.commands.single.AbstractSingleCommand;
 

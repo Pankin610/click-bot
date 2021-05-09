@@ -1,7 +1,6 @@
 package lang.conditions;
 
 import environments.Environment;
-import util.gui.CodeItem;
 
 import java.util.Scanner;
 
@@ -28,10 +27,5 @@ public final class True extends AbstractCondition {
   @Override
   public String getId() {
     return id;
-  }
-
-  @Override
-  public CodeItem getCodeItem() {
-    return null;
   }
 }

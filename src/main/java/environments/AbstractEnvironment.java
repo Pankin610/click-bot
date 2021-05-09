@@ -13,8 +13,6 @@ import util.containers.VariableList;
 import java.awt.*;
 import java.io.IOException;
 
-import static java.lang.Thread.sleep;
-
 /**
  * Abstract environment contains default (Console) implementation of methods associated with instances of Command interface,
  * such as PushButton, Move, Hold, etc...

@@ -6,7 +6,6 @@ import lang.CodeFragment;
 import lang.commands.AbstractCommand;
 import lang.commands.Command;
 import util.builders.BlockBuilder;
-import util.gui.CodeItem;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -47,9 +46,9 @@ public abstract class AbstractGroupCommand extends AbstractCommand implements Gr
 
   /**
    * Default implementation of getTreeRepresentation for GroupCommands.
-   * Every Command inside {@link #commands commands} array is treated as a child node of the resulting CodeItem.
+   * Every Command inside {@link #commands commands} array is treated as a child node of the resulting TreeItem.
    *
-   * @return CodeItem representation of {@code this}.
+   * @return TreeItem representation of {@code this}.
    */
   @Override
   public TreeItem<CodeFragment> getTreeRepresentation() {

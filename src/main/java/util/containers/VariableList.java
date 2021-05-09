@@ -5,7 +5,10 @@ import exceptions.NoVariableWithThisNameException;
 import javafx.collections.ObservableListBase;
 import lang.variables.Variable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.Objects;
 
 /**
  * Implementation of VariableContainer interface.
