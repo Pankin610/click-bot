@@ -1,10 +1,11 @@
 package lang.conditions;
 
 import environments.Environment;
+import util.gui.CodeItem;
 
 import java.util.Scanner;
 
-public final class True implements Condition {
+public final class True extends AbstractCondition {
   private static final String id = "TRUE";
   public static final True TRUE = new True();
 
@@ -27,5 +28,10 @@ public final class True implements Condition {
   @Override
   public String getId() {
     return id;
+  }
+
+  @Override
+  public CodeItem getCodeItem() {
+    return null;
   }
 }

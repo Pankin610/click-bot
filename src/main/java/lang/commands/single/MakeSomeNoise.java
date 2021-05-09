@@ -33,9 +33,4 @@ public final class MakeSomeNoise extends AbstractSingleCommand {
   public String getId() {
     return id;
   }
-
-  @Override
-  public CodeItem getTreeRepresentation() {
-    return new CodeItem(MAKE_SOME_NOISE);
-  }
 }

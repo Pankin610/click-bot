@@ -31,9 +31,4 @@ public class MouseLeftClick extends AbstractSingleCommand {
   public String getId() {
     return id;
   }
-
-  @Override
-  public CodeItem getTreeRepresentation() {
-    return new CodeItem(MOUSE_LEFT_CLICK);
-  }
 }

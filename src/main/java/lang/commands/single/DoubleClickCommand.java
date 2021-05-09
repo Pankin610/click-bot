@@ -31,9 +31,4 @@ public class DoubleClickCommand extends AbstractSingleCommand {
   public String getStringRepresentation() {
     return id;
   }
-
-  @Override
-  public CodeItem getTreeRepresentation() {
-    return new CodeItem(DOUBLE_CLICK_COMMAND);
-  }
 }

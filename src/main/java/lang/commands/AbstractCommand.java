@@ -1,6 +1,8 @@
 package lang.commands;
 
+import javafx.scene.control.TreeItem;
 import lang.AbstractCodeFragment;
+import lang.CodeFragment;
 import util.gui.CodeItem;
 
 /**
@@ -14,7 +16,7 @@ public abstract class AbstractCommand extends AbstractCodeFragment implements Co
    * @return CodeItem instance with ID of class.
    */
   @Override
-  public CodeItem getTreeRepresentation() {
-    return new CodeItem(this);
+  public TreeItem<CodeFragment> getTreeRepresentation() {
+    return new TreeItem<>(this);
   }
 }

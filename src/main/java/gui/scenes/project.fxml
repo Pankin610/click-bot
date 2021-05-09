@@ -4,12 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.ProjectController">
-    <TreeView fx:id="programTree" cacheShape="false" fixedCellSize="25.0" layoutX="200.0" prefHeight="400.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
     <TableView fx:id="variableList" editable="true" layoutY="220.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="220.0" />
     <SplitMenuButton fx:id="addCommandButton" layoutX="40.0" layoutY="114.0" mnemonicParsing="false" text="Add Command" />
     <Label fx:id="nameProgramLabel" alignment="CENTER" layoutY="31.0" prefHeight="34.0" prefWidth="200.0" text="Name of Program">
@@ -18,4 +18,9 @@
         </font>
     </Label>
     <Button layoutX="40.0" layoutY="157.0" mnemonicParsing="false" onAction="#addVariable" prefWidth="120.0" text="Add Variable" />
+   <TreeTableView fx:id="programTree" layoutX="250.0" layoutY="57.0" prefHeight="200.0" prefWidth="200.0" showRoot="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+     <columns>
+       <TreeTableColumn fx:id="programColumn" editable="false" prefWidth="400.0" sortable="false" text="Program" />
+     </columns>
+   </TreeTableView>
 </AnchorPane>

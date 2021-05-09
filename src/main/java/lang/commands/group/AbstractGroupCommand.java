@@ -1,6 +1,8 @@
 package lang.commands.group;
 
 import environments.Environment;
+import javafx.scene.control.TreeItem;
+import lang.CodeFragment;
 import lang.commands.AbstractCommand;
 import lang.commands.Command;
 import util.builders.BlockBuilder;
@@ -50,8 +52,8 @@ public abstract class AbstractGroupCommand extends AbstractCommand implements Gr
    * @return CodeItem representation of {@code this}.
    */
   @Override
-  public CodeItem getTreeRepresentation() {
-    CodeItem res = new CodeItem(this);
+  public TreeItem<CodeFragment> getTreeRepresentation() {
+    TreeItem<CodeFragment> res = new TreeItem<>(this);
     for (Command command : commands) res.getChildren().add(command.getTreeRepresentation());
     return res;
   }

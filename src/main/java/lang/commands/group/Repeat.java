@@ -4,7 +4,6 @@ import environments.Environment;
 import exceptions.ExecException;
 import lang.commands.Command;
 import util.builders.BlockBuilder;
-import util.gui.CodeItem;
 
 import java.util.Scanner;
 
@@ -50,12 +49,5 @@ public final class Repeat extends AbstractGroupCommand {
       res.append(com.getStringRepresentation());
     }
     return res.toString();
-  }
-
-  @Override
-  public CodeItem getTreeRepresentation() {
-    CodeItem res = super.getTreeRepresentation();
-    res.setValue(getId() + ' ' + num);
-    return res;
   }
 }

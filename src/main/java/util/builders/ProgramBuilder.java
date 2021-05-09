@@ -4,13 +4,13 @@ import exceptions.NoUniqueVariableNameException;
 import files.reading.ReadFileObject;
 import files.writing.WriteFileObject;
 import javafx.scene.control.TreeItem;
+import lang.CodeFragment;
 import lang.commands.Command;
 import lang.variables.Variable;
 import lang.variables.VariableDescription;
 import program.Program;
 import program.ProgramDescription;
 import util.containers.VariableContainer;
-import util.gui.CodeItem;
 
 import java.io.IOException;
 
@@ -42,10 +42,10 @@ public final class ProgramBuilder {
     }
   }
 
-  public ProgramBuilder(TreeItem<String> root, VariableContainer vars) {
-    this.programName = root.getValue();
-    for (TreeItem<String> item : root.getChildren()) {
-      this.addCommand(((CodeItem) item).getCommand());
+  public ProgramBuilder(TreeItem<CodeFragment> root, VariableContainer vars) {
+    this.programName = root.getValue().getStringRepresentation();
+    for (TreeItem<CodeFragment> item : root.getChildren()) {
+      this.addCommand( (Command) item.getValue() );
     }
     for (Variable var : vars) {
       this.addVariable(new VariableDescription(var));

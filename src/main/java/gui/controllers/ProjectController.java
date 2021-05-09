@@ -3,9 +3,11 @@ package gui.controllers;
 import files.reading.ReadFileObject;
 import gui.WindowsManager;
 import javafx.beans.value.ObservableValueBase;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import lang.CodeFragment;
 import lang.commands.Command;
 import lang.commands.Commands;
 import lang.variables.Variable;
@@ -13,18 +15,17 @@ import lang.variables.VariableDescription;
 import util.builders.ProgramBuilder;
 import util.containers.VariableContainer;
 import util.containers.VariableList;
-import util.gui.CodeItem;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 
 public class ProjectController implements Controller {
   public Label nameProgramLabel;
   public SplitMenuButton addCommandButton;
-  public TreeView<String> programTree;
+  public TreeTableView<CodeFragment> programTree;
+  public TreeTableColumn<CodeFragment, String> programColumn;
   public TableView<Variable> variableList;
   public TableColumn<Variable, String> typeVariableList;
   public TableColumn<Variable, String> nameVariableList;
@@ -33,6 +34,7 @@ public class ProjectController implements Controller {
   public final VariableContainer variables = new VariableList();
   public AnchorPane mainPane;
 
+  //list of menu items with commands from Commands enum
   private final List<MenuItem> commandList;
 
   { // populating commandList
@@ -41,13 +43,13 @@ public class ProjectController implements Controller {
       MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_', ' '));
       menu.setOnAction(actionEvent -> {
         Command command = element.createCommand();
-        TreeItem<String> selected = programTree.getSelectionModel().getSelectedItem();
+        TreeItem<CodeFragment> selected = programTree.getSelectionModel().getSelectedItem();
         if (selected == null) {
           System.out.println("Select item in Tree!");
           return;
         }
         if (command == null) return;
-        CodeItem.addAfter(selected, command.getTreeRepresentation());
+        addAfter(selected, command.getTreeRepresentation());
         programTree.refresh();
         System.out.println(command.getStringRepresentation());
       });
@@ -75,11 +77,12 @@ public class ProjectController implements Controller {
 
   private final ContextMenu contextMenuProgram;
   private final MenuItem deleteComm;
-  { //program context menu
+
+  { //context menu for TreeView with program description
     contextMenuProgram = new ContextMenu();
     deleteComm = new MenuItem("Delete");
     deleteComm.setOnAction(actionEvent -> {
-        TreeItem<String> toDeletion = programTree.getSelectionModel().getSelectedItem();
+        TreeItem<CodeFragment> toDeletion = programTree.getSelectionModel().getSelectedItem();
         if (toDeletion == null || toDeletion.getParent() == null) return;
         toDeletion.getParent().getChildren().remove(toDeletion);
         programTree.refresh();
@@ -95,7 +98,6 @@ public class ProjectController implements Controller {
     refreshVariables();
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     // Type column
@@ -105,6 +107,10 @@ public class ProjectController implements Controller {
     // Value column
     initValueColumn();
 
+    // Program tree
+    initProgramTree();
+
+    //noinspection unchecked
     variableList.getColumns().addAll(typeVariableList, nameVariableList, valueVariableList);
 
     //setting context menus
@@ -124,6 +130,15 @@ public class ProjectController implements Controller {
 
     // Populating AddCommandButton SplitMenuButton
     addCommandButton.getItems().addAll(commandList);
+  }
+
+  private void initProgramTree() {
+    programColumn.setCellValueFactory(p -> new ObservableValueBase<>() {
+      @Override
+      public String getValue() {
+        return p.getValue().getValue().getStringRepresentation();
+      }
+    });
   }
 
   private void initValueColumn() {
@@ -164,14 +179,13 @@ public class ProjectController implements Controller {
 
   /**
    * Loads tree representation of program inside file.
-   *
    * @param file {@link ReadFileObject} with description of program
    */
   public void load(ReadFileObject file) {
     this.reload();
     ProgramBuilder program = new ProgramBuilder(file);
     nameProgramLabel.setText(program.programName);
-    TreeItem<String> root = new TreeItem<>(program.programName); /* load Commands */
+    TreeItem<CodeFragment> root = new TreeItem<>(); /* load Commands */
     for (Command comm : program.getCommands()) {
       root.getChildren().add(comm.getTreeRepresentation());
     }
@@ -182,20 +196,56 @@ public class ProjectController implements Controller {
     programTree.setRoot(root);
   }
 
+  /**
+   * @return container with variables
+   */
   public VariableContainer getVariables() {
     return variables;
   }
 
+  @SuppressWarnings("unused")
   public void addVariable(ActionEvent e) {
     WindowsManager.addVariable();
   }
 
   /**
    * Refreshes TableView with variables.
-   * Forces TableView to hard refresh (view, selectable items, possible indices etc.)
+   * Forces TableView to hard refresh (view, selectable items, possible indices etc)
    */
   public void refreshVariables() {
     variableList.setItems(null);
     variableList.setItems(variables);
   }
+
+  public void addAfter(TreeItem<CodeFragment> me, TreeItem<CodeFragment> item) {
+    TreeItem<CodeFragment> parent = me.getParent();
+    if (parent == null) return;
+    ObservableList<TreeItem<CodeFragment>> list = parent.getChildren();
+    int ind = list.indexOf(me);
+    List<TreeItem<CodeFragment>> new_list = new ArrayList<>(list.subList(0, ind + 1));
+    new_list.add(item);
+    new_list.addAll(list.subList(ind + 1, list.size()));
+    list.clear();
+    list.addAll(new_list);
+  }
 }
+
+// just notes, may be useful later
+//    programTree.setShowRoot(false);
+//    programTree.setCellFactory(new Callback<>() {
+//      @Override
+//      public TreeCell<String> call(TreeView<String> treeView) {
+//        Label label = new Label();
+//        HBox hbox = new HBox(5, label);
+//        TreeCell<String> cell = new TreeCell<>(){
+//          @Override
+//          protected void updateItem(String item, boolean empty) {
+//            super.updateItem(item, empty);
+//            if(empty) setGraphic(null);
+//            else  setGraphic(hbox);
+//          }
+//        };
+//        cell.itemProperty().addListener((observableValue, s, t1) -> label.setText(t1 == null ? "" : t1));
+//        return cell;
+//      }
+//    });

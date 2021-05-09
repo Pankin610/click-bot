@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lang.CodeFragment;
 import util.Coordinate;
 import util.containers.VariableContainer;
 import util.gui.MouseUtility;
@@ -127,7 +128,7 @@ public class WindowsManager {
   /**
    * @return {@code TreeItem} with current project.
    */
-  public static TreeItem<String> getRootOfProject() {
+  public static TreeItem<CodeFragment> getRootOfProject() {
     return ProjectWindow.getController().programTree.getRoot();
   }
 
