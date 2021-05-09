@@ -7,7 +7,7 @@ import util.gui.CodeItem;
 
 import java.util.Scanner;
 
-public class MouseRightClick extends AbstractSingleCommand {
+public final class MouseRightClick extends AbstractSingleCommand {
   private final static String id = "RIGHT_CLICK";
   public final static MouseRightClick MOUSE_RIGHT_CLICK = new MouseRightClick();
 

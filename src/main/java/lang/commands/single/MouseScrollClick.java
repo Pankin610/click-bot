@@ -7,7 +7,7 @@ import util.gui.CodeItem;
 
 import java.util.Scanner;
 
-public class MouseScrollClick extends AbstractSingleCommand {
+public final class MouseScrollClick extends AbstractSingleCommand {
   private final static String id = "SCROLL_CLICK";
   public final static MouseScrollClick MOUSE_SCROLL_CLICK = new MouseScrollClick();
 
