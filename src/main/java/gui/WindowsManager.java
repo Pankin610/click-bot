@@ -20,6 +20,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lang.CodeFragment;
+import lang.commands.Command;
 import util.Coordinate;
 import util.containers.VariableContainer;
 import util.gui.MouseUtility;
@@ -128,7 +129,7 @@ public class WindowsManager {
   /**
    * @return {@code TreeItem} with current project.
    */
-  public static TreeItem<CodeFragment> getRootOfProject() {
+  public static TreeItem<Command> getRootOfProject() {
     return ProjectWindow.getController().programTree.getRoot();
   }
 

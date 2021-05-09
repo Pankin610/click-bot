@@ -1,6 +1,8 @@
 package lang.commands;
 
 import environments.Environment;
+import exceptions.NonImplementedMethodException;
+import javafx.scene.control.TreeItem;
 import lang.CodeFragment;
 import lang.commands.single.AbstractSingleCommand;
 
@@ -11,6 +13,25 @@ import java.util.Scanner;
  * in as generic style as possible.
  */
 public interface Command extends Executable, CodeFragment {
+
+  /**
+   * This method should describe how Command should be showed as tree node inside project-creation window.
+   *
+   * @return TreeItem with representation.
+   * For now, it may be non implemented.
+   */
+  default TreeItem<Command> getTreeRepresentation() {
+    throw new NonImplementedMethodException("getTreeRepresentation");
+  }
+
+  /**
+   * This method creates instance of CodeFragment based on TreeItem
+   * @param item node with description of Command
+   * @return instance of Command
+   */
+  default Command parseFromTree(TreeItem<Command> item) {
+    throw new NonImplementedMethodException("parseFromTree");
+  }
 
   /**
    * Static instance of Command interface representing "do nothing" command.

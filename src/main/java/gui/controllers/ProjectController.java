@@ -1,5 +1,6 @@
 package gui.controllers;
 
+import environments.Environment;
 import files.reading.ReadFileObject;
 import gui.WindowsManager;
 import javafx.beans.value.ObservableValueBase;
@@ -7,10 +8,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import lang.CodeFragment;
 import lang.commands.Command;
 import lang.commands.Commands;
-import lang.variables.StringVariable;
+import lang.commands.single.AbstractSingleCommand;
 import lang.variables.Variable;
 import lang.variables.VariableDescription;
 import util.builders.ProgramBuilder;
@@ -25,8 +25,8 @@ import java.util.ResourceBundle;
 public class ProjectController implements Controller {
   public Label nameProgramLabel;
   public SplitMenuButton addCommandButton;
-  public TreeTableView<CodeFragment> programTree;
-  public TreeTableColumn<CodeFragment, String> programColumn;
+  public TreeTableView<Command> programTree;
+  public TreeTableColumn<Command, String> programColumn;
   public TableView<Variable> variableList;
   public TableColumn<Variable, String> typeVariableList;
   public TableColumn<Variable, String> nameVariableList;
@@ -44,7 +44,7 @@ public class ProjectController implements Controller {
       MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_', ' '));
       menu.setOnAction(actionEvent -> {
         Command command = element.createCommand();
-        TreeItem<CodeFragment> selected = programTree.getSelectionModel().getSelectedItem();
+        TreeItem<Command> selected = programTree.getSelectionModel().getSelectedItem();
         if (selected == null) {
           System.out.println("Select item in Tree!");
           return;
@@ -83,7 +83,7 @@ public class ProjectController implements Controller {
     contextMenuProgram = new ContextMenu();
     deleteComm = new MenuItem("Delete");
     deleteComm.setOnAction(actionEvent -> {
-        TreeItem<CodeFragment> toDeletion = programTree.getSelectionModel().getSelectedItem();
+        TreeItem<Command> toDeletion = programTree.getSelectionModel().getSelectedItem();
         if (toDeletion == null || toDeletion.getParent() == null) return;
         toDeletion.getParent().getChildren().remove(toDeletion);
         programTree.refresh();
@@ -187,7 +187,15 @@ public class ProjectController implements Controller {
     ProgramBuilder program = new ProgramBuilder(file);
     nameProgramLabel.setText(program.programName);
     /* load Commands */
-    TreeItem<CodeFragment> root = new TreeItem<>(new StringVariable("root", program.programName));
+    TreeItem<Command> root = new TreeItem<>(new AbstractSingleCommand() { /* small hack */
+      @Override
+      public void execute(Environment envi) {}
+
+      @Override
+      public String getId() {
+        return program.programName;
+      }
+    });
     for (Command comm : program.getCommands()) {
       root.getChildren().add(comm.getTreeRepresentation());
     }
@@ -220,12 +228,12 @@ public class ProjectController implements Controller {
     variableList.setItems(variables);
   }
 
-  public void addAfter(TreeItem<CodeFragment> me, TreeItem<CodeFragment> item) {
-    TreeItem<CodeFragment> parent = me.getParent();
+  public void addAfter(TreeItem<Command> me, TreeItem<Command> item) {
+    TreeItem<Command> parent = me.getParent();
     if (parent == null) return;
-    ObservableList<TreeItem<CodeFragment>> list = parent.getChildren();
+    ObservableList<TreeItem<Command>> list = parent.getChildren();
     int ind = list.indexOf(me);
-    List<TreeItem<CodeFragment>> new_list = new ArrayList<>(list.subList(0, ind + 1));
+    List<TreeItem<Command>> new_list = new ArrayList<>(list.subList(0, ind + 1));
     new_list.add(item);
     new_list.addAll(list.subList(ind + 1, list.size()));
     list.clear();

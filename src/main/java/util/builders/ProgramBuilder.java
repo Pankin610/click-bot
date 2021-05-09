@@ -43,10 +43,10 @@ public final class ProgramBuilder {
     }
   }
 
-  public ProgramBuilder(TreeItem<CodeFragment> root, VariableContainer vars) {
-    this.programName = ((StringVariable) root.getValue()).getValue();
-    for (TreeItem<CodeFragment> item : root.getChildren()) {
-      this.addCommand( (Command) item.getValue().parseFromTree(item) );
+  public ProgramBuilder(TreeItem<Command> root, VariableContainer vars) {
+    this.programName = root.getValue().getId();
+    for (TreeItem<Command> item : root.getChildren()) {
+      this.addCommand(item.getValue().parseFromTree(item));
     }
     for (Variable var : vars) {
       this.addVariable(new VariableDescription(var));

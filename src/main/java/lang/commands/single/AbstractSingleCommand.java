@@ -3,18 +3,19 @@ package lang.commands.single;
 import javafx.scene.control.TreeItem;
 import lang.CodeFragment;
 import lang.commands.AbstractCommand;
+import lang.commands.Command;
 
 /**
  * Abstract implementation of SingleCommand interface.
  */
 public abstract class AbstractSingleCommand extends AbstractCommand implements SingleCommand {
   @Override
-  public TreeItem<CodeFragment> getTreeRepresentation() {
+  public TreeItem<Command> getTreeRepresentation() {
     return new TreeItem<>(this);
   }
 
   @Override
-  public CodeFragment parseFromTree(TreeItem<CodeFragment> item) {
+  public Command parseFromTree(TreeItem<Command> item) {
     return item.getValue();
   }
 

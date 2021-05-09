@@ -8,6 +8,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
 import lang.CodeFragment;
+import lang.commands.Command;
 import util.builders.ProgramBuilder;
 import util.containers.VariableContainer;
 
@@ -63,7 +64,7 @@ public class MenuController implements Controller {
    */
   public void saveProject() throws IOException { /* for now, variables are omitted */
     /* root of current project */
-    TreeItem<CodeFragment> root = WindowsManager.getRootOfProject();
+    TreeItem<Command> root = WindowsManager.getRootOfProject();
 
     /* variables of current project */
     VariableContainer vars = WindowsManager.getProjectVariables();

@@ -2,7 +2,6 @@ package lang.commands.group;
 
 import environments.Environment;
 import javafx.scene.control.TreeItem;
-import lang.CodeFragment;
 import lang.commands.AbstractCommand;
 import lang.commands.Command;
 import util.builders.BlockBuilder;
@@ -51,20 +50,20 @@ public abstract class AbstractGroupCommand extends AbstractCommand implements Gr
    * @return TreeItem representation of {@code this}.
    */
   @Override
-  public TreeItem<CodeFragment> getTreeRepresentation() {
-    TreeItem<CodeFragment> res = new TreeItem<>(this);
+  public TreeItem<Command> getTreeRepresentation() {
+    TreeItem<Command> res = new TreeItem<>(this);
     for (Command command : commands) res.getChildren().add(command.getTreeRepresentation());
     return res;
   }
 
   //TODO condition parsing
   @Override
-  public CodeFragment parseFromTree(TreeItem<CodeFragment> item) {
+  public Command parseFromTree(TreeItem<Command> item) {
     AbstractGroupCommand res = (AbstractGroupCommand) item.getValue();
     res.commands = new Command[item.getChildren().size()];
     int ind = 0;
-    for(TreeItem<CodeFragment> child : item.getChildren()) {
-      res.commands[ind++] = (Command) child.getValue().parseFromTree(child);
+    for(TreeItem<Command> child : item.getChildren()) {
+      res.commands[ind++] = child.getValue().parseFromTree(child);
     }
     return res;
   }

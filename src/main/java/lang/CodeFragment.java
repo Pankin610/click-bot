@@ -2,6 +2,7 @@ package lang;
 
 import exceptions.NonImplementedMethodException;
 import javafx.scene.control.TreeItem;
+import lang.commands.Command;
 
 import java.util.Scanner;
 
@@ -35,18 +36,4 @@ public interface CodeFragment {
    * @return ID of corresponding class.
    */
   String getId();
-
-  /**
-   * This method should describe how Command should be showed as tree node inside project-creation window.
-   *
-   * @return TreeItem with representation.
-   * For now, it may be non implemented.
-   */
-  default TreeItem<CodeFragment> getTreeRepresentation() {
-    throw new NonImplementedMethodException("getTreeRepresentation");
-  }
-
-  default CodeFragment parseFromTree(TreeItem<CodeFragment> item) {
-    throw new NonImplementedMethodException("parseFromTree");
-  }
 }
