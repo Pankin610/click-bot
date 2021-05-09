@@ -16,7 +16,7 @@ import java.util.Iterator;
  * Blocks of commands are some kind of exception - they can be fully implemented without invoking environment methods.
  */
 public abstract class AbstractGroupCommand extends AbstractCommand implements GroupCommand {
-  protected final Command[] commands;
+  protected Command[] commands;
 
   protected AbstractGroupCommand(Command[] commands) {
     this.commands = new Command[commands.length];
@@ -55,6 +55,18 @@ public abstract class AbstractGroupCommand extends AbstractCommand implements Gr
   public TreeItem<CodeFragment> getTreeRepresentation() {
     TreeItem<CodeFragment> res = new TreeItem<>(this);
     for (Command command : commands) res.getChildren().add(command.getTreeRepresentation());
+    return res;
+  }
+
+  //TODO condition parsing
+  @Override
+  public CodeFragment parseFromTree(TreeItem<CodeFragment> item) {
+    AbstractGroupCommand res = (AbstractGroupCommand) item.getValue();
+    res.commands = new Command[item.getChildren().size()];
+    int ind = 0;
+    for(TreeItem<CodeFragment> child : item.getChildren()) {
+      res.commands[ind++] = (Command) child.getValue().parseFromTree(child);
+    }
     return res;
   }
 }

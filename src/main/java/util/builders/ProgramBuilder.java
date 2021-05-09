@@ -6,6 +6,7 @@ import files.writing.WriteFileObject;
 import javafx.scene.control.TreeItem;
 import lang.CodeFragment;
 import lang.commands.Command;
+import lang.variables.StringVariable;
 import lang.variables.Variable;
 import lang.variables.VariableDescription;
 import program.Program;
@@ -43,9 +44,9 @@ public final class ProgramBuilder {
   }
 
   public ProgramBuilder(TreeItem<CodeFragment> root, VariableContainer vars) {
-    this.programName = root.getValue().getStringRepresentation();
+    this.programName = ((StringVariable) root.getValue()).getValue();
     for (TreeItem<CodeFragment> item : root.getChildren()) {
-      this.addCommand( (Command) item.getValue() );
+      this.addCommand( (Command) item.getValue().parseFromTree(item) );
     }
     for (Variable var : vars) {
       this.addVariable(new VariableDescription(var));

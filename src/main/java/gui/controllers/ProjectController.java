@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import lang.CodeFragment;
 import lang.commands.Command;
 import lang.commands.Commands;
+import lang.variables.StringVariable;
 import lang.variables.Variable;
 import lang.variables.VariableDescription;
 import util.builders.ProgramBuilder;
@@ -185,11 +186,13 @@ public class ProjectController implements Controller {
     this.reload();
     ProgramBuilder program = new ProgramBuilder(file);
     nameProgramLabel.setText(program.programName);
-    TreeItem<CodeFragment> root = new TreeItem<>(); /* load Commands */
+    /* load Commands */
+    TreeItem<CodeFragment> root = new TreeItem<>(new StringVariable("root", program.programName));
     for (Command comm : program.getCommands()) {
       root.getChildren().add(comm.getTreeRepresentation());
     }
-    for (VariableDescription var : program.getVariablesDescription()) { /* load Variables */
+    /* load Variables */
+    for (VariableDescription var : program.getVariablesDescription()) {
       variables.add(var.getVariable());
     }
     refreshVariables();
