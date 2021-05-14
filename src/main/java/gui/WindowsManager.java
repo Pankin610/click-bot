@@ -13,13 +13,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import lang.CodeFragment;
 import lang.commands.Command;
 import util.Coordinate;
 import util.containers.VariableContainer;
@@ -39,6 +39,7 @@ public class WindowsManager {
   public static Stage stage;
   public static BorderPane root;
   public static Scene scene;
+  private static final Image[] icons = new Image[4];
 
   static {
     try {
@@ -55,6 +56,7 @@ public class WindowsManager {
    */
   public static void setStage(Stage stage) {
     WindowsManager.stage = stage;
+    stage.getIcons().addAll(icons);
     scene = new Scene(root);
     stage.setScene(scene);
     stage.setResizable(false);
@@ -202,5 +204,9 @@ public class WindowsManager {
 
   public static void addVariable() {
     AddVariableWindow.show();
+  }
+
+  public static Image[] getIcons() {
+    return icons;
   }
 }

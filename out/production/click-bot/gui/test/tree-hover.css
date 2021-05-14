@@ -1,7 +1,0 @@
-.tree-cell:hover {
-    -fx-background-color: #0003ff ;
-}
-
-.tree-cell:hover .highlight-on-hover {
-    -fx-text-fill: red ;
-}

@@ -23,6 +23,7 @@ public class SettingsWindow implements SideWindow {
     }
     stage.setTitle("Settings");
     stage.initOwner(WindowsManager.stage);
+    stage.getIcons().addAll(WindowsManager.getIcons());
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.setResizable(false);
     controller = loader.getController();

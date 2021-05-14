@@ -4,10 +4,12 @@ import gui.WindowsManager;
 import gui.controllers.ListOfProgramsController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * This class is responsible for window with list of existing programs and option to open any of these.
@@ -24,6 +26,7 @@ public abstract class ListOfProgramsWindow implements SideWindow {
       e.printStackTrace();
     }
     stage.setResizable(false);
+    stage.getIcons().addAll(WindowsManager.getIcons());
     stage.setTitle("List of programs");
     stage.initOwner(WindowsManager.stage);
     stage.initModality(Modality.APPLICATION_MODAL);
