@@ -39,7 +39,7 @@ public class WindowsManager {
   public static Stage stage;
   public static BorderPane root;
   public static Scene scene;
-  private static final Image[] icons = new Image[4];
+  private static final Image[] icons = new Image[1];
 
   static {
     try {

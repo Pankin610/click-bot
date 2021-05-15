@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public final class Main extends Application {
   public Main(){
     Image[] icons = WindowsManager.getIcons();
-    for(int i=0;i<4;i++)
+    for(int i=0;i<1;i++)
       icons[i] = new Image(Main.class.getResource("/graphics/icon" + i + ".png").toExternalForm());
   }
 
