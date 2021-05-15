@@ -10,12 +10,12 @@ import lang.commands.Command;
  */
 public abstract class AbstractSingleCommand extends AbstractCommand implements SingleCommand {
   @Override
-  public TreeItem<Command> getTreeRepresentation() {
+  public final TreeItem<Command> getTreeRepresentation() {
     return new TreeItem<>(this);
   }
 
   @Override
-  public Command parseFromTree(TreeItem<Command> item) {
+  public final Command parseFromTree(TreeItem<Command> item) {
     return item.getValue();
   }
 

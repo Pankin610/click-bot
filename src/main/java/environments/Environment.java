@@ -47,6 +47,8 @@ public interface Environment {
 
   void executeSystem(String command);
 
+  void clickFast(long time_milliseconds, int button_mask);
+
   /**
    * Getter for variables, based on names.
    *

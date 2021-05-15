@@ -38,7 +38,7 @@ public enum Commands {
       Command res = null;
       if (controller.successful_creation)
         res = new Repeat(new Command[]{Command.NOTHING},
-                Integer.parseInt(controller.textField.getCharacters().toString()));
+                Integer.parseInt(controller.textField.getText()));
       return res;
     }
   },
@@ -55,7 +55,7 @@ public enum Commands {
       stage.showAndWait();
       Command res = null;
       if (controller.successful_creation)
-        res = new Wait(Integer.parseInt(controller.textField.getCharacters().toString()));
+        res = new Wait(Integer.parseInt(controller.textField.getText()));
       return res;
     }
   },
@@ -72,7 +72,7 @@ public enum Commands {
       stage.showAndWait();
       Command res = null;
       if (controller.successful_creation)
-        res = new PressKey(Integer.parseInt(controller.textField.getCharacters().toString()));
+        res = new PressKey(Integer.parseInt(controller.textField.getText()));
       return res;
     }
   },
@@ -133,6 +133,40 @@ public enum Commands {
     @Override
     public Command createCommand() {
       return MouseScrollClick.MOUSE_SCROLL_CLICK;
+    }
+  },
+  LEFT_CLICK_FAST(new LeftClickVeryFast(1000)){
+    @Override
+    public Command createCommand() {
+      AddCommandController controller = AddCommandWindow.getController();
+      controller.reload();
+      Stage stage = AddCommandWindow.getStage();
+      stage.setTitle("Fast mouse left click");
+      controller.textFieldLabel.setText("Time in milliseconds");
+      controller.textField.addEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.numericOnly);
+      stage.showAndWait();
+      Command res = null;
+      if(controller.successful_creation){
+        res = new LeftClickVeryFast(Long.parseLong(controller.textField.getText()));
+      }
+      return res;
+    }
+  },
+  RIGHT_CLICK_FAST(new RightClickVeryFast(1000)){
+    @Override
+    public Command createCommand() {
+      AddCommandController controller = AddCommandWindow.getController();
+      controller.reload();
+      Stage stage = AddCommandWindow.getStage();
+      stage.setTitle("Fast mouse right click");
+      controller.textFieldLabel.setText("Time in milliseconds");
+      controller.textField.addEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.numericOnly);
+      stage.showAndWait();
+      Command res = null;
+      if(controller.successful_creation){
+        res = new RightClickVeryFast(Long.parseLong(controller.textField.getText()));
+      }
+      return res;
     }
   };
 

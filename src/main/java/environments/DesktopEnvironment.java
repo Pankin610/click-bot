@@ -5,7 +5,9 @@ import util.Coordinate;
 import util.bot.Bot;
 
 import java.awt.*;
+import java.awt.event.InputEvent;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Environment in which Bot implementation of Commands is used.
@@ -89,6 +91,31 @@ public final class DesktopEnvironment extends AbstractEnvironment {
   public Coordinate getPosition() {
     Point pnt = MouseInfo.getPointerInfo().getLocation();
     return new Coordinate(pnt);
+  }
+
+  @Override
+  public void clickFast(long time_milliseconds, int button_mask) {
+    Thread clicker = new Thread(() -> {
+      Robot robot = null;
+      try {
+        robot = new Robot();
+      } catch (AWTException e) {
+        e.printStackTrace();
+      }
+      assert robot != null;
+      while(!Thread.interrupted()){
+        robot.mousePress(button_mask);
+        robot.mouseRelease(button_mask);
+        robot.delay(2);
+      }
+    });
+    clicker.start();
+    try {
+      TimeUnit.MILLISECONDS.sleep(time_milliseconds);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    clicker.interrupt();
   }
 
   @SuppressWarnings("all")

@@ -101,6 +101,11 @@ public abstract class AbstractEnvironment implements Environment {
   }
 
   @Override
+  public void clickFast(long time_milliseconds, int button_mask) {
+    throw new UnsupportedOperationException("This environment doesn't support fast clicking");
+  }
+
+  @Override
   public Variable getVarByName(String name) throws NoVariableWithThisNameException {
     for (Variable var : variables) if (var.getName().equals(name)) return var;
     throw new NoVariableWithThisNameException(name);
