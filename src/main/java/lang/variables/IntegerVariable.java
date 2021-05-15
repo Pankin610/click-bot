@@ -6,7 +6,7 @@ import exceptions.IncorrectVariableAssignment;
 import java.util.Objects;
 import java.util.Scanner;
 
-public final class IntegerVariable extends AbstractVariable {
+public final class IntegerVariable extends AbstractVariable implements Addable<Integer> {
   private static final String id = "INT";
   private Integer val;
 
@@ -39,6 +39,7 @@ public final class IntegerVariable extends AbstractVariable {
     val = v;
   }
 
+  @Override
   public void add(Integer v) {
     val += v;
   }

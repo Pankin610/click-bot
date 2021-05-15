@@ -2,11 +2,21 @@ package lang.variables;
 
 import exceptions.NonImplementedMethodException;
 import lang.AbstractCodeFragment;
+import util.Parsing;
 
 public abstract class AbstractVariable extends AbstractCodeFragment implements Variable {
   private final String name;
 
+  static public boolean validName(String name) {
+    return name.length() > 0 &&
+            !Character.isDigit(name.charAt(0)) &&
+            Parsing.validString(name);
+  }
+
   protected AbstractVariable(String name) {
+    if (!validName(name)) {
+      throw new IllegalArgumentException("Illegal variable name.");
+    }
     this.name = name;
   }
 
