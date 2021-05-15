@@ -1,12 +1,12 @@
 package util.builders;
 
 import exceptions.NoUniqueVariableNameException;
+import exceptions.WrongFileFormatException;
 import files.reading.ReadFileObject;
 import files.writing.WriteFileObject;
 import javafx.scene.control.TreeItem;
-import lang.CodeFragment;
+import lang.CodeFactory;
 import lang.commands.Command;
-import lang.variables.StringVariable;
 import lang.variables.Variable;
 import lang.variables.VariableDescription;
 import program.Program;
@@ -14,6 +14,7 @@ import program.ProgramDescription;
 import util.containers.VariableContainer;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Class used to build programs. Can be used later in Program's constructor.
@@ -29,17 +30,32 @@ public final class ProgramBuilder {
 
   /**
    * Creates ProgramBuilder basing on file description of program.
-   *
    * @param file with description of the program.
    */
   public ProgramBuilder(ReadFileObject file) {
-    ProgramBuilder tmp = file.getProgramBuilder();
-    this.programName = tmp.programName;
-    for (Command com : tmp.commands) {
-      this.addCommand(com);
+    this(file.getScanner());
+  }
+
+  public ProgramBuilder(Scanner scanner){
+    if (!"PROGRAM".equals(scanner.next())) throw new WrongFileFormatException("Program preamble");
+    programName = scanner.next();
+    loadVariables(scanner);
+    loadCommands(scanner);
+  }
+
+  public void loadVariables(Scanner scanner){
+    if (!"VARIABLES".equals(scanner.next())) throw new WrongFileFormatException("Variables preamble");
+    int num = scanner.nextInt();
+    for (int i = 0; i < num; i++) {
+      addVariable(new VariableDescription(CodeFactory.parseVariable(scanner)));
     }
-    for (VariableDescription var : tmp.variables) {
-      this.addVariable(var);
+  }
+
+  public void loadCommands(Scanner scanner){
+    if (!"COMMANDS".equals(scanner.next())) throw new WrongFileFormatException("Commands preamble");
+    int num = scanner.nextInt();
+    for (int i = 0; i < num; i++) {
+      addCommand(CodeFactory.parseCommand(scanner));
     }
   }
 

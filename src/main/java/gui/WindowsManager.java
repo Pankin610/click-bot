@@ -84,8 +84,12 @@ public class WindowsManager {
    */
   public static void changeScene(SceneType type) {
     ProgramMenu.settingScene(type);
-    if (type == SceneType.PROJECT_SCENE) root.setCenter(ProjectWindow.getPane());
+    if (type == SceneType.PROJECT_SCENE_GRAPHIC) root.setCenter(ProjectWindow.getPane());
     if (type == SceneType.START_SCENE) root.setCenter(StartWindow.getPane());
+  }
+
+  public static void changeMode(SceneType type){
+    ProjectWindow.getController().changeMode(type);
   }
 
   /**
@@ -102,7 +106,7 @@ public class WindowsManager {
    */
   public static void openExistingProject(String name) {
     ProjectWindow.prepareExisting(CreatedPrograms.getFileByName(name));
-    changeScene(SceneType.PROJECT_SCENE);
+    changeScene(SceneType.PROJECT_SCENE_GRAPHIC);
   }
 
   /**
@@ -120,7 +124,7 @@ public class WindowsManager {
    */
   public static void openNewProject(String name) {
     ProjectWindow.prepareNew(name);
-    changeScene(SceneType.PROJECT_SCENE);
+    changeScene(SceneType.PROJECT_SCENE_GRAPHIC);
   }
 
   /**

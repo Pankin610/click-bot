@@ -53,40 +53,12 @@ public final class ReadFileObject {
     }
   }
 
-  private void loadVariables(ProgramBuilder res) {
-    if (!"VARIABLES".equals(scanner.next())) throw new WrongFileFormatException("Variables preamble");
-    int num = scanner.nextInt();
-    for (int i = 0; i < num; i++) {
-      res.addVariable(new VariableDescription(CodeFactory.parseVariable(scanner)));
-    }
-  }
-
-  private void loadCommands(ProgramBuilder res) {
-    if (!"COMMANDS".equals(scanner.next())) throw new WrongFileFormatException("Commands preamble");
-    int num = scanner.nextInt();
-    for (int i = 0; i < num; i++) {
-      res.addCommand(CodeFactory.parseCommand(scanner));
-    }
-  }
-
   /**
    * Method parsing program from attached file.
    *
    * @return program which corresponds to file content.
    */
   public Program getProgram() {
-    return new ProgramDescription(getProgramBuilder());
-  }
-
-  /**
-   * @return ProgramBuilder corresponding to file content.
-   */
-  public ProgramBuilder getProgramBuilder() {
-    ProgramBuilder res = new ProgramBuilder();
-    if (!"PROGRAM".equals(scanner.next())) throw new WrongFileFormatException("Program preamble");
-    res.programName = scanner.next();
-    loadVariables(res);
-    loadCommands(res);
-    return res;
+    return new ProgramDescription(this);
   }
 }

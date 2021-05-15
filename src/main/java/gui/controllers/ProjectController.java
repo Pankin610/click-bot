@@ -2,6 +2,7 @@ package gui.controllers;
 
 import environments.Environment;
 import files.reading.ReadFileObject;
+import gui.SceneType;
 import gui.WindowsManager;
 import javafx.beans.value.ObservableValueBase;
 import javafx.collections.ObservableList;
@@ -19,10 +20,13 @@ import util.builders.ProgramBuilder;
 import util.containers.VariableContainer;
 import util.containers.VariableList;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class ProjectController implements Controller {
   public Label nameProgramLabel;
@@ -33,9 +37,12 @@ public class ProjectController implements Controller {
   public TableColumn<Variable, String> typeVariableList;
   public TableColumn<Variable, String> nameVariableList;
   public TableColumn<Variable, String> valueVariableList;
+  public TextArea codeTextArea;
 
   public final VariableContainer variables = new VariableList();
   public AnchorPane mainPane;
+
+  private SceneType mode = SceneType.PROJECT_SCENE_GRAPHIC;
 
   //list of menu items with commands from Commands enum
   private final List<MenuItem> commandList;
@@ -205,10 +212,21 @@ public class ProjectController implements Controller {
    * @param file {@link ReadFileObject} with description of program
    */
   public void load(ReadFileObject file) {
+    load(new ProgramBuilder(file));
+  }
+
+  public void load(ProgramBuilder program){
     this.reload();
-    ProgramBuilder program = new ProgramBuilder(file);
     nameProgramLabel.setText(program.programName);
-    /* load Commands */
+    loadCommands(program);
+    /* load Variables */
+    for (VariableDescription var : program.getVariablesDescription()) {
+      variables.add(var.getVariable());
+    }
+    refreshVariables();
+  }
+
+  private void loadCommands(ProgramBuilder program) {
     TreeItem<Command> root = new TreeItem<>(new AbstractSingleCommand() { /* small hack */
       @Override
       public void execute(Environment envi) {}
@@ -221,11 +239,6 @@ public class ProjectController implements Controller {
     for (Command comm : program.getCommands()) {
       root.getChildren().add(comm.getTreeRepresentation());
     }
-    /* load Variables */
-    for (VariableDescription var : program.getVariablesDescription()) {
-      variables.add(var.getVariable());
-    }
-    refreshVariables();
     programTree.setRoot(root);
   }
 
@@ -260,5 +273,29 @@ public class ProjectController implements Controller {
     new_list.addAll(list.subList(ind + 1, list.size()));
     list.clear();
     list.addAll(new_list);
+  }
+
+  public void changeMode(SceneType type) {
+    if(type == SceneType.PROJECT_SCENE_GRAPHIC && mode != type){
+      Scanner scanner = new Scanner(new ByteArrayInputStream(codeTextArea.getText().getBytes(StandardCharsets.UTF_8)));
+      ProgramBuilder program = new ProgramBuilder();
+      program.loadCommands(scanner);
+      program.programName = nameProgramLabel.getText();
+      loadCommands(program);
+      programTree.setVisible(true);
+      codeTextArea.setVisible(false);
+      mode = type;
+    }
+    if(type == SceneType.PROJECT_SCENE_TEXT && mode != type){
+      ProgramBuilder program = new ProgramBuilder(programTree.getRoot(), variables);
+      codeTextArea.setText("COMMANDS " + program.getCommands().length + "\n");
+      for(Command com : program.getCommands()){
+        codeTextArea.appendText(com.getStringRepresentation());
+        codeTextArea.appendText("\n");
+      }
+      programTree.setVisible(false);
+      codeTextArea.setVisible(true);
+      mode = type;
+    }
   }
 }
