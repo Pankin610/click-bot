@@ -1,5 +1,6 @@
 package util;
 
+import javafx.beans.binding.ObjectExpression;
 import lang.variables.Variable;
 
 public class Parsing {
@@ -7,9 +8,6 @@ public class Parsing {
     return s.indexOf('\'') == -1;
   }
 
-  static public <T> String parseLiteral(T literal) {
-    return literal.toString();
-  }
   static public String parseLiteral(String literal) {
     if (!validString(literal)) {
       throw new IllegalArgumentException(literal);
@@ -18,5 +16,14 @@ public class Parsing {
   }
   static public String parseLiteral(Variable v) {
     return v.getName();
+  }
+  static public String parseLiteral(Object o) {
+    if (o instanceof Variable var) {
+      return parseLiteral(var);
+    }
+    if (o instanceof String str) {
+      return parseLiteral(str);
+    }
+    return o.toString();
   }
 }
