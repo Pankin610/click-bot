@@ -2,6 +2,10 @@
     -fx-background-color: #0003ff ;
 }
 
-.tree-table-cell:hover .highlight-on-hover {
+.tree-table-cell:hover .label {
     -fx-text-fill: red ;
+}
+
+.tree-table-row-cell {
+    -fx-indent: 10px;
 }

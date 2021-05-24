@@ -39,12 +39,13 @@ public final class ProgramBuilder {
   public ProgramBuilder(Scanner scanner){
     if (!"PROGRAM".equals(scanner.next())) throw new WrongFileFormatException("Program preamble");
     programName = scanner.next();
+    if (!"VARIABLES".equals(scanner.next())) throw new WrongFileFormatException("Variables preamble");
     loadVariables(scanner);
+    if (!"COMMANDS".equals(scanner.next())) throw new WrongFileFormatException("Commands preamble");
     loadCommands(scanner);
   }
 
   public void loadVariables(Scanner scanner){
-    if (!"VARIABLES".equals(scanner.next())) throw new WrongFileFormatException("Variables preamble");
     int num = scanner.nextInt();
     for (int i = 0; i < num; i++) {
       addVariable(new VariableDescription(CodeFactory.parseVariable(scanner)));
@@ -52,9 +53,7 @@ public final class ProgramBuilder {
   }
 
   public void loadCommands(Scanner scanner){
-    if (!"COMMANDS".equals(scanner.next())) throw new WrongFileFormatException("Commands preamble");
-    int num = scanner.nextInt();
-    for (int i = 0; i < num; i++) {
+    while(scanner.hasNext()){
       addCommand(CodeFactory.parseCommand(scanner));
     }
   }
@@ -88,9 +87,10 @@ public final class ProgramBuilder {
    *
    * @param variable variable to be added.
    */
-  public void addVariable(VariableDescription variable) throws NoUniqueVariableNameException {
+  public ProgramBuilder addVariable(VariableDescription variable) throws NoUniqueVariableNameException {
     if (checkIfContains(variable.getName())) throw new NoUniqueVariableNameException(variable.getName());
     variables.append(variable);
+    return this;
   }
 
   private boolean checkIfContains(String name) {
@@ -103,8 +103,9 @@ public final class ProgramBuilder {
    *
    * @param command commands to be appended.
    */
-  public void addCommand(Command command) {
+  public ProgramBuilder addCommand(Command command) {
     commands.append(command);
+    return this;
   }
 
   /**

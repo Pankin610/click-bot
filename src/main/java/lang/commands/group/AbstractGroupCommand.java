@@ -8,6 +8,7 @@ import util.builders.BlockBuilder;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Scanner;
 
 /**
  * Abstract implementation of GroupCommand interface.
@@ -71,5 +72,24 @@ public abstract class AbstractGroupCommand extends AbstractCommand implements Gr
   @Override
   public String toString() {
     return getId();
+  }
+
+  @Override
+  public Command[] getCommands() {
+    return commands;
+  }
+
+  protected void parseBlockToString(StringBuilder builder){
+    builder.append('{').append('\n');
+    for(Command command : commands){
+      builder.append(command.getStringRepresentation());
+      builder.append('\n');
+    }
+    builder.append("}");
+  }
+
+  @Override
+  final public boolean isGroup() {
+    return true;
   }
 }

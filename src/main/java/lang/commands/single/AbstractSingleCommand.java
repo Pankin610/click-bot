@@ -23,4 +23,9 @@ public abstract class AbstractSingleCommand extends AbstractCommand implements S
   public String toString() {
     return getStringRepresentation();
   }
+
+  @Override
+  final public boolean isGroup() {
+    return false;
+  }
 }

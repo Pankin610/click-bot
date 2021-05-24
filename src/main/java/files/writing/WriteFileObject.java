@@ -44,7 +44,7 @@ public final class WriteFileObject {
   }
 
   private void writeCommands(Program program) throws IOException {
-    file.write(("COMMANDS " + program.getNumOfCommands() + "\n").getBytes(StandardCharsets.UTF_8));
+    file.write(("COMMANDS\n").getBytes(StandardCharsets.UTF_8));
     for (Command com : program.getCommands()) {
       file.write(com.getStringRepresentation().getBytes(StandardCharsets.UTF_8));
       file.write('\n');

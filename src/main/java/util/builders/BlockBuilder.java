@@ -91,11 +91,12 @@ public final class BlockBuilder implements Builder<Command> {
    * Creating BlockBuilder from file description.
    *
    * @param scanner from ReadFileObject.
-   * @param num     number of Commands to parse.
    */
-  public void parseFromString(Scanner scanner, int num) {
-    for (int i = 0; i < num; i++) {
-      append(CodeFactory.parseCommand(scanner));
+  public BlockBuilder parseFromString(Scanner scanner) {
+    scanner.next(); // reading '{' symbol
+    for(String id = scanner.next(); !id.equals("}"); id = scanner.next()) {
+      append(CodeFactory.getCommandByID(id).parseFromString(scanner));
     }
+    return this;
   }
 }

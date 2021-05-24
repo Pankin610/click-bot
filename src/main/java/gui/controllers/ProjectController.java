@@ -1,6 +1,5 @@
 package gui.controllers;
 
-import environments.Environment;
 import files.reading.ReadFileObject;
 import gui.SceneType;
 import gui.WindowsManager;
@@ -32,6 +31,7 @@ public class ProjectController implements Controller {
   public Label nameProgramLabel;
   public SplitMenuButton addCommandButton;
   public TreeTableView<Command> programTree;
+  private TreeItem<Command> root;
   public TreeTableColumn<Command, String> programColumn;
   public TableView<Variable> variableList;
   public TableColumn<Variable, String> typeVariableList;
@@ -46,6 +46,7 @@ public class ProjectController implements Controller {
 
   //list of menu items with commands from Commands enum
   private final List<MenuItem> commandList;
+  private final List<MenuItem> appendCommandList;
 
   { // populating commandList
     commandList = new ArrayList<>();
@@ -53,18 +54,47 @@ public class ProjectController implements Controller {
       MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_', ' '));
       menu.setOnAction(actionEvent -> {
         Command command = element.createCommand();
-        TreeItem<Command> selected = programTree.getSelectionModel().getSelectedItem();
-        if (selected == null) {
-          System.out.println("Select item in Tree!");
-          return;
-        }
-        if (command == null) return;
-        addAfter(selected, command.getTreeRepresentation());
-        programTree.refresh();
+        if(mode == SceneType.PROJECT_SCENE_GRAPHIC) addCommandToGraphic(command);
+        if(mode == SceneType.PROJECT_SCENE_TEXT)    addCommandToText(command);
         System.out.println(command.getStringRepresentation());
       });
       commandList.add(menu);
     }
+    appendCommandList = new ArrayList<>();
+    for (Commands element : Commands.values()) {
+      MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_', ' '));
+      menu.setOnAction(actionEvent -> {
+        Command command = element.createCommand();
+        appendCommand(command);
+        System.out.println(command.getStringRepresentation());
+      });
+      appendCommandList.add(menu);
+    }
+  }
+
+  private void appendCommand(Command command) {
+    programTree.getSelectionModel().getSelectedItem().getChildren().add(command.getTreeRepresentation());
+    programTree.refresh();
+  }
+
+  private void addCommandToText(Command command) {
+    int cursor_position = codeTextArea.getCaretPosition();
+    codeTextArea.insertText(cursor_position, command.getStringRepresentation());
+  }
+
+  private void addCommandToGraphic(Command command) {
+    if(root.getChildren().isEmpty()){
+      root.getChildren().add(command.getTreeRepresentation());
+      return;
+    }
+    TreeItem<Command> selected = programTree.getSelectionModel().getSelectedItem();
+    if (selected == null) {
+      System.out.println("Select item in Tree!");
+      return;
+    }
+    if (command == null) return;
+    addAfter(selected, command.getTreeRepresentation());
+    programTree.refresh();
   }
 
   private final ContextMenu contextMenuVar;
@@ -87,6 +117,7 @@ public class ProjectController implements Controller {
 
   private final ContextMenu contextMenuProgram;
   private final MenuItem deleteComm;
+  private final Menu appendComm;
 
   { //context menu for TreeView with program description
     contextMenuProgram = new ContextMenu();
@@ -96,10 +127,13 @@ public class ProjectController implements Controller {
         if (toDeletion == null || toDeletion.getParent() == null) return;
         toDeletion.getParent().getChildren().remove(toDeletion);
         programTree.refresh();
+        programTree.getSelectionModel().clearSelection();
     });
     Menu addComm = new Menu("Add command");
     addComm.getItems().addAll(commandList);
-    contextMenuProgram.getItems().addAll(addComm, deleteComm);
+    appendComm = new Menu("Append command");
+    appendComm.getItems().addAll(appendCommandList);
+    contextMenuProgram.getItems().addAll(addComm, appendComm, deleteComm);
   }
 
   @Override
@@ -132,9 +166,13 @@ public class ProjectController implements Controller {
             deleteVar.setDisable(variableList.getItems().isEmpty() ||
                     variableList.getSelectionModel().getSelectedItems().isEmpty()));
 
-    programTree.setOnContextMenuRequested(contextMenuEvent ->
+    programTree.setOnContextMenuRequested(contextMenuEvent -> {
             deleteComm.setDisable(programTree.getSelectionModel().getSelectedItem() == null ||
-                    programTree.getSelectionModel().getSelectedItem().getParent() == null));
+                    programTree.getSelectionModel().getSelectedItem().getParent() == null);
+            appendComm.setDisable(programTree.getSelectionModel().getSelectedItem() == null ||
+                    !programTree.getSelectionModel().getSelectedItem().getValue().isGroup() ||
+                    mode == SceneType.PROJECT_SCENE_TEXT);
+    });
 
     variableList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -146,15 +184,17 @@ public class ProjectController implements Controller {
     programColumn.setCellValueFactory(p -> new ObservableValueBase<>() {
       @Override
       public String getValue() {
-        return p.getValue().getValue().toString();
+        return getIndent(p.getValue()) + p.getValue().getValue().toString();
       }
     });
     programColumn.setCellFactory(new Callback<>() {
       @Override
       public TreeTableCell<Command, String> call(TreeTableColumn<Command, String> commandStringTreeTableColumn) {
         Label label = new Label();
+//        final Label anotherLabel = new Label("Item:");
         HBox hbox = new HBox(5, label);
-        label.getStyleClass().add("highlight-on-hover");
+        hbox.getStyleClass().add("tree-table-cell");
+//        label.getStyleClass().add("label");
         TreeTableCell<Command, String> cell = new TreeTableCell<>() {
           @Override
           protected void updateItem(String item, boolean empty) {
@@ -169,6 +209,15 @@ public class ProjectController implements Controller {
       }
     });
     WindowsManager.scene.getStylesheets().add(getClass().getResource("tree-table-hover.css").toExternalForm());
+  }
+
+  private String getIndent(TreeItem<Command> item) {
+    StringBuilder spaces = new StringBuilder("  ");
+    while(item.getParent() != null){
+      spaces.append("  ");
+      item = item.getParent();
+    }
+    return spaces.toString();
   }
 
   private void initValueColumn() {
@@ -227,10 +276,7 @@ public class ProjectController implements Controller {
   }
 
   private void loadCommands(ProgramBuilder program) {
-    TreeItem<Command> root = new TreeItem<>(new AbstractSingleCommand() { /* small hack */
-      @Override
-      public void execute(Environment envi) {}
-
+    root = new TreeItem<>(new AbstractSingleCommand() { /* small hack */
       @Override
       public String getId() {
         return program.programName;
@@ -261,6 +307,7 @@ public class ProjectController implements Controller {
   public void refreshVariables() {
     variableList.setItems(null);
     variableList.setItems(variables);
+    variableList.getSelectionModel().clearSelection();
   }
 
   public void addAfter(TreeItem<Command> me, TreeItem<Command> item) {
@@ -287,10 +334,10 @@ public class ProjectController implements Controller {
       mode = type;
     }
     if(type == SceneType.PROJECT_SCENE_TEXT && mode != type){
+      codeTextArea.setText("");
       ProgramBuilder program = new ProgramBuilder(programTree.getRoot(), variables);
-      codeTextArea.setText("COMMANDS " + program.getCommands().length + "\n");
-      for(Command com : program.getCommands()){
-        codeTextArea.appendText(com.getStringRepresentation());
+      for(Command command : program.getCommands()){
+        codeTextArea.appendText(command.getStringRepresentation());
         codeTextArea.appendText("\n");
       }
       programTree.setVisible(false);

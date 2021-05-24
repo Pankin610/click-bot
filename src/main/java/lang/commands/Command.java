@@ -35,12 +35,16 @@ public interface Command extends Executable, CodeFragment {
   }
 
   /**
+   * @return true when implements GroupCommand, false otherwise
+   */
+  boolean isGroup();
+
+  /**
    * Static instance of Command interface representing "do nothing" command.
    */
   Command NOTHING = new AbstractSingleCommand() {
     @Override
-    public void execute(Environment envi) {
-    }
+    public void execute(Environment envi) {}
 
     @Override
     public String getStringRepresentation() {
