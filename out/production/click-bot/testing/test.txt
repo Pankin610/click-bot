@@ -1,3 +1,0 @@
-INT my_int 7
-INT var1 10
-INT var2 11
