@@ -33,9 +33,8 @@ public class ReadFileObjectTest {
     for (int i = 0; i < 3; i++) {
       con.add(CodeFactory.parseVariable(cin));
     }
-    Variable[] tmp = con.toArray();
     for (int i = 0; i < 3; i++) {
-      assertEquals(tmp[i].toString(), res[i]);
+      assertEquals(con.get(i).toString(), res[i]);
     }
   }
 }

@@ -5,5 +5,6 @@ package gui;
  */
 public enum SceneType {
   START_SCENE,
-  PROJECT_SCENE;
+  PROJECT_SCENE_GRAPHIC,
+  PROJECT_SCENE_TEXT
 }

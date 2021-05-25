@@ -40,21 +40,14 @@ public final class While extends AbstractGroupCommand {
   @Override
   @SuppressWarnings("unchecked")
   public Command parseFromString(Scanner scanner) {
-    int num = scanner.nextInt();
     Condition con = CodeFactory.parseCondition(scanner);
-    BlockBuilder block = new BlockBuilder();
-    block.parseFromString(scanner, num);
-    return new While(block, con);
+    return new While(new BlockBuilder().parseFromString(scanner), con);
   }
 
   @Override
   public String getStringRepresentation() {
-    StringBuilder res = new StringBuilder(getId() + ' ' + commands.length + '\n');
-    res.append(condition.getStringRepresentation());
-    for (Command com : commands) {
-      res.append('\n');
-      res.append(com.getStringRepresentation());
-    }
+    StringBuilder res = new StringBuilder(getId() + ' ' + condition.getStringRepresentation() + '\n');
+    parseBlockToString(res);
     return res.toString();
   }
 }

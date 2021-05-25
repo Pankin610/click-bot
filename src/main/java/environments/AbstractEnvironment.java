@@ -13,8 +13,6 @@ import util.containers.VariableList;
 import java.awt.*;
 import java.io.IOException;
 
-import static java.lang.Thread.sleep;
-
 /**
  * Abstract environment contains default (Console) implementation of methods associated with instances of Command interface,
  * such as PushButton, Move, Hold, etc...
@@ -100,6 +98,11 @@ public abstract class AbstractEnvironment implements Environment {
   @Override
   public void drag(Coordinate where) {
     throw new UnsupportedOperationException("This environment doesn't support dragging.");
+  }
+
+  @Override
+  public void clickFast(long time_milliseconds, int button_mask) {
+    throw new UnsupportedOperationException("This environment doesn't support fast clicking");
   }
 
   @Override

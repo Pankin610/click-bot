@@ -3,7 +3,6 @@ package lang.commands.single;
 import environments.Environment;
 import exceptions.ExecException;
 import lang.commands.Command;
-import util.gui.CodeItem;
 
 import java.util.Scanner;
 
@@ -30,10 +29,5 @@ public final class MouseRightClick extends AbstractSingleCommand {
   @Override
   public String getId() {
     return id;
-  }
-
-  @Override
-  public CodeItem getTreeRepresentation() {
-    return new CodeItem(MOUSE_RIGHT_CLICK);
   }
 }

@@ -1,2 +1,5 @@
 
 out/production/click-bot/testing/testPrograms/tmp.txt
+/out/
+/src/main/java/gui/test/
+*.class

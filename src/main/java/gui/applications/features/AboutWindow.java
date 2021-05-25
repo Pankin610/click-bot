@@ -26,6 +26,7 @@ public abstract class AboutWindow implements SideWindow {
     }
     controller = loader.getController();
     stage.setResizable(false);
+    stage.getIcons().addAll(WindowsManager.getIcons());
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.initOwner(WindowsManager.stage);
     stage.setTitle("About Click-bot");

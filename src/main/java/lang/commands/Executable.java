@@ -14,5 +14,7 @@ public interface Executable {
    * @param envi Environment in which command should be executed.
    * @throws ExecException when something gone wrong during execution.
    */
-  void execute(Environment envi) throws ExecException;
+  default void execute(Environment envi) throws ExecException {
+    throw new UnsupportedOperationException();
+  }
 }

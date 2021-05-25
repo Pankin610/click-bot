@@ -26,6 +26,7 @@ public class AddCommandWindow implements SideWindow {
     }
     stage.setTitle("Add Command");
     stage.setResizable(false);
+    stage.getIcons().addAll(WindowsManager.getIcons());
     stage.initOwner(WindowsManager.stage);
     stage.initModality(Modality.APPLICATION_MODAL);
     controller = loader.getController();

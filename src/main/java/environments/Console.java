@@ -3,8 +3,6 @@ package environments;
 import program.Program;
 import util.Coordinate;
 
-import java.awt.*;
-
 /**
  * Class describing how program should behave in console environment.
  * Most methods associated with commands should be implemented in superclass.

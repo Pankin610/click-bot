@@ -26,6 +26,7 @@ public abstract class ProgramNameWindow implements SideWindow {
     }
     stage.setResizable(false);
     stage.setTitle("Program's name");
+    stage.getIcons().addAll(WindowsManager.getIcons());
     stage.initOwner(WindowsManager.stage);
     stage.initModality(Modality.APPLICATION_MODAL);
     controller = loader.getController();

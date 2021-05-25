@@ -2,15 +2,16 @@ package lang.commands;
 
 import environments.Environment;
 import exceptions.NonImplementedMethodException;
+import javafx.scene.control.TreeItem;
 import lang.CodeFragment;
 import lang.commands.single.AbstractSingleCommand;
-import util.gui.CodeItem;
 
 import java.util.Scanner;
 
 /**
  * Commands should be implemented as calls to Environment methods with corresponding parameters
  * in as generic style as possible.
+ * toString method should describe how CodeFragment should be displayed in GUI.
  */
 public interface Command extends Executable, CodeFragment {
 
@@ -20,17 +21,30 @@ public interface Command extends Executable, CodeFragment {
    * @return TreeItem with representation.
    * For now, it may be non implemented.
    */
-  default CodeItem getTreeRepresentation() {
+  default TreeItem<Command> getTreeRepresentation() {
     throw new NonImplementedMethodException("getTreeRepresentation");
   }
+
+  /**
+   * This method creates instance of CodeFragment based on TreeItem
+   * @param item node with description of Command
+   * @return instance of Command
+   */
+  default Command parseFromTree(TreeItem<Command> item) {
+    throw new NonImplementedMethodException("parseFromTree");
+  }
+
+  /**
+   * @return true when implements GroupCommand, false otherwise
+   */
+  boolean isGroup();
 
   /**
    * Static instance of Command interface representing "do nothing" command.
    */
   Command NOTHING = new AbstractSingleCommand() {
     @Override
-    public void execute(Environment envi) {
-    }
+    public void execute(Environment envi) {}
 
     @Override
     public String getStringRepresentation() {
@@ -46,11 +60,6 @@ public interface Command extends Executable, CodeFragment {
     @Override
     public String getId() {
       return "NOTHING";
-    }
-
-    @Override
-    public CodeItem getTreeRepresentation() {
-      return new CodeItem(this);
     }
   };
 }

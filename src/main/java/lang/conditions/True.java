@@ -4,7 +4,7 @@ import environments.Environment;
 
 import java.util.Scanner;
 
-public final class True implements Condition {
+public final class True extends AbstractCondition {
   private static final String id = "TRUE";
   public static final True TRUE = new True();
 

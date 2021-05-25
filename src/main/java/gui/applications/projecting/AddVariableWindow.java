@@ -22,6 +22,7 @@ public class AddVariableWindow implements SideWindow {
       e.printStackTrace();
     }
     stage.setResizable(false);
+    stage.getIcons().addAll(WindowsManager.getIcons());
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.initOwner(WindowsManager.stage);
     stage.setTitle("Add variable");

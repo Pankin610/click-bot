@@ -39,7 +39,7 @@ public class AddVariableController implements Controller {
     ProjectController controller = ProjectWindow.getController();
     try {
       controller.variables.add(var);
-      controller.variableList.refresh();
+      controller.refreshVariables();
     } catch (NoUniqueVariableNameException e) {
       new Bot().beep();
       System.out.println(e.getName() + " already exists");

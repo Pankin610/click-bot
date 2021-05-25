@@ -1,18 +1,20 @@
 package util.builders;
 
 import exceptions.NoUniqueVariableNameException;
+import exceptions.WrongFileFormatException;
 import files.reading.ReadFileObject;
 import files.writing.WriteFileObject;
 import javafx.scene.control.TreeItem;
+import lang.CodeFactory;
 import lang.commands.Command;
 import lang.variables.Variable;
 import lang.variables.VariableDescription;
 import program.Program;
 import program.ProgramDescription;
 import util.containers.VariableContainer;
-import util.gui.CodeItem;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Class used to build programs. Can be used later in Program's constructor.
@@ -28,24 +30,38 @@ public final class ProgramBuilder {
 
   /**
    * Creates ProgramBuilder basing on file description of program.
-   *
    * @param file with description of the program.
    */
   public ProgramBuilder(ReadFileObject file) {
-    ProgramBuilder tmp = file.getProgramBuilder();
-    this.programName = tmp.programName;
-    for (Command com : tmp.commands) {
-      this.addCommand(com);
-    }
-    for (VariableDescription var : tmp.variables) {
-      this.addVariable(var);
+    this(file.getScanner());
+  }
+
+  public ProgramBuilder(Scanner scanner){
+    if (!"PROGRAM".equals(scanner.next())) throw new WrongFileFormatException("Program preamble");
+    programName = scanner.next();
+    if (!"VARIABLES".equals(scanner.next())) throw new WrongFileFormatException("Variables preamble");
+    loadVariables(scanner);
+    if (!"COMMANDS".equals(scanner.next())) throw new WrongFileFormatException("Commands preamble");
+    loadCommands(scanner);
+  }
+
+  public void loadVariables(Scanner scanner){
+    int num = scanner.nextInt();
+    for (int i = 0; i < num; i++) {
+      addVariable(new VariableDescription(CodeFactory.parseVariable(scanner)));
     }
   }
 
-  public ProgramBuilder(TreeItem<String> root, VariableContainer vars) {
-    this.programName = root.getValue();
-    for (TreeItem<String> item : root.getChildren()) {
-      this.addCommand(((CodeItem) item).getCommand());
+  public void loadCommands(Scanner scanner){
+    while(scanner.hasNext()){
+      addCommand(CodeFactory.parseCommand(scanner));
+    }
+  }
+
+  public ProgramBuilder(TreeItem<Command> root, VariableContainer vars) {
+    this.programName = root.getValue().getId();
+    for (TreeItem<Command> item : root.getChildren()) {
+      this.addCommand(item.getValue().parseFromTree(item));
     }
     for (Variable var : vars) {
       this.addVariable(new VariableDescription(var));
@@ -71,9 +87,10 @@ public final class ProgramBuilder {
    *
    * @param variable variable to be added.
    */
-  public void addVariable(VariableDescription variable) throws NoUniqueVariableNameException {
+  public ProgramBuilder addVariable(VariableDescription variable) throws NoUniqueVariableNameException {
     if (checkIfContains(variable.getName())) throw new NoUniqueVariableNameException(variable.getName());
     variables.append(variable);
+    return this;
   }
 
   private boolean checkIfContains(String name) {
@@ -86,8 +103,9 @@ public final class ProgramBuilder {
    *
    * @param command commands to be appended.
    */
-  public void addCommand(Command command) {
+  public ProgramBuilder addCommand(Command command) {
     commands.append(command);
+    return this;
   }
 
   /**

@@ -22,7 +22,7 @@ public interface CodeFragment {
    * @param scanner of file, in which representation of CodeFragment is saved.
    * @return proper instance of CodeFragment's implementation.
    */
-  <T extends CodeFragment> T parseFromString(Scanner scanner); /* signature may be changed later */
+  <T extends CodeFragment> T parseFromString(Scanner scanner);
 
   /**
    * Every final implementation of this interface should contain static final field with unique ID,

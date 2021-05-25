@@ -23,8 +23,9 @@ public class AddCommand<T> extends AbstractSingleCommand {
   @Override
   public void execute(Environment envi) throws ExecException {
     Variable var = envi.getVarByName(variable_name);
-    if (var instanceof Addable addable) {
+    if (var instanceof Addable) {
       try {
+        Addable<T> addable = (Addable<T>) var;
         addable.add(to_add);
       }
       catch (ClassCastException e) {

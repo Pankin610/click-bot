@@ -13,12 +13,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lang.commands.Command;
 import util.Coordinate;
 import util.containers.VariableContainer;
 import util.gui.MouseUtility;
@@ -36,6 +38,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public class WindowsManager {
   public static Stage stage;
   public static BorderPane root;
+  public static Scene scene;
+  private static final Image[] icons = new Image[1];
 
   static {
     try {
@@ -52,7 +56,9 @@ public class WindowsManager {
    */
   public static void setStage(Stage stage) {
     WindowsManager.stage = stage;
-    stage.setScene(new Scene(root));
+    stage.getIcons().addAll(icons);
+    scene = new Scene(root);
+    stage.setScene(scene);
     stage.setResizable(false);
     stage.setTitle("Click-Bot");
   }
@@ -78,8 +84,12 @@ public class WindowsManager {
    */
   public static void changeScene(SceneType type) {
     ProgramMenu.settingScene(type);
-    if (type == SceneType.PROJECT_SCENE) root.setCenter(ProjectWindow.getPane());
+    if (type == SceneType.PROJECT_SCENE_GRAPHIC) root.setCenter(ProjectWindow.getPane());
     if (type == SceneType.START_SCENE) root.setCenter(StartWindow.getPane());
+  }
+
+  public static void changeMode(SceneType type){
+    ProjectWindow.getController().changeMode(type);
   }
 
   /**
@@ -96,7 +106,7 @@ public class WindowsManager {
    */
   public static void openExistingProject(String name) {
     ProjectWindow.prepareExisting(CreatedPrograms.getFileByName(name));
-    changeScene(SceneType.PROJECT_SCENE);
+    changeScene(SceneType.PROJECT_SCENE_GRAPHIC);
   }
 
   /**
@@ -114,7 +124,7 @@ public class WindowsManager {
    */
   public static void openNewProject(String name) {
     ProjectWindow.prepareNew(name);
-    changeScene(SceneType.PROJECT_SCENE);
+    changeScene(SceneType.PROJECT_SCENE_GRAPHIC);
   }
 
   /**
@@ -127,7 +137,7 @@ public class WindowsManager {
   /**
    * @return {@code TreeItem} with current project.
    */
-  public static TreeItem<String> getRootOfProject() {
+  public static TreeItem<Command> getRootOfProject() {
     return ProjectWindow.getController().programTree.getRoot();
   }
 
@@ -198,5 +208,9 @@ public class WindowsManager {
 
   public static void addVariable() {
     AddVariableWindow.show();
+  }
+
+  public static Image[] getIcons() {
+    return icons;
   }
 }

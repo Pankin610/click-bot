@@ -1,0 +1,14 @@
+.tree-table-cell:hover {
+    -fx-background-color: #Dcee4d ;
+    -fx-text-fill: black ;
+    -fx-font-weight: bold ;
+}
+
+.tree-table-row-cell {
+    -fx-indent: 10px;
+}
+
+.tree-table-row-cell: selected {
+    -fx-background-color: #Da8214 ;
+    -fx-text-fill: black ;
+}

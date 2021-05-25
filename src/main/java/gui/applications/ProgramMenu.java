@@ -39,6 +39,6 @@ public abstract class ProgramMenu implements SideWindow {
    * Use whenever Scene is changed.
    */
   public static void settingScene(SceneType type) {
-    controller.setActiveProject(type == SceneType.PROJECT_SCENE);
+    controller.setActiveProject(type == SceneType.PROJECT_SCENE_GRAPHIC);
   }
 }

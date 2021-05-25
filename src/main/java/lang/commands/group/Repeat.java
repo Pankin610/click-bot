@@ -4,7 +4,6 @@ import environments.Environment;
 import exceptions.ExecException;
 import lang.commands.Command;
 import util.builders.BlockBuilder;
-import util.gui.CodeItem;
 
 import java.util.Scanner;
 
@@ -38,28 +37,15 @@ public final class Repeat extends AbstractGroupCommand {
   @Override
   @SuppressWarnings("unchecked")
   public Command parseFromString(Scanner scanner) {
-    int num_com = scanner.nextInt();
     int num_rep = scanner.nextInt();
-    BlockBuilder block = new BlockBuilder();
-    block.parseFromString(scanner, num_com);
-    return new Repeat(block, num_rep);
+    scanner.next(); // reading "TIMES"
+    return new Repeat(new BlockBuilder().parseFromString(scanner), num_rep);
   }
 
   @Override
   public String getStringRepresentation() {
-    StringBuilder res = new StringBuilder(getId() + ' ' + commands.length + '\n');
-    res.append(num);
-    for (Command com : commands) {
-      res.append('\n');
-      res.append(com.getStringRepresentation());
-    }
+    StringBuilder res = new StringBuilder(getId() + ' ' + num + " TIMES\n");
+    parseBlockToString(res);
     return res.toString();
-  }
-
-  @Override
-  public CodeItem getTreeRepresentation() {
-    CodeItem res = super.getTreeRepresentation();
-    res.setValue(getId() + ' ' + num);
-    return res;
   }
 }

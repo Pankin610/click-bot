@@ -9,4 +9,5 @@ import lang.commands.Command;
  */
 public interface GroupCommand extends Command, Iterable<Command> {
   void executeBlock(Environment envi) throws ExecException;
+  Command[] getCommands();
 }

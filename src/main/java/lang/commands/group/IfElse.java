@@ -7,7 +7,9 @@ import lang.commands.Command;
 import lang.conditions.Condition;
 import util.builders.BlockBuilder;
 
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public final class IfElse extends AbstractGroupCommand {
   private static final String id = "IF_ELSE";
@@ -44,29 +46,29 @@ public final class IfElse extends AbstractGroupCommand {
 
   @Override
   public String getStringRepresentation() {
-    StringBuilder res = new StringBuilder(getId() + ' ' + commands.length + ' ' + commands2.length + '\n');
-    res.append(condition.getStringRepresentation());
-    for (Command com : commands) {
-      res.append('\n');
-      res.append(com.getStringRepresentation());
-    }
+    StringBuilder res = new StringBuilder(getId() + condition.getStringRepresentation() +'\n');
+    parseBlockToString(res);
+    res.append("\nELSE {\n");
     for (Command com : commands2) {
-      res.append('\n');
       res.append(com.getStringRepresentation());
+      res.append('\n');
     }
+    res.append('}');
     return res.toString();
   }
 
   @Override
   @SuppressWarnings("unchecked")
   public Command parseFromString(Scanner scanner) {
-    int num1 = scanner.nextInt();
-    int num2 = scanner.nextInt();
     Condition con = CodeFactory.parseCondition(scanner);
-    BlockBuilder ifBlock = new BlockBuilder();
-    BlockBuilder elseBlock = new BlockBuilder();
-    ifBlock.parseFromString(scanner, num1);
-    elseBlock.parseFromString(scanner, num2);
+    BlockBuilder ifBlock = new BlockBuilder().parseFromString(scanner);
+    scanner.next(); // reading "ELSE"
+    BlockBuilder elseBlock = new BlockBuilder().parseFromString(scanner);
     return new IfElse(ifBlock, elseBlock, con);
+  }
+
+  @Override
+  public Command[] getCommands() {
+    return Stream.concat(Arrays.stream(commands), Arrays.stream(commands2)).toArray(Command[]::new);
   }
 }

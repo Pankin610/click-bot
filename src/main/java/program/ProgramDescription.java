@@ -40,7 +40,7 @@ public final class ProgramDescription implements Program {
    * @param file with program description.
    */
   public ProgramDescription(ReadFileObject file) {
-    this(file.getProgramBuilder());
+    this(new ProgramBuilder(file));
   }
 
   @Override

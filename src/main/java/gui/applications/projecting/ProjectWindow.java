@@ -39,7 +39,7 @@ public abstract class ProjectWindow implements SideWindow {
 
   public static void prepareNew(String name) {
     controller.nameProgramLabel.setText(name);
-    controller.programTree.setRoot(new TreeItem<>(name));
+    controller.programTree.setRoot(new TreeItem<>());
   }
 
   public static void prepareExisting(ReadFileObject file) {

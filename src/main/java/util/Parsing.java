@@ -1,6 +1,5 @@
 package util;
 
-import javafx.beans.binding.ObjectExpression;
 import lang.variables.Variable;
 
 public class Parsing {
@@ -18,11 +17,11 @@ public class Parsing {
     return v.getName();
   }
   static public String parseLiteral(Object o) {
-    if (o instanceof Variable var) {
-      return parseLiteral(var);
+    if (o instanceof Variable) {
+      return parseLiteral((Variable) o);
     }
-    if (o instanceof String str) {
-      return parseLiteral(str);
+    if (o instanceof String) {
+      return parseLiteral((String) o);
     }
     return o.toString();
   }

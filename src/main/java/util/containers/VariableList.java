@@ -2,14 +2,18 @@ package util.containers;
 
 import exceptions.NoUniqueVariableNameException;
 import exceptions.NoVariableWithThisNameException;
+import javafx.collections.ObservableListBase;
 import lang.variables.Variable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.Objects;
 
 /**
  * Implementation of VariableContainer interface.
  */
-public class VariableList extends AbstractList<Variable> implements VariableContainer {
+public class VariableList extends ObservableListBase<Variable> implements VariableContainer {
   private final ArrayList<Variable> variables = new ArrayList<>();
 
   @Override
@@ -36,16 +40,6 @@ public class VariableList extends AbstractList<Variable> implements VariableCont
   }
 
   @Override
-  public void addAll(Variable... vars) {
-    Collections.addAll(variables, vars);
-  }
-
-  @Override
-  public void remove(Variable var) {
-    variables.remove(var);
-  }
-
-  @Override
   public void remove(String name) {
     if (!checkNameVariable(name)) throw new NoVariableWithThisNameException(name);
     variables.remove(this.get(name));
@@ -58,14 +52,6 @@ public class VariableList extends AbstractList<Variable> implements VariableCont
       }
     }
     return false;
-  }
-
-  @Override
-  public Variable[] toArray() {
-    Variable[] res = new Variable[variables.size()];
-    int ind = 0;
-    for (Variable var : variables) res[ind++] = var;
-    return res;
   }
 
   @Override
