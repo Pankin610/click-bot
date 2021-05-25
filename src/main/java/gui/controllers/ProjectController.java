@@ -29,7 +29,7 @@ import java.util.Scanner;
 
 public class ProjectController implements Controller {
   public Label nameProgramLabel;
-  public SplitMenuButton addCommandButton;
+  public MenuButton addCommandButton;
   public TreeTableView<Command> programTree;
   private TreeItem<Command> root;
   public TreeTableColumn<Command, String> programColumn;
