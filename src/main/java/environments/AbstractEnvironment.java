@@ -10,6 +10,7 @@ import util.Coordinate;
 import util.containers.VariableContainer;
 import util.containers.VariableList;
 
+import javax.swing.text.html.StyleSheet;
 import java.awt.*;
 import java.io.IOException;
 
@@ -129,6 +130,7 @@ public abstract class AbstractEnvironment implements Environment {
 
   @Override
   public void executeSystem(String command) {
+    System.out.println(command);
     try {
       Process process = Runtime.getRuntime().exec(command);
       process.waitFor();

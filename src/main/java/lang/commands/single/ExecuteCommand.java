@@ -29,6 +29,11 @@ public class ExecuteCommand extends AbstractSingleCommand {
   @Override
   @SuppressWarnings("unchecked")
   public Command parseFromString(Scanner scanner) {
-    return new ExecuteCommand(scanner.next());
+    return new ExecuteCommand(scanner.nextLine());
+  }
+
+  @Override
+  public String getStringRepresentation() {
+    return id + ' ' + system_command;
   }
 }

@@ -1,0 +1,4 @@
+PROGRAM executeProgram
+VARIABLES 0
+COMMANDS
+EXECUTE mkdir folder
