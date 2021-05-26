@@ -7,7 +7,7 @@ import java.awt.event.InputEvent;
 
 public class Bot {
   Robot robot;
-  final int kDefaultDelay = 100;
+  final int kDefaultDelay = 5;
 
   public Bot() {
     try {

@@ -23,14 +23,18 @@ public final class IntegerVariable extends AbstractVariable implements Addable<I
   // regular java objects serve the role of literals
   @Override
   public void setValue(Object value) {
+    System.out.println(value.getClass().toString());
     if (value instanceof Integer) {
       val = (Integer) value;
+      return;
     }
     if (value instanceof IntegerVariable) {
       val = ((IntegerVariable) value).getValue();
+      return;
     }
     if (value instanceof StringVariable) {
       val = ((StringVariable) value).toInteger();
+      return;
     }
     throw new IncorrectVariableAssignment(this, value);
   }

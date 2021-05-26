@@ -27,12 +27,19 @@ public class SetCommand extends AbstractSingleCommand {
 
   @Override
   public String getStringRepresentation() {
-    return id + " " + variable_name + Parsing.parseLiteral(value);
+    return id + " " + variable_name +  ' ' + Parsing.parseLiteral(value);
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public Command parseFromString(Scanner scanner) {
-    throw new UnsupportedOperationException(); // TODO
+    String name = scanner.next();
+    Integer integer = scanner.nextInt();
+    return new SetCommand(name, integer);
+  }
+
+  @Override
+  public String getId() {
+    return id;
   }
 }

@@ -39,13 +39,15 @@ public class AddCommand<T> extends AbstractSingleCommand {
 
   @Override
   public String getStringRepresentation() {
-    return id + " " + variable_name + Parsing.parseLiteral(to_add);
+    return id + " " + variable_name + ' ' + Parsing.parseLiteral(to_add);
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public Command parseFromString(Scanner scanner) {
-    throw new UnsupportedOperationException(); // TODO
+    String name = scanner.next();
+    Integer integer = scanner.nextInt();
+    return new AddCommand<>(name, integer);
   }
 
   @Override

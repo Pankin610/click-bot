@@ -10,6 +10,8 @@ import lang.commands.group.IfElse;
 import lang.commands.group.Repeat;
 import lang.commands.group.While;
 import lang.commands.single.*;
+import lang.commands.var_manipulation.AddCommand;
+import lang.commands.var_manipulation.SetCommand;
 import lang.conditions.True;
 import util.Coordinate;
 
@@ -168,7 +170,9 @@ public enum Commands {
       }
       return res;
     }
-  };
+  },
+  SET(new SetCommand("aha",0)),
+  ADD(new AddCommand<Integer>("aha",0));
 
   private final Command comm;
 

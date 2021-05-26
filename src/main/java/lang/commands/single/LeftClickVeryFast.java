@@ -8,7 +8,7 @@ import java.awt.event.InputEvent;
 import java.util.Scanner;
 
 /**
- * Command for fast clicking (even 600 CPS).
+ * Command for fast clicking (even 3000 CPS).
  */
 public class LeftClickVeryFast extends AbstractSingleCommand{
     private static final String id = "LEFT_CLICK_FAST";
