@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * Variable storing single-word String (may be changed later).
  */
-public final class StringVariable extends AbstractVariable {
+public final class StringVariable extends AbstractVariable implements Addable<String> {
   private static final String id = "STR"; // can be changed to STRING if needed
   private String val;
 
@@ -64,5 +64,10 @@ public final class StringVariable extends AbstractVariable {
       return this_value.compareTo(other_value);
     }
     throw new IncomparableVariablesException(this.getName(), other.getName());
+  }
+
+  @Override
+  public void add(String var) {
+    val += var;
   }
 }
