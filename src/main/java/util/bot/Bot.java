@@ -1,5 +1,6 @@
 package util.bot;
 
+import gui.Settings;
 import util.Coordinate;
 
 import java.awt.*;
@@ -7,7 +8,7 @@ import java.awt.event.InputEvent;
 
 public class Bot {
   Robot robot;
-  final int kDefaultDelay = 100;
+  final int kDefaultDelay = Settings.getDelay();
 
   public Bot() {
     try {

@@ -40,4 +40,8 @@ public class SettingsWindow implements SideWindow {
   public static void close() {
     stage.close();
   }
+
+  public static Stage getStage(){
+    return stage;
+  }
 }

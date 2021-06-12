@@ -139,6 +139,9 @@ public class ProjectController implements Controller {
   @Override
   public void reload() {
     variables.clear();
+    mode = SceneType.PROJECT_SCENE_GRAPHIC;
+    programTree.setVisible(true);
+    codeTextArea.setVisible(false);
     refreshVariables();
   }
 
