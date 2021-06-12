@@ -1,8 +1,11 @@
 package lang.commands.single;
 
+import environments.DesktopEnvironment;
 import environments.Environment;
 import exceptions.ExecException;
 import lang.commands.Command;
+import program.ProgramDescription;
+import util.builders.ProgramBuilder;
 
 import java.util.Scanner;
 
@@ -35,5 +38,12 @@ public class ExecuteCommand extends AbstractSingleCommand {
   @Override
   public String getStringRepresentation() {
     return id + ' ' + system_command;
+  }
+
+  public static void main(String[] args) {
+    ProgramBuilder program = new ProgramBuilder();
+    program.addCommand(new ExecuteCommand("wsl psql -c 'select * from tab' > tempo.txt"));
+    Environment envi = new DesktopEnvironment(program.getProgram());
+    envi.runProgram();
   }
 }

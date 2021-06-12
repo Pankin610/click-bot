@@ -13,6 +13,7 @@ import util.containers.VariableList;
 import javax.swing.text.html.StyleSheet;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Abstract environment contains default (Console) implementation of methods associated with instances of Command interface,
@@ -129,12 +130,17 @@ public abstract class AbstractEnvironment implements Environment {
   }
 
   @Override
-  public void executeSystem(String command) { //TODO make this work on Windows
+  public void executeSystem(String command) {
     System.out.println(command);
     try {
       Process process = Runtime.getRuntime().exec(command);
-      process.waitFor();
-    } catch (IOException | InterruptedException e) {
+      Scanner scanner = new Scanner(process.getInputStream());
+      while(scanner.hasNext())  System.out.println(scanner.nextLine());
+      System.out.println();
+      scanner = new Scanner(process.getErrorStream());
+      while(scanner.hasNext())  System.out.println(scanner.nextLine());
+      System.out.println();
+    } catch (IOException e) {
       throw new ExecException("An IOException occurred.", e);
     }
   }
