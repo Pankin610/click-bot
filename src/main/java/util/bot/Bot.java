@@ -60,16 +60,21 @@ public class Bot {
 
   // simple drag from current location to the given one
   public void drag(Coordinate where) {
+    Coordinate p = new Coordinate(MouseInfo.getPointerInfo().getLocation());
+    int C = 30;
+    Coordinate dv = new Coordinate((where.x - p.x)/C, (where.y-p.y)/C);
     robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
     try {
-      Thread.sleep(4000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    robot.mouseMove(where.x, where.y);
-    smallDelay();
+        for (int t = 30; t > 0; t--) {
+          p.x += dv.x;
+          p.y += dv.y;
+          robot.mouseMove(p.x, p.y);
+          Thread.sleep(5);
+        }
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
     robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-    smallDelay();
   }
 
   public void pressKey(int key_event_code) {

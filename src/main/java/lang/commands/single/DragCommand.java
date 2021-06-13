@@ -11,8 +11,8 @@ public class DragCommand extends AbstractSingleCommand {
   private static final String id = "DRAG";
   private final Coordinate where;
 
-  public DragCommand(Coordinate m_where) {
-    where = m_where;
+  public DragCommand(Coordinate where) {
+    this.where = where;
   }
 
   @Override
@@ -29,5 +29,10 @@ public class DragCommand extends AbstractSingleCommand {
   @Override
   public String getId() {
     return id;
+  }
+
+  @Override
+  public String getStringRepresentation() {
+    return id + ' ' + where.x + ' ' + where.y;
   }
 }

@@ -189,7 +189,27 @@ public enum Commands {
     }
   },
 //  SCROLL_COMMAND(new ScrollCommand(0)),
-  DRAG(new DragCommand(new Coordinate(0, 0))),
+  DRAG(new DragCommand(new Coordinate(0, 0))){
+    @Override
+    public Command createCommand() {
+      AddCommandController controller = AddCommandWindow.getController();
+      controller.reload();
+      Stage stage = AddCommandWindow.getStage();
+      stage.setTitle("Drag");
+      controller.textFieldLabel.setText("Where");
+      controller.utilityButton.setVisible(true);
+      controller.utilityButton.setText("Get cords");
+      controller.utilityButton.setOnAction(actionEvent ->
+              controller.textField.setText(WindowsManager.getCords().toString()));
+      stage.showAndWait();
+      Command res = null;
+      if(controller.successful_creation) {
+        String[] tab = controller.textField.getText().split(" ");
+        res = new DragCommand(new Coordinate(Integer.parseInt(tab[0]),Integer.parseInt(tab[1])));
+      }
+      return res;
+    }
+  },
   DOUBLE_CLICK_COMMAND(DoubleClickCommand.DOUBLE_CLICK_COMMAND) {
     @Override
     public Command createCommand() {

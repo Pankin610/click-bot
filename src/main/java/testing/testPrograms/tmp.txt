@@ -3,12 +3,4 @@ VARIABLES 2
 INT i 0
 INT end 0
 COMMANDS
-SET i 0
-SET end 100
-WHILE LESS i end
-{
-TYPE this is an annoying scriptENTER
-ADD i 1
-}
-SCROLL_UP 10
-SCROLL_DOWN 5
+DRAG 813 447
