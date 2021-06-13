@@ -4,6 +4,7 @@ import exceptions.NoUniqueVariableNameException;
 import exceptions.WrongFileFormatException;
 import files.reading.ReadFileObject;
 import files.writing.WriteFileObject;
+import gui.applications.projecting.ProjectWindow;
 import javafx.scene.control.TreeItem;
 import lang.CodeFactory;
 import lang.commands.Command;
@@ -13,7 +14,10 @@ import program.Program;
 import program.ProgramDescription;
 import util.containers.VariableContainer;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
@@ -63,6 +67,14 @@ public final class ProgramBuilder {
     for (TreeItem<Command> item : root.getChildren()) {
       this.addCommand(item.getValue().parseFromTree(item));
     }
+    for (Variable var : vars) {
+      this.addVariable(new VariableDescription(var));
+    }
+  }
+
+  public ProgramBuilder(String name, String code, VariableContainer vars){
+    this.programName = name;
+    loadCommands(new Scanner(new ByteArrayInputStream(code.getBytes(StandardCharsets.UTF_8))));
     for (Variable var : vars) {
       this.addVariable(new VariableDescription(var));
     }

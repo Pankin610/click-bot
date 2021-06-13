@@ -11,7 +11,7 @@
     <Menu mnemonicParsing="false" text="File">
         <MenuItem mnemonicParsing="false" onAction="#newAction" text="New" />
         <MenuItem mnemonicParsing="false" onAction="#openAction" text="Open" />
-      <MenuItem mnemonicParsing="false" onAction="#runProgram" text="Run" />
+      <MenuItem fx:id="runItem" mnemonicParsing="false" onAction="#runProgram" text="Run" />
         <MenuItem fx:id="saveItem" disable="true" mnemonicParsing="false" onAction="#saveProject" text="Save" />
         <MenuItem fx:id="closeProjectItem" disable="true" mnemonicParsing="false" onAction="#closeProject" text="Close project" />
         <SeparatorMenuItem mnemonicParsing="false" />

@@ -39,6 +39,7 @@ public class WindowsManager {
   public static Stage stage;
   public static BorderPane root;
   public static Scene scene;
+  private static SceneType scene_type = SceneType.PROJECT_SCENE_GRAPHIC;
   private static final Image[] icons = new Image[1];
 
   static {
@@ -89,6 +90,7 @@ public class WindowsManager {
   }
 
   public static void changeMode(SceneType type){
+    scene_type = type;
     ProjectWindow.getController().changeMode(type);
   }
 
@@ -216,5 +218,9 @@ public class WindowsManager {
 
   public static void runProgram() {
 
+  }
+
+  public static SceneType getSceneType() {
+    return scene_type;
   }
 }

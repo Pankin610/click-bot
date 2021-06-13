@@ -4,6 +4,7 @@ import files.Paths;
 import files.writing.WriteFileObject;
 import gui.SceneType;
 import gui.WindowsManager;
+import gui.applications.projecting.ProjectWindow;
 import javafx.event.ActionEvent;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -24,6 +25,7 @@ public class MenuController implements Controller {
   public MenuItem closeProjectItem;
   public MenuItem saveItem;
   public ToggleGroup ModeGroup;
+  public MenuItem runItem;
 
   private boolean activeProject = false;
 
@@ -34,6 +36,7 @@ public class MenuController implements Controller {
   public void setActiveProject(boolean f) {
     activeProject = f;
     saveItem.setDisable(!f);
+    runItem.setDisable(!f);
     closeProjectItem.setDisable(!f);
   }
 
@@ -64,18 +67,28 @@ public class MenuController implements Controller {
    *
    * @throws IOException when something with file opening gone wrong.
    */
-  public void saveProject() throws IOException { /* for now, variables are omitted */
-    /* root of current project */
-    TreeItem<Command> root = WindowsManager.getRootOfProject();
+  public void saveProject() throws IOException {
+    ProgramBuilder program = null;
+    if(WindowsManager.getSceneType() == SceneType.PROJECT_SCENE_GRAPHIC) {
+      /* root of current project */
+      TreeItem<Command> root = WindowsManager.getRootOfProject();
 
-    /* variables of current project */
-    VariableContainer vars = WindowsManager.getProjectVariables();
+      /* variables of current project */
+      VariableContainer vars = WindowsManager.getProjectVariables();
 
-    /* creating program based on collected data */
-    ProgramBuilder program = new ProgramBuilder(root, vars);
+      /* creating program based on collected data */
+      program = new ProgramBuilder(root, vars);
+    }
+    else{
+      /* variables of current project */
+      VariableContainer vars = WindowsManager.getProjectVariables();
 
-    /* path to file, where program should be saved */ //for now, all programs are saved to tmp file.
-    String path = Paths.PATH_WITH_PROGRAMS.getPath() + /* program.programName*/ "tmp" + ".txt";
+      /* code of program */
+      program = new ProgramBuilder(ProjectWindow.getController().nameProgramLabel.getText(),
+              ProjectWindow.getController().codeTextArea.getText(),vars);
+    }
+    /* path to file, where program should be saved */
+    String path = Paths.PATH_WITH_PROGRAMS.getPath() + program.programName + ".txt";
 
     program.viewCommands(); /* only for testing */
 

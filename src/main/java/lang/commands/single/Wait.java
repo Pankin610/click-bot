@@ -10,6 +10,7 @@ public final class Wait extends AbstractSingleCommand {
   private final int wait_time;
 
   public Wait(int wait_time_milliseconds) {
+    if(wait_time_milliseconds < 0)  throw new IllegalArgumentException("Time cannot be less then 0");
     wait_time = wait_time_milliseconds;
   }
 
