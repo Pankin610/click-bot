@@ -113,7 +113,7 @@ public enum Commands {
       return res;
     }
   },
-  RELEASE_KEYS_COMMAND(new ReleaseKeysCommand("")),
+//  RELEASE_KEYS_COMMAND(new ReleaseKeysCommand("")),
   MOVE_MOUSE(new MoveMouse(new Coordinate(0, 0))) {
     @Override
     public Command createCommand() {
@@ -135,8 +135,25 @@ public enum Commands {
       return res;
     }
   },
-  HOLD_KEYS_COMMAND(new HoldKeysCommand("")),
-  EXECUTE_COMMAND(new ExecuteCommand("")),
+//  HOLD_KEYS_COMMAND(new HoldKeysCommand("")),
+  EXECUTE_COMMAND(new ExecuteCommand("")){
+  @Override
+  public Command createCommand() {
+    AddCommandController controller = AddCommandWindow.getController();
+    controller.reload();
+    Stage stage = AddCommandWindow.getStage();
+    stage.setTitle("Execute");
+    controller.textFieldLabel.setText("Command to execute");
+    controller.textField.setPrefWidth(300);
+    stage.showAndWait();
+    Command res = null;
+    if(controller.successful_creation) {
+      res = new ExecuteCommand(controller.textField.getText());
+    }
+    controller.textField.setPrefWidth(70);
+    return res;
+  }
+},
   SCROLL_DOWN_COMMAND(new ScrollCommand(0)),
   SCROLL_UP_COMMAND(new ScrollUpCommand(0)),
   SCROLL_COMMAND(new ScrollCommand(0)),

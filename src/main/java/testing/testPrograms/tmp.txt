@@ -3,12 +3,4 @@ VARIABLES 2
 INT i 0
 INT end 0
 COMMANDS
-SET i 0
-SET end 100
-WHILE LESS i end
-{
-TYPE this is an annoying scriptENTER
-TYPE helloENTER
-TYPE CAPS_LOCKhCAPS_LOCKCAPS_LOCKaCAPS_LOCKCAPS_LOCKlCAPS_LOCKCAPS_LOCKlCAPS_LOCKCAPS_LOCKoCAPS_LOCK
-ADD i 1
-}
+EXECUTE wsl psql -c 'select * from paczkomaty' > tempo.txt

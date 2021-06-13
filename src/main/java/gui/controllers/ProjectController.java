@@ -54,6 +54,7 @@ public class ProjectController implements Controller {
       MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_', ' '));
       menu.setOnAction(actionEvent -> {
         Command command = element.createCommand();
+        if (command == null) return;
         if(mode == SceneType.PROJECT_SCENE_GRAPHIC) addCommandToGraphic(command);
         if(mode == SceneType.PROJECT_SCENE_TEXT)    addCommandToText(command);
         System.out.println(command.getStringRepresentation());
@@ -92,7 +93,6 @@ public class ProjectController implements Controller {
       System.out.println("Select item in Tree!");
       return;
     }
-    if (command == null) return;
     addAfter(selected, command.getTreeRepresentation());
     programTree.refresh();
   }
