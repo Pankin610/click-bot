@@ -10,9 +10,9 @@
    <TextArea fx:id="textArea" layoutX="14.0" layoutY="32.0" prefHeight="81.0" prefWidth="254.0" />
     <Button defaultButton="true" layoutX="344.0" layoutY="89.0" mnemonicParsing="false" onAction="#addCommand" prefWidth="60.0" text="Add" />
     <Button cancelButton="true" layoutX="273.0" layoutY="89.0" mnemonicParsing="false" onAction="#closeButton" prefWidth="60.0" text="Cancel" />
-    <Label fx:id="textFieldLabel" layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="150.0" text="Value" textAlignment="CENTER" />
+    <Label fx:id="textFieldLabel" layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="150.0" text="Name of variable" textAlignment="CENTER" />
     <TextField fx:id="textField" layoutX="14.0" layoutY="38.0" prefWidth="70.0" />
     <Button fx:id="utilityButton" layoutX="14.0" layoutY="89.0" mnemonicParsing="false" prefWidth="70.0" text="Utility" visible="false" />
-   <TextField fx:id="textFieldSecond" disable="true" layoutX="90.0" layoutY="38.0" prefHeight="26.0" prefWidth="70.0" />
-   <Label fx:id="labelSecond" disable="true" layoutX="90.0" layoutY="15.0" prefHeight="18.0" prefWidth="70.0" text="Label" />
+   <TextField fx:id="textFieldSecond" disable="true" layoutX="125.0" layoutY="37.0" prefHeight="26.0" prefWidth="70.0" />
+   <Label fx:id="labelSecond" disable="true" layoutX="125.0" layoutY="14.0" prefHeight="18.0" prefWidth="70.0" text="Label" />
 </AnchorPane>
