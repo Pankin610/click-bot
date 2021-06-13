@@ -18,7 +18,7 @@ public class AddTest {
   public void basic() {
     ProgramBuilder builder = new ProgramBuilder();
     Variable var = new IntegerVariable("test", 0);
-    builder.addCommand(new AddCommand<>("test", 5));
+    builder.addCommand(new AddCommand("test", 5));
     builder.addVariable(new VariableDescription(var));
     DesktopEnvironment envi = new DesktopEnvironment(new ProgramDescription(builder));
     envi.runProgram();
@@ -30,28 +30,11 @@ public class AddTest {
   public void basicString() {
     ProgramBuilder builder = new ProgramBuilder();
     Variable var = new StringVariable("test", "0");
-    builder.addCommand(new AddCommand<>("test", "5"));
+    builder.addCommand(new AddCommand("test", 5));
     builder.addVariable(new VariableDescription(var));
     DesktopEnvironment envi = new DesktopEnvironment(new ProgramDescription(builder));
     envi.runProgram();
 
     System.out.println(envi.getVarByName("test").getValue());
-  }
-
-  @Test
-  public void wrongAdd() {
-    ProgramBuilder builder = new ProgramBuilder();
-    Variable var = new IntegerVariable("test", 0);
-    builder.addCommand(new AddCommand<>("test", "lol"));
-    builder.addVariable(new VariableDescription(var));
-    DesktopEnvironment envi = new DesktopEnvironment(new ProgramDescription(builder));
-
-    try {
-      envi.runProgram();
-      fail("No exception");
-    }
-    catch (ExecException e) {
-      e.printStackTrace();
-    }
   }
 }

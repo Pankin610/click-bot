@@ -268,8 +268,54 @@ public enum Commands {
       return res;
     }
   },
-  SET(new SetCommand("aha",0)),
-  ADD(new AddCommand<>("aha", 0));
+  SET(new SetCommand("aha",0)){
+    @Override
+    public Command createCommand() {
+      AddCommandController controller = AddCommandWindow.getController();
+      controller.reload();
+      Stage stage = AddCommandWindow.getStage();
+      stage.setTitle("Set");
+      controller.textFieldLabel.setText("Name of variable");
+      controller.labelSecond.setText("Value");
+      controller.labelSecond.setDisable(false);
+      controller.textFieldSecond.setDisable(false);
+      controller.textFieldSecond.setText("");
+      controller.textFieldSecond.addEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.numericOnly);
+      stage.showAndWait();
+      Command res = null;
+      if(controller.successful_creation) {
+        res = new SetCommand(controller.textField.getText(), Integer.parseInt(controller.textFieldSecond.getText()));
+      }
+      controller.labelSecond.setDisable(true);
+      controller.textFieldSecond.setDisable(true);
+      controller.textFieldSecond.removeEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.numericOnly);
+      return res;
+    }
+  },
+  ADD(new AddCommand("aha", 0)){
+    @Override
+    public Command createCommand() {
+      AddCommandController controller = AddCommandWindow.getController();
+      controller.reload();
+      Stage stage = AddCommandWindow.getStage();
+      stage.setTitle("Set");
+      controller.textFieldLabel.setText("Name of variable");
+      controller.labelSecond.setText("Value to add");
+      controller.labelSecond.setDisable(false);
+      controller.textFieldSecond.setDisable(false);
+      controller.textFieldSecond.setText("");
+      controller.textFieldSecond.addEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.numericOnly);
+      stage.showAndWait();
+      Command res = null;
+      if(controller.successful_creation) {
+        res = new AddCommand(controller.textField.getText(), Integer.parseInt(controller.textFieldSecond.getText()));
+      }
+      controller.labelSecond.setDisable(true);
+      controller.textFieldSecond.setDisable(true);
+      controller.textFieldSecond.removeEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.numericOnly);
+      return res;
+    }
+  };
 
   private final Command comm;
 

@@ -13,10 +13,10 @@ public class SetCommand extends AbstractSingleCommand {
   private final static String id = "SET";
 
   String variable_name;
-  Object value;
-  public SetCommand(String m_variable_name, Object m_value) {
-    variable_name = m_variable_name;
-    value = m_value;
+  Integer value;
+  public SetCommand(String variable_name, Integer value) {
+    this.variable_name = variable_name;
+    this.value = value;
   }
 
   @Override
@@ -27,7 +27,7 @@ public class SetCommand extends AbstractSingleCommand {
 
   @Override
   public String getStringRepresentation() {
-    return id + " " + variable_name +  ' ' + Parsing.parseLiteral(value);
+    return id + " " + variable_name +  ' ' + value;
   }
 
   @SuppressWarnings("unchecked")

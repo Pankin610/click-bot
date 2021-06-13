@@ -17,6 +17,8 @@ public class AddCommandController implements Controller {
   public boolean successful_creation = false;
   public Button utilityButton;
   public TextArea textArea;
+  public TextField textFieldSecond;
+  public Label labelSecond;
 
   @Override
   public void reload() {

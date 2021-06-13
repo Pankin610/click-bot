@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public final class DoubleClickCommand extends AbstractSingleCommand {
   private final static String id = "DOUBLE_CLICK";
-  public final static MouseLeftClick DOUBLE_CLICK_COMMAND = new MouseLeftClick();
+  public final static DoubleClickCommand DOUBLE_CLICK_COMMAND = new DoubleClickCommand();
 
   @Override
   public void execute(Environment envi) throws ExecException {

@@ -4,42 +4,31 @@ import environments.Environment;
 import exceptions.ExecException;
 import lang.commands.Command;
 import lang.commands.single.AbstractSingleCommand;
-import lang.variables.Addable;
+import lang.variables.IntegerVariable;
 import lang.variables.Variable;
 
 import java.util.Scanner;
 
-import util.Parsing;
-
-public class AddCommand<T> extends AbstractSingleCommand {
+public class AddCommand extends AbstractSingleCommand {
   private final static String id = "ADD";
 
   String variable_name;
-  T to_add;
-  public AddCommand(String var_name, T m_to_add) {
+  Integer to_add;
+  public AddCommand(String var_name, Integer to_add) {
     variable_name = var_name;
-    to_add = m_to_add;
+    this.to_add = to_add;
   }
   @Override
   public void execute(Environment envi) throws ExecException {
     Variable var = envi.getVarByName(variable_name);
-    if (var instanceof Addable) {
-      try {
-        Addable<T> addable = (Addable<T>) var;
-        addable.add(to_add);
-      }
-      catch (ClassCastException e) {
-        throw new ExecException("The variable can't add this.", e);
-      }
-    }
-    else {
-      throw new ExecException("The variable doesn't support adding");
+    if (var instanceof IntegerVariable) {
+      ((IntegerVariable)var).add(to_add);
     }
   }
 
   @Override
   public String getStringRepresentation() {
-    return id + " " + variable_name + ' ' + Parsing.parseLiteral(to_add);
+    return id + " " + variable_name + ' ' + to_add;
   }
 
   @SuppressWarnings("unchecked")
@@ -47,7 +36,7 @@ public class AddCommand<T> extends AbstractSingleCommand {
   public Command parseFromString(Scanner scanner) {
     String name = scanner.next();
     Integer integer = scanner.nextInt();
-    return new AddCommand<>(name, integer);
+    return new AddCommand(name, integer);
   }
 
   @Override

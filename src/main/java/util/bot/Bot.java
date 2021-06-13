@@ -61,11 +61,11 @@ public class Bot {
   // simple drag from current location to the given one
   public void drag(Coordinate where) {
     Coordinate p = new Coordinate(MouseInfo.getPointerInfo().getLocation());
-    int C = 30;
+    int C = 30; //number of iterations
     Coordinate dv = new Coordinate((where.x - p.x)/C, (where.y-p.y)/C);
     robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
     try {
-        for (int t = 30; t > 0; t--) {
+        for (int t = C; t > 0; t--) {
           p.x += dv.x;
           p.y += dv.y;
           robot.mouseMove(p.x, p.y);

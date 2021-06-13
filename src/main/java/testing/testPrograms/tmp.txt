@@ -3,4 +3,12 @@ VARIABLES 2
 INT i 0
 INT end 0
 COMMANDS
-DRAG 813 447
+SET i 0
+SET end 100
+SET end 10
+WHILE LESS i end
+{
+TYPE this is an annoying scriptENTER
+ADD i 1
+ADD i 1
+}
