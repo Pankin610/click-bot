@@ -18,12 +18,12 @@ import util.Coordinate;
  * Enum for all final implementation of Command interface.
  */
 public enum Commands {
-  NOTHING(Command.NOTHING) {
-    @Override
-    public Command createCommand() {
-      return Command.NOTHING;
-    }
-  },
+//  NOTHING(Command.NOTHING) {
+//    @Override
+//    public Command createCommand() {
+//      return Command.NOTHING;
+//    }
+//  },
   IF_CONDITION(new IfCondition(new Command[]{Command.NOTHING}, True.TRUE)),
 //  IF_ELSE(new IfElse(new Command[]{Command.NOTHING}, new Command[]{Command.NOTHING}, True.TRUE)),
   REPEAT(new Repeat(new Command[]{Command.NOTHING}, 0)) {
