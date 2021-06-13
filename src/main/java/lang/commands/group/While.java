@@ -55,4 +55,9 @@ public final class While extends AbstractGroupCommand {
   public String getPattern() {
     return "WHILE condition {...}";
   }
+
+  @Override
+  public String toString() {
+    return getId() + ' ' + condition.getStringRepresentation();
+  }
 }

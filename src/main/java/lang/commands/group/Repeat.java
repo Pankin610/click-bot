@@ -53,4 +53,9 @@ public final class Repeat extends AbstractGroupCommand {
   public String getPattern() {
     return "REPEAT num_of_times {...}";
   }
+
+  @Override
+  public String toString() {
+    return getId() + ' ' + num + " TIMES";
+  }
 }

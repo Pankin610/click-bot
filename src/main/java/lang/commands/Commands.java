@@ -18,12 +18,12 @@ import util.Coordinate;
  * Enum for all final implementation of Command interface.
  */
 public enum Commands {
-//  NOTHING(Command.NOTHING) {
-//    @Override
-//    public Command createCommand() {
-//      return Command.NOTHING;
-//    }
-//  },
+  NOTHING(Command.NOTHING) {
+    @Override
+    public Command createCommand() {
+      return Command.NOTHING;
+    }
+  },
   IF_CONDITION(new IfCondition(new Command[]{Command.NOTHING}, True.TRUE)),
 //  IF_ELSE(new IfElse(new Command[]{Command.NOTHING}, new Command[]{Command.NOTHING}, True.TRUE)),
   REPEAT(new Repeat(new Command[]{Command.NOTHING}, 0)) {
@@ -297,8 +297,8 @@ public enum Commands {
       stage.setTitle("Set");
       controller.textFieldLabel.setText("Name of variable");
       controller.labelSecond.setText("Value to add");
-      controller.labelSecond.setDisable(false);
-      controller.textFieldSecond.setDisable(false);
+      controller.labelSecond.setVisible(true);
+      controller.textFieldSecond.setVisible(true);
       controller.textFieldSecond.setText("");
       controller.textFieldSecond.addEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.numericOnly);
       stage.showAndWait();
@@ -306,8 +306,8 @@ public enum Commands {
       if(controller.successful_creation) {
         res = new AddCommand(controller.textField.getText(), Integer.parseInt(controller.textFieldSecond.getText()));
       }
-      controller.labelSecond.setDisable(true);
-      controller.textFieldSecond.setDisable(true);
+      controller.labelSecond.setVisible(false);
+      controller.textFieldSecond.setVisible(false);
       controller.textFieldSecond.removeEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.numericOnly);
       return res;
     }

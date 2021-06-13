@@ -55,4 +55,9 @@ public final class IfCondition extends AbstractGroupCommand {
   public String getPattern() {
     return "IF_CONDITION condition {..}";
   }
+
+  @Override
+  public String toString() {
+    return getId() + ' ' +  condition.getStringRepresentation();
+  }
 }

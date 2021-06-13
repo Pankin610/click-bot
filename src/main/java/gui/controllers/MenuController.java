@@ -4,6 +4,7 @@ import files.Paths;
 import files.writing.WriteFileObject;
 import gui.SceneType;
 import gui.WindowsManager;
+import javafx.event.ActionEvent;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleGroup;
@@ -105,5 +106,9 @@ public class MenuController implements Controller {
 
   public void changeToText() {
     WindowsManager.changeMode(SceneType.PROJECT_SCENE_TEXT);
+  }
+
+  public void runProgram() {
+    WindowsManager.runProgram();
   }
 }

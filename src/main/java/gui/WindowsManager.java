@@ -213,4 +213,8 @@ public class WindowsManager {
   public static Image[] getIcons() {
     return icons;
   }
+
+  public static void runProgram() {
+
+  }
 }
