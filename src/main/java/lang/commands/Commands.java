@@ -5,6 +5,7 @@ import gui.applications.projecting.AddCommandWindow;
 import gui.controllers.AddCommandController;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import lang.CodeFactory;
 import lang.commands.group.IfCondition;
 import lang.commands.group.Repeat;
 import lang.commands.group.While;
@@ -24,8 +25,26 @@ public enum Commands {
       return Command.NOTHING;
     }
   },
-  IF_CONDITION(new IfCondition(new Command[]{Command.NOTHING}, True.TRUE)),
-//  IF_ELSE(new IfElse(new Command[]{Command.NOTHING}, new Command[]{Command.NOTHING}, True.TRUE)),
+  IF_CONDITION(new IfCondition(new Command[]{Command.NOTHING}, True.TRUE)){
+    @Override
+    public Command createCommand() {
+      AddCommandController controller = AddCommandWindow.getController();
+      controller.reload();
+      controller.textField.setPrefWidth(400);
+      controller.textFieldLabel.setText("Condition");
+      Stage stage = AddCommandWindow.getStage();
+      stage.setTitle("If");
+      stage.showAndWait();
+      Command res = null;
+      if(controller.successful_creation) {
+        res = new IfCondition(new Command[]{Command.NOTHING},
+                CodeFactory.parseCondition(controller.textField.getText()
+                        .replace('(',' ').replace(')',' ')));
+      }
+      controller.textField.setPrefWidth(70);
+      return res;
+    }
+  },
   REPEAT(new Repeat(new Command[]{Command.NOTHING}, 0)) {
     @Override
     public Command createCommand() {
@@ -43,7 +62,26 @@ public enum Commands {
       return res;
     }
   },
-  WHILE(new While(new Command[]{Command.NOTHING}, True.TRUE)),
+  WHILE(new While(new Command[]{Command.NOTHING}, True.TRUE)){
+    @Override
+    public Command createCommand() {
+      AddCommandController controller = AddCommandWindow.getController();
+      controller.reload();
+      controller.textField.setPrefWidth(400);
+      controller.textFieldLabel.setText("Condition");
+      Stage stage = AddCommandWindow.getStage();
+      stage.setTitle("While");
+      stage.showAndWait();
+      Command res = null;
+      if(controller.successful_creation) {
+        res = new While(new Command[]{Command.NOTHING},
+                CodeFactory.parseCondition(controller.textField.getText()
+                        .replace('(',' ').replace(')',' ')));
+      }
+      controller.textField.setPrefWidth(70);
+      return res;
+    }
+  },
   WAIT(new Wait(1000)) {
     @Override
     public Command createCommand() {
