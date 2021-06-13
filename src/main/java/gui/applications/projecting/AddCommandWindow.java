@@ -10,7 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import util.Coordinate;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class AddCommandWindow implements SideWindow {
@@ -43,6 +45,14 @@ public class AddCommandWindow implements SideWindow {
   };
 
   public static EventHandler<KeyEvent> consumeTyped = Event::consume;
+
+  public static EventHandler<KeyEvent> cords = keyEvent -> {
+    if(keyEvent.getCharacter().equals("q")) {
+      Coordinate cords = new Coordinate(MouseInfo.getPointerInfo().getLocation());
+      controller.textField.setText(cords.x + " "  + cords.y);
+      keyEvent.consume();
+    }
+  };
 
   public static AddCommandController getController() {
     return controller;

@@ -11,9 +11,9 @@ public abstract class BinaryCondition extends AbstractCondition {
   protected final Condition condition1;
   protected final Condition condition2;
 
-  protected BinaryCondition(Condition m_condition1, Condition m_condition2) {
-    condition1 = m_condition1;
-    condition2 = m_condition2;
+  protected BinaryCondition(Condition condition1, Condition condition2) {
+    this.condition1 = condition1;
+    this.condition2 = condition2;
   }
 
   @Override

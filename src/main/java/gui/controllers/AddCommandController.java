@@ -26,10 +26,15 @@ public class AddCommandController implements Controller {
     textField.removeEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.numericOnly);
     textField.removeEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.consumeTyped);
     textField.removeEventFilter(KeyEvent.KEY_PRESSED, AddCommandWindow.codeOfKey);
+    textField.removeEventFilter(KeyEvent.KEY_PRESSED, AddCommandWindow.cords);
     // tiding utility button
     utilityButton.setVisible(false);
     utilityButton.setText("Utility");
     // default options
+    textFieldSecond.setVisible(false);
+    textArea.setVisible(false);
+    labelSecond.setVisible(false);
+    textField.setPromptText("");
     successful_creation = false;
     textFieldLabel.setText("Default");
     textField.setText("");

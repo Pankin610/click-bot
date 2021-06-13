@@ -121,16 +121,15 @@ public enum Commands {
       Stage stage = AddCommandWindow.getStage();
       stage.setTitle("Move mouse");
       controller.textFieldLabel.setText("Coordinates");
-      controller.utilityButton.setVisible(true);
-      controller.utilityButton.setText("Get cords");
-      controller.utilityButton.setOnAction(actionEvent ->
-              controller.textField.setText(WindowsManager.getCords().toString()));
+      controller.textField.setPromptText("Click q");
+      controller.textField.addEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.cords);
       stage.showAndWait();
       Command res = null;
       if (controller.successful_creation) {
         String[] tab = controller.textField.getCharacters().toString().split(" ");
         res = new MoveMouse(new Coordinate(Integer.parseInt(tab[0]), Integer.parseInt(tab[1])));
       }
+
       return res;
     }
   },
@@ -196,10 +195,8 @@ public enum Commands {
       Stage stage = AddCommandWindow.getStage();
       stage.setTitle("Drag");
       controller.textFieldLabel.setText("Where");
-      controller.utilityButton.setVisible(true);
-      controller.utilityButton.setText("Get cords");
-      controller.utilityButton.setOnAction(actionEvent ->
-              controller.textField.setText(WindowsManager.getCords().toString()));
+      controller.textField.setPromptText("Click q");
+      controller.textField.addEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.cords);
       stage.showAndWait();
       Command res = null;
       if(controller.successful_creation) {
