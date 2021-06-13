@@ -20,4 +20,9 @@ public abstract class BinaryCondition extends AbstractCondition {
   public String getStringRepresentation() {
     return getId() + " " + condition1.getStringRepresentation() + " " + condition2.getStringRepresentation();
   }
+
+  @Override
+  public String getPattern() {
+    return getId() + " condition1 condition2";
+  }
 }

@@ -19,4 +19,9 @@ public abstract class BinaryRelation extends AbstractCondition {
   public String getStringRepresentation() {
     return getId() + " " + variable1 + " " + variable2;
   }
+
+  @Override
+  public String getPattern() {
+    return getId() + " var1 var2";
+  }
 }

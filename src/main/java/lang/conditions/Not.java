@@ -34,4 +34,9 @@ public final class Not extends AbstractCondition {
   public Condition parseFromString(Scanner scanner) {
     return new Not(CodeFactory.parseCondition(scanner));
   }
+
+  @Override
+  public String getPattern() {
+    return id + " condition";
+  }
 }

@@ -28,4 +28,9 @@ public final class True extends AbstractCondition {
   public String getId() {
     return id;
   }
+
+  @Override
+  public String getPattern() {
+    return id;
+  }
 }

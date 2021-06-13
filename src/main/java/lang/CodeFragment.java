@@ -31,4 +31,6 @@ public interface CodeFragment {
    * @return ID of corresponding class.
    */
   String getId();
+
+  String getPattern();
 }

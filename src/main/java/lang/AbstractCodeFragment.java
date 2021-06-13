@@ -19,4 +19,9 @@ public abstract class AbstractCodeFragment implements CodeFragment {
   public String getId() {
     throw new NonImplementedMethodException("getId");
   }
+
+  @Override
+  public String getPattern() {
+    return null;
+  }
 }
