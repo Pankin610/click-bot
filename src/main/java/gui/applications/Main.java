@@ -1,5 +1,6 @@
 package gui.applications;
 
+import gui.Settings;
 import gui.WindowsManager;
 import javafx.application.Application;
 import javafx.scene.image.Image;
@@ -18,6 +19,7 @@ public final class Main extends Application {
   @Override
   public void start(Stage stage) {
     WindowsManager.setStage(stage); /* calling setStage at start of the program */
+    Settings.load();
     WindowsManager.startProgram();
   }
 

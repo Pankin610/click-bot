@@ -3,6 +3,7 @@ package gui.controllers;
 import gui.applications.projecting.AddCommandWindow;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
@@ -15,6 +16,7 @@ public class AddCommandController implements Controller {
 
   public boolean successful_creation = false;
   public Button utilityButton;
+  public TextArea textArea;
 
   @Override
   public void reload() {
@@ -29,6 +31,9 @@ public class AddCommandController implements Controller {
     successful_creation = false;
     textFieldLabel.setText("Default");
     textField.setText("");
+    textArea.setText("");
+    textArea.setVisible(false);
+
     AddCommandWindow.getStage().setTitle("Default");
   }
 

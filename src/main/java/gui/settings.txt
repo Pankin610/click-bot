@@ -1,1 +1,1 @@
-DELAY: 5
+DELAY: 1

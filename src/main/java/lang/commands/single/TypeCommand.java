@@ -34,6 +34,6 @@ public final class TypeCommand extends KeySequenceCommand {
   @SuppressWarnings("unchecked")
   @Override
   public Command parseFromString(Scanner scanner) {
-    return new TypeCommand(scanner.nextLine());
+    return new TypeCommand(scanner.nextLine().substring(1));
   }
 }

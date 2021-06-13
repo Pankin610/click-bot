@@ -84,7 +84,35 @@ public enum Commands {
       return MakeSomeNoise.MAKE_SOME_NOISE;
     }
   },
-  TYPE_COMMAND(new TypeCommand("")),
+  TYPE_COMMAND(new TypeCommand("")) {
+    @Override
+    public Command createCommand() {
+      AddCommandController controller = AddCommandWindow.getController();
+      controller.reload();
+      Stage stage = AddCommandWindow.getStage();
+      stage.setTitle("Type");
+      controller.textFieldLabel.setText("Text to type");
+      controller.textArea.setVisible(true);
+      controller.textField.setVisible(false);
+      stage.showAndWait();
+      Command res = null;
+      if(controller.successful_creation) {
+        System.out.println(controller.textArea.getText().charAt(controller.textArea.getText().length()-1));
+        StringBuilder builder = new StringBuilder();
+        String text = controller.textArea.getText();
+        for(int i=0;i<text.length();i++){
+          char t = text.charAt(i);
+          if(t=='\n'){
+            builder.append("ENTER");
+          } else if('A' <= t && t <= 'Z'){
+            builder.append("CAPS_LOCK").append((char)(t - 'A' + 'a')).append("CAPS_LOCK");
+          } else builder.append(t);
+        }
+        res = new TypeCommand(builder.toString());
+      }
+      return res;
+    }
+  },
   RELEASE_KEYS_COMMAND(new ReleaseKeysCommand("")),
   MOVE_MOUSE(new MoveMouse(new Coordinate(0, 0))) {
     @Override
