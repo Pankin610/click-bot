@@ -39,6 +39,8 @@ public interface Command extends Executable, CodeFragment {
    */
   boolean isGroup();
 
+  String getPattern();
+
   /**
    * Static instance of Command interface representing "do nothing" command.
    */

@@ -50,4 +50,9 @@ public final class While extends AbstractGroupCommand {
     parseBlockToString(res);
     return res.toString();
   }
+
+  @Override
+  public String getPattern() {
+    return "WHILE condition {...}";
+  }
 }

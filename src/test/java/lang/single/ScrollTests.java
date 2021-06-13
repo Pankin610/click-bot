@@ -14,13 +14,6 @@ import static org.junit.Assert.fail;
 
 public class ScrollTests {
   @Test
-  public void scrollTest() {
-    ProgramBuilder builder = new ProgramBuilder();
-    builder.addCommand(new ScrollCommand(-5));
-    Environment envi = new DesktopEnvironment(new ProgramDescription(builder));
-    envi.runProgram();
-  }
-  @Test
   public void scrollUpTest() {
     try {
       Command invalid = new ScrollUpCommand(-5);

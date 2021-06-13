@@ -2,7 +2,7 @@ package lang.commands.single;
 
 import environments.Environment;
 
-public class ScrollCommand extends AbstractSingleCommand {
+public abstract class ScrollCommand extends AbstractSingleCommand {
   private static final String id = "SCROLL";
   protected final Integer where;
 
@@ -16,7 +16,7 @@ public class ScrollCommand extends AbstractSingleCommand {
   }
 
   @Override
-  public String getId() {
-    return id;
+  public String getPattern() {
+    return id + " number";
   }
 }

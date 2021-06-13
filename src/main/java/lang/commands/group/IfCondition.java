@@ -50,4 +50,9 @@ public final class IfCondition extends AbstractGroupCommand {
     parseBlockToString(res);
     return res.toString();
   }
+
+  @Override
+  public String getPattern() {
+    return "IF_CONDITION condition {..}";
+  }
 }

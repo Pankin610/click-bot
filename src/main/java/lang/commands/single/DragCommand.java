@@ -35,4 +35,9 @@ public class DragCommand extends AbstractSingleCommand {
   public String getStringRepresentation() {
     return id + ' ' + where.x + ' ' + where.y;
   }
+
+  @Override
+  public String getPattern() {
+    return "DRAG x_cord y_cord";
+  }
 }

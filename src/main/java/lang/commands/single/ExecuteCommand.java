@@ -46,4 +46,9 @@ public class ExecuteCommand extends AbstractSingleCommand {
     Environment envi = new DesktopEnvironment(program.getProgram());
     envi.runProgram();
   }
+
+  @Override
+  public String getPattern() {
+    return "EXECUTE command";
+  }
 }

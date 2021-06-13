@@ -33,5 +33,10 @@ public final class PressKey extends AbstractSingleCommand {
   public Command parseFromString(Scanner scanner) {
     return new PressKey(scanner.nextInt());
   }
+
+  @Override
+  public String getPattern() {
+    return "PRESS key_code";
+  }
 }
 

@@ -34,4 +34,9 @@ public final class MoveMouse extends AbstractSingleCommand {
   public Command parseFromString(Scanner scanner) {
     return new MoveMouse(new Coordinate(scanner.nextInt(), scanner.nextInt()));
   }
+
+  @Override
+  public String getPattern() {
+    return "MOVE x_cord y_cord";
+  }
 }

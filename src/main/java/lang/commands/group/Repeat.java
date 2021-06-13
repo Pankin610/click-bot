@@ -48,4 +48,9 @@ public final class Repeat extends AbstractGroupCommand {
     parseBlockToString(res);
     return res.toString();
   }
+
+  @Override
+  public String getPattern() {
+    return "REPEAT num_of_times {...}";
+  }
 }

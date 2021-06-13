@@ -1,8 +1,7 @@
 package lang.single;
 
 import environments.DesktopEnvironment;
-import exceptions.ExecException;
-import lang.commands.var_manipulation.AddCommand;
+import lang.commands.single.variables.AddCommand;
 import lang.variables.IntegerVariable;
 import lang.variables.StringVariable;
 import lang.variables.Variable;

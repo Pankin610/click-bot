@@ -1,4 +1,4 @@
-package lang.commands.var_manipulation;
+package lang.commands.single.variables;
 
 import environments.Environment;
 import exceptions.ExecException;
@@ -42,5 +42,10 @@ public class AddCommand extends AbstractSingleCommand {
   @Override
   public String getId() {
     return id;
+  }
+
+  @Override
+  public String getPattern() {
+    return "ADD var_name value";
   }
 }

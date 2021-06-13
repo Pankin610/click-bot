@@ -38,4 +38,9 @@ public class LeftClickVeryFast extends AbstractSingleCommand{
     public void execute(Environment envi) throws ExecException {
         envi.clickFast(time,InputEvent.BUTTON1_DOWN_MASK);
     }
+
+    @Override
+    public String getPattern() {
+        return "LEFT_CLICK_FAST time";
+    }
 }

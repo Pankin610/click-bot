@@ -35,5 +35,10 @@ public class RightClickVeryFast extends AbstractSingleCommand{
     public void execute(Environment envi) throws ExecException {
         envi.clickFast(time,InputEvent.BUTTON3_DOWN_MASK);
     }
+
+    @Override
+    public String getPattern() {
+        return id + " time";
+    }
 }
 

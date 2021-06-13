@@ -1,11 +1,9 @@
-package lang.commands.var_manipulation;
+package lang.commands.single.variables;
 
 import environments.Environment;
-import exceptions.ExecException;
 import lang.commands.Command;
 import lang.commands.single.AbstractSingleCommand;
 import lang.variables.Variable;
-import util.Parsing;
 
 import java.util.Scanner;
 
@@ -41,5 +39,10 @@ public class SetCommand extends AbstractSingleCommand {
   @Override
   public String getId() {
     return id;
+  }
+
+  @Override
+  public String getPattern() {
+    return "SET var_name value";
   }
 }

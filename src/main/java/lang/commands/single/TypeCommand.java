@@ -36,4 +36,9 @@ public final class TypeCommand extends KeySequenceCommand {
   public Command parseFromString(Scanner scanner) {
     return new TypeCommand(scanner.nextLine().substring(1));
   }
+
+  @Override
+  public String getPattern() {
+    return id + " sequence";
+  }
 }

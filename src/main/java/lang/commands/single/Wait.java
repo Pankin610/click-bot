@@ -33,4 +33,9 @@ public final class Wait extends AbstractSingleCommand {
   public String getId() {
     return id;
   }
+
+  @Override
+  public String getPattern() {
+    return id + " time";
+  }
 }

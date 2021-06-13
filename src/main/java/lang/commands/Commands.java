@@ -6,12 +6,11 @@ import gui.controllers.AddCommandController;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import lang.commands.group.IfCondition;
-import lang.commands.group.IfElse;
 import lang.commands.group.Repeat;
 import lang.commands.group.While;
 import lang.commands.single.*;
-import lang.commands.var_manipulation.AddCommand;
-import lang.commands.var_manipulation.SetCommand;
+import lang.commands.single.variables.AddCommand;
+import lang.commands.single.variables.SetCommand;
 import lang.conditions.True;
 import util.Coordinate;
 
@@ -26,7 +25,7 @@ public enum Commands {
     }
   },
   IF_CONDITION(new IfCondition(new Command[]{Command.NOTHING}, True.TRUE)),
-  IF_ELSE(new IfElse(new Command[]{Command.NOTHING}, new Command[]{Command.NOTHING}, True.TRUE)),
+//  IF_ELSE(new IfElse(new Command[]{Command.NOTHING}, new Command[]{Command.NOTHING}, True.TRUE)),
   REPEAT(new Repeat(new Command[]{Command.NOTHING}, 0)) {
     @Override
     public Command createCommand() {

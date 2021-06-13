@@ -11,4 +11,9 @@ public abstract class AbstractCommand extends AbstractCodeFragment implements Co
     public String toString() {
         return getId();
     }
+
+    @Override
+    public String getPattern() {
+        return getId();
+    }
 }
