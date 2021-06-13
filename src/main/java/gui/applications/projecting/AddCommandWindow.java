@@ -33,7 +33,7 @@ public class AddCommandWindow implements SideWindow {
   }
 
   public static EventHandler<KeyEvent> numericOnly = keyEvent -> {
-    if (!"0123456789".contains(keyEvent.getCharacter())) keyEvent.consume();
+    if (!"-0123456789".contains(keyEvent.getCharacter())) keyEvent.consume();
   };
 
   public static EventHandler<KeyEvent> codeOfKey = keyEvent -> {

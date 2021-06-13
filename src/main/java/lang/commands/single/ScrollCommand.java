@@ -4,7 +4,7 @@ import environments.Environment;
 
 public class ScrollCommand extends AbstractSingleCommand {
   private static final String id = "SCROLL";
-  private final Integer where;
+  protected final Integer where;
 
   public ScrollCommand(int where) {
     this.where = where;

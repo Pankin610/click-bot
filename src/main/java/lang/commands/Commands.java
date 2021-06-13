@@ -137,26 +137,58 @@ public enum Commands {
   },
 //  HOLD_KEYS_COMMAND(new HoldKeysCommand("")),
   EXECUTE_COMMAND(new ExecuteCommand("")){
-  @Override
-  public Command createCommand() {
-    AddCommandController controller = AddCommandWindow.getController();
-    controller.reload();
-    Stage stage = AddCommandWindow.getStage();
-    stage.setTitle("Execute");
-    controller.textFieldLabel.setText("Command to execute");
-    controller.textField.setPrefWidth(300);
-    stage.showAndWait();
-    Command res = null;
-    if(controller.successful_creation) {
-      res = new ExecuteCommand(controller.textField.getText());
+    @Override
+    public Command createCommand() {
+      AddCommandController controller = AddCommandWindow.getController();
+      controller.reload();
+      Stage stage = AddCommandWindow.getStage();
+      stage.setTitle("Execute");
+      controller.textFieldLabel.setText("Command to execute");
+      controller.textField.setPrefWidth(300);
+      stage.showAndWait();
+      Command res = null;
+      if(controller.successful_creation) {
+        res = new ExecuteCommand(controller.textField.getText());
+      }
+      controller.textField.setPrefWidth(70);
+      return res;
     }
-    controller.textField.setPrefWidth(70);
-    return res;
-  }
-},
-  SCROLL_DOWN_COMMAND(new ScrollCommand(0)),
-  SCROLL_UP_COMMAND(new ScrollUpCommand(0)),
-  SCROLL_COMMAND(new ScrollCommand(0)),
+  },
+  SCROLL_DOWN_COMMAND(new ScrollDownCommand(0)){
+    @Override
+    public Command createCommand() {
+      AddCommandController controller = AddCommandWindow.getController();
+      controller.reload();
+      Stage stage = AddCommandWindow.getStage();
+      stage.setTitle("Scroll down");
+      controller.textFieldLabel.setText("How much?");
+      controller.textField.addEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.numericOnly);
+      stage.showAndWait();
+      Command res = null;
+      if(controller.successful_creation) {
+        res = new ScrollDownCommand(Integer.parseInt(controller.textField.getText()));
+      }
+      return res;
+    }
+  },
+  SCROLL_UP_COMMAND(new ScrollUpCommand(0)){
+    @Override
+    public Command createCommand() {
+      AddCommandController controller = AddCommandWindow.getController();
+      controller.reload();
+      Stage stage = AddCommandWindow.getStage();
+      stage.setTitle("Scroll up");
+      controller.textFieldLabel.setText("How much?");
+      controller.textField.addEventFilter(KeyEvent.KEY_TYPED, AddCommandWindow.numericOnly);
+      stage.showAndWait();
+      Command res = null;
+      if(controller.successful_creation) {
+        res = new ScrollUpCommand(Integer.parseInt(controller.textField.getText()));
+      }
+      return res;
+    }
+  },
+//  SCROLL_COMMAND(new ScrollCommand(0)),
   DRAG(new DragCommand(new Coordinate(0, 0))),
   DOUBLE_CLICK_COMMAND(DoubleClickCommand.DOUBLE_CLICK_COMMAND) {
     @Override
@@ -217,7 +249,7 @@ public enum Commands {
     }
   },
   SET(new SetCommand("aha",0)),
-  ADD(new AddCommand<Integer>("aha",0));
+  ADD(new AddCommand<>("aha", 0));
 
   private final Command comm;
 

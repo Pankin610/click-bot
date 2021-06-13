@@ -66,6 +66,7 @@ public class ProjectController implements Controller {
       MenuItem menu = new MenuItem(element.getId().toLowerCase().replace('_', ' '));
       menu.setOnAction(actionEvent -> {
         Command command = element.createCommand();
+        if(command == null) return;
         appendCommand(command);
         System.out.println(command.getStringRepresentation());
       });
