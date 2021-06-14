@@ -144,6 +144,8 @@ public class ProjectController implements Controller {
     programTree.setVisible(true);
     codeTextArea.setVisible(false);
     refreshVariables();
+    addCommandButton.getItems().clear();
+    addCommandButton.getItems().addAll(commandList);
   }
 
   @Override

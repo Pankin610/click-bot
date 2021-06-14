@@ -14,9 +14,4 @@ public abstract class ScrollCommand extends AbstractSingleCommand {
   public void execute(Environment envi) {
     envi.scroll(where);
   }
-
-  @Override
-  public String getPattern() {
-    return id + " number";
-  }
 }

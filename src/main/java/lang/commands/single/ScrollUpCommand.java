@@ -24,4 +24,9 @@ public final class ScrollUpCommand extends ScrollCommand {
   public ScrollUpCommand parseFromString(Scanner scanner) {
     return new ScrollUpCommand(Integer.parseInt(scanner.next()));
   }
+
+  @Override
+  public String getPattern() {
+    return id + " number";
+  }
 }
