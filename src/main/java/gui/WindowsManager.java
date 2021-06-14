@@ -92,7 +92,10 @@ public class WindowsManager {
   public static void changeScene(SceneType type) {
     ProgramMenu.settingScene(type);
     if (type == SceneType.PROJECT_SCENE_GRAPHIC) root.setCenter(ProjectWindow.getPane());
-    if (type == SceneType.START_SCENE) root.setCenter(StartWindow.getPane());
+    if (type == SceneType.START_SCENE) {
+      root.setCenter(StartWindow.getPane());
+      StartWindow.getController().reload();
+    }
   }
 
   public static void changeMode(SceneType type){

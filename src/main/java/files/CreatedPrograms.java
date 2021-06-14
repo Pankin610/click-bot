@@ -13,9 +13,9 @@ public class CreatedPrograms {
   }
 
   private static final String path = Paths.PATH_WITH_PROGRAMS.getPath();
-  private static final File file = new File(path);
 
   public static String[] getNames() {
+    File file = new File(path);
     String[] res = file.list();
     if (res == null) return null;
     for (int i = 0; i < res.length; i++) {
