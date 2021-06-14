@@ -104,7 +104,7 @@ public final class DesktopEnvironment extends AbstractEnvironment {
 
   @Override
   public void runProgram() {
-    for (int i = 2; i >= 1; i--) {
+    for (int i = 3; i > 0; i--) {
       System.out.println("Running in " + i + "...");
       try {
         Thread.sleep(1000);

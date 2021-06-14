@@ -61,7 +61,7 @@ public class Bot {
   // simple drag from current location to the given one
   public void drag(Coordinate where) {
     Coordinate p = new Coordinate(MouseInfo.getPointerInfo().getLocation());
-    int C = 30; //number of iterations
+    int C = 50; //number of iterations
     Coordinate dv = new Coordinate((where.x - p.x)/C, (where.y-p.y)/C);
     robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
     try {
