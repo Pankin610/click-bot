@@ -33,8 +33,12 @@ public class AddCommandController implements Controller {
     // default options
     textField.setVisible(true);
     textFieldSecond.setVisible(false);
+    textFieldLabel.setDisable(false);
     textArea.setVisible(false);
+    textArea.setDisable(false);
     labelSecond.setVisible(false);
+    labelSecond.setDisable(false);
+    textFieldSecond.setDisable(false);
     textField.setPromptText("");
     successful_creation = false;
     textFieldLabel.setText("Default");

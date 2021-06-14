@@ -93,6 +93,7 @@ public class WindowsManager {
     ProgramMenu.settingScene(type);
     if (type == SceneType.PROJECT_SCENE_GRAPHIC) root.setCenter(ProjectWindow.getPane());
     if (type == SceneType.START_SCENE) {
+      changeMode(SceneType.PROJECT_SCENE_GRAPHIC);
       root.setCenter(StartWindow.getPane());
       StartWindow.getController().reload();
     }
