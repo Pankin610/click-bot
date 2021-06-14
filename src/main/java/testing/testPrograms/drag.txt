@@ -8,12 +8,13 @@ MAKE_SOME_NOISE
 }
 REPEAT 1 TIMES
 {
-EXECUTE notepad.exe
+EXECUTE  notepad.exe
 WAIT 500
 MOVE 953 454
 LEFT_CLICK
 REPEAT 10 TIMES
 {
 TYPE helloENTER
+EXECUTE wsl psql -c 'select * from tab' > wyn.txt
 }
 }

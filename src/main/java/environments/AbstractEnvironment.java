@@ -132,17 +132,20 @@ public abstract class AbstractEnvironment implements Environment {
   @Override
   public void executeSystem(String command) {
     System.out.println(command);
-    try {
-      Process process = Runtime.getRuntime().exec(command);
-      Scanner scanner = new Scanner(process.getInputStream());
-      while(scanner.hasNext())  System.out.println(scanner.nextLine());
-      System.out.println();
-      scanner = new Scanner(process.getErrorStream());
-      while(scanner.hasNext())  System.out.println(scanner.nextLine());
-      System.out.println();
-    } catch (IOException e) {
-      throw new ExecException("An IOException occurred.", e);
-    }
+    Thread process = new Thread(() -> {
+      try {
+        Process process1 = Runtime.getRuntime().exec(command);
+        Scanner scanner = new Scanner(process1.getInputStream());
+        while (scanner.hasNext()) System.out.println(scanner.nextLine());
+        System.out.println();
+        scanner = new Scanner(process1.getErrorStream());
+        while (scanner.hasNext()) System.out.println(scanner.nextLine());
+        System.out.println();
+      } catch (IOException e) {
+        throw new ExecException("An IOException occurred.", e);
+      }
+    });
+    process.start();
   }
 
   @Override
