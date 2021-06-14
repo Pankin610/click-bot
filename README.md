@@ -53,4 +53,4 @@ There are also additional wrappers in _files_ file, which handle direct communic
 ## P.S.
 Bug with Add Command button which occurred during presentation seems to be purely visual.
 Additional checking confirmed that corresponding MenuItems still were inside MenuButton, but
-some reason, interface refused to show it. Some hard reset has been added so now it should work properly.
+for some reason, interface refused to show it. Some hard reset has been added so now it should work properly.
