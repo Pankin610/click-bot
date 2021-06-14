@@ -1,6 +1,5 @@
 package lang.commands;
 
-import gui.WindowsManager;
 import gui.applications.projecting.AddCommandWindow;
 import gui.controllers.AddCommandController;
 import javafx.scene.input.KeyEvent;

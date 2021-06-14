@@ -31,7 +31,6 @@ public abstract class AbstractEnvironment implements Environment {
 
   @Override
   public void runProgram() throws ExecException {
-    //TODO make this inside new Thread (endgame)
     for (Command com : program.getCommands()) {
       com.execute(this);
     }

@@ -50,7 +50,7 @@ public class AddCommandController implements Controller {
 
   }
 
-  public void addCommand() { //TODO: checking correctness of entered data
+  public void addCommand() {
     successful_creation = true;
     closeButton();
   }

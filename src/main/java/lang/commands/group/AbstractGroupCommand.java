@@ -57,7 +57,6 @@ public abstract class AbstractGroupCommand extends AbstractCommand implements Gr
     return res;
   }
 
-  //TODO condition parsing
   @Override
   public Command parseFromTree(TreeItem<Command> item) {
     AbstractGroupCommand res = (AbstractGroupCommand) item.getValue();
