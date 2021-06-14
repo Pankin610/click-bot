@@ -1,14 +1,19 @@
 package gui;
 
+import environments.DesktopEnvironment;
+import environments.Environment;
 import files.CreatedPrograms;
+import files.reading.ReadFileObject;
 import gui.applications.ListOfProgramsWindow;
 import gui.applications.ProgramMenu;
 import gui.applications.ProgramNameWindow;
 import gui.applications.StartWindow;
 import gui.applications.features.AboutWindow;
+import gui.applications.features.ErrorAlert;
 import gui.applications.features.SettingsWindow;
 import gui.applications.projecting.AddVariableWindow;
 import gui.applications.projecting.ProjectWindow;
+import gui.controllers.MenuController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,6 +26,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lang.commands.Command;
+import program.Program;
 import util.Coordinate;
 import util.containers.VariableContainer;
 import util.gui.MouseUtility;
@@ -217,7 +223,16 @@ public class WindowsManager {
   }
 
   public static void runProgram() {
-
+    try {
+      ProgramMenu.getController().saveProject();
+    } catch (IOException e) {
+      ErrorAlert.showErrorAlert("Code couldn't compile",WindowsManager.stage);
+      e.printStackTrace();
+    }
+    Program program = Program.getProgramFromFile(new ReadFileObject(CreatedPrograms.getPathByName(
+            ProjectWindow.getController().nameProgramLabel.getText())));
+    Environment envi = new DesktopEnvironment(program);
+    envi.runProgram();
   }
 
   public static SceneType getSceneType() {

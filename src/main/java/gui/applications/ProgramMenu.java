@@ -41,4 +41,8 @@ public abstract class ProgramMenu implements SideWindow {
   public static void settingScene(SceneType type) {
     controller.setActiveProject(type == SceneType.PROJECT_SCENE_GRAPHIC);
   }
+
+  public static MenuController getController(){
+    return controller;
+  }
 }

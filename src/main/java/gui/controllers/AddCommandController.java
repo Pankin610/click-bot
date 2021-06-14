@@ -31,6 +31,7 @@ public class AddCommandController implements Controller {
     utilityButton.setVisible(false);
     utilityButton.setText("Utility");
     // default options
+    textField.setVisible(true);
     textFieldSecond.setVisible(false);
     textArea.setVisible(false);
     labelSecond.setVisible(false);

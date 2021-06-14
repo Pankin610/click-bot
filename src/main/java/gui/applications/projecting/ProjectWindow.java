@@ -7,6 +7,7 @@ import gui.controllers.ProjectController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.Pane;
+import lang.commands.single.AbstractSingleCommand;
 
 import java.io.IOException;
 
@@ -39,7 +40,13 @@ public abstract class ProjectWindow implements SideWindow {
 
   public static void prepareNew(String name) {
     controller.nameProgramLabel.setText(name);
-    controller.programTree.setRoot(new TreeItem<>());
+    controller.root = new TreeItem<>(new AbstractSingleCommand() { /* small hack */
+      @Override
+      public String getId() {
+        return name;
+      }
+    });
+    controller.programTree.setRoot(controller.root);
   }
 
   public static void prepareExisting(ReadFileObject file) {

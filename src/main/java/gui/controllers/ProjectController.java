@@ -31,7 +31,7 @@ public class ProjectController implements Controller {
   public Label nameProgramLabel;
   public MenuButton addCommandButton;
   public TreeTableView<Command> programTree;
-  private TreeItem<Command> root;
+  public TreeItem<Command> root;
   public TreeTableColumn<Command, String> programColumn;
   public TableView<Variable> variableList;
   public TableColumn<Variable, String> typeVariableList;

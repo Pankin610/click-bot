@@ -147,6 +147,7 @@ public enum Commands {
         }
         res = new TypeCommand(builder.toString());
       }
+      controller.textField.setVisible(true);
       return res;
     }
   },
